@@ -112,7 +112,8 @@ class ExperimentReader {
 			
 			//Per line loop....
 			while ((line = br.readLine()) != null) {
-				if (line.split(",")[0].equals("Schedule")){
+				if (line.split(",")[0].equals("Schedule Name")||
+						line.split(",")[0].equals("Schedule")){
 					schedule = line.split(",")[1];
 				}
 				else if (line.split(",")[0].equals("Environment")){
@@ -124,7 +125,8 @@ class ExperimentReader {
 				else if (line.split(",")[0].equals("Database")){
 					database = line.split(",")[1];
 				}
-				else if (line.split(",")[0].equals("SessionId")){
+				else if (line.split(",")[0].equals("Schedule Run ID") ||
+						line.split(",")[0].equals("SessionId")){
 					sessionId = Integer.parseInt(line.split(",")[1]);
 				}
 				else if (line.split(",")[0].equals("Animal ID")){

@@ -1,14 +1,28 @@
 package dataModels;
 
-public abstract class Result {
+public class Result {
+	
+	private String content;
 	
 	SessionInfo sessionInfo;
 	
-	public Result(SessionInfo sessionInfo)
+	private String contentHeader;
+	
+	public Result(SessionInfo sessionInfo, String content, String resultHeader)
 	{
 		this.sessionInfo = sessionInfo;
+		this.content = content;
+		this.contentHeader = resultHeader;
+		System.out.print(sessionInfo.toString());
+		System.out.println(content);
 	}
 	
-	public abstract String toString();
+	public String toString() {
+		return this.sessionInfo.toString() + content;
+	}
+	
+	public String getHeader(){
+		return sessionInfo.getHeader() + contentHeader;
+	}
 	
 }
