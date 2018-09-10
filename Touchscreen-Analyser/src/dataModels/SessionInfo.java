@@ -21,6 +21,8 @@ public class SessionInfo {
 	private String notes;
 	
 	private File file;
+	
+	private final String header = "Animal_Id,Group_Id,Date,Database,Chamber,Session_Id,";
 
 	public SessionInfo(
 			String schedule, 
@@ -107,7 +109,11 @@ public class SessionInfo {
 	}
 
 	public String toString() {
-		return animalId + "," + groupId + "," + date + "," + database + "," + chamber + "," + sessionId;
+		return this.schedule + "," + animalId + "," + groupId + "," + date + "," + database + "," + chamber + "," + sessionId + ',';
+	}
+
+	public String getHeader() {
+		return header;
 	}
 }
 
