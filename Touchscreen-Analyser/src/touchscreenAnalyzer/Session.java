@@ -28,7 +28,6 @@ public class Session {
 		this.file = sessionFile;
 		this.sessionInfo = sessionInfo;
 		this.partitionProtocol = partitionProtocol;
-		System.out.println("created session!");
 		
 	}
 	
@@ -49,8 +48,6 @@ public class Session {
 		int trialcounter = 0;
 		
 		results = new ArrayList<Result>();
-		
-		System.out.println(sessionInfo.toString());
 		
 		for (Trial trial : trials) {
 			results.add(trialAnalyzer.analyzeTrial(trial, trialcounter, sessionInfo));
@@ -115,6 +112,11 @@ public class Session {
 		return this.parameters;
 	}
 	
-	
+	public Result getResult() {
+		if (this.results != null && (this.results.size() > 0)){
+			return this.results.remove(0);
+		}
+		else return null;
+	}
 
 }

@@ -173,8 +173,6 @@ class ExperimentReader {
 	    		file
 	    		) ;  
 	    
-	    //Test newInfo
-	    System.out.println(newInfo.toString());
 	    
 	    //Associate the sessionInfo to a file
 	    this.sessionInfoMap.put(file, newInfo);

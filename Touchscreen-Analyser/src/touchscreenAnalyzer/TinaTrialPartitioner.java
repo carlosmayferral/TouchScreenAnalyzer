@@ -9,8 +9,6 @@ public class TinaTrialPartitioner implements ITrialPartitioner {
 		
 		ArrayList<Trial> trials = new ArrayList<Trial>();
 		
-		System.out.println("Partitioning into Trials!");
-		
 		//While there is events left in the list
 		while(!events.isEmpty()) {
 			
@@ -26,13 +24,21 @@ public class TinaTrialPartitioner implements ITrialPartitioner {
 				//add first event
 				trialEvents.add(current_event);
 				
-				//While the trial has not finished...
+				//While the trial has not finished... Add events to trial
 				while (!events.isEmpty() && !(current_event = events.remove(0)).getItem_Name().equals("Select Trial Type")) {
 					trialEvents.add(current_event);
 				}
 				
+				//Add last event to trial, after finish was detected
+				if (!events.isEmpty()) {
+					trialEvents.add(current_event);
+				}
 				
-				trials.add(new Trial(trialEvents));
+				//Ensure trial integrity, verify end of trial was reached.
+				if (trialEvents.get(trialEvents.size()-1).getItem_Name().equals("Select Trial Type")) {
+					trials.add(new Trial(trialEvents));
+				}
+				
 				
 			}
 			
