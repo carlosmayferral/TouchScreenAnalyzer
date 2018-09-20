@@ -82,7 +82,11 @@ class ExperimentReader {
 			}
 		}
 		
-		
+	}
+	
+	
+	public int getNumberOfSessions() {
+		return this.sessions.size();
 	}
 
 	private void metaRead(File file) {
@@ -173,8 +177,6 @@ class ExperimentReader {
 	    		file
 	    		) ;  
 	    
-	    //Test newInfo
-	    System.out.println(newInfo.toString());
 	    
 	    //Associate the sessionInfo to a file
 	    this.sessionInfoMap.put(file, newInfo);

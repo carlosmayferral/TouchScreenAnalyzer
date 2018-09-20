@@ -13,8 +13,6 @@ public class Result {
 		this.sessionInfo = sessionInfo;
 		this.content = content;
 		this.contentHeader = resultHeader;
-		System.out.print(sessionInfo.toString());
-		System.out.println(content);
 	}
 	
 	public String toString() {

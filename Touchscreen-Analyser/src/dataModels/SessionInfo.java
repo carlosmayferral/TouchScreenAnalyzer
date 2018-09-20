@@ -22,7 +22,9 @@ public class SessionInfo {
 	
 	private File file;
 	
-	private final String header = "Animal_Id,Group_Id,Date,Database,Chamber,Session_Id,";
+	private int ordinalDay;
+	
+	private final String header = "Schedule,Animal_Id,Group_Id,Date,Database,Chamber,Session_Id,Day,";
 
 	public SessionInfo(
 			String schedule, 
@@ -43,6 +45,7 @@ public class SessionInfo {
 		this.groupId = groupId;
 		this.notes = notes;
 		this.file = file;
+		this.ordinalDay = -1; //To point out that it has not been set
 	}
 
 	/**
@@ -107,9 +110,17 @@ public class SessionInfo {
 	public File getFile() {
 		return file;
 	}
+	
+	public void setDay(int day) {
+		this.ordinalDay = day;
+	}
+	
+	public int getOrdinalDay() {
+		return this.ordinalDay;
+	}
 
 	public String toString() {
-		return this.schedule + "," + animalId + "," + groupId + "," + date + "," + database + "," + chamber + "," + sessionId + ',';
+		return this.schedule + "," + animalId + "," + groupId + "," + date + "," + database + "," + chamber + "," + sessionId + ',' + ordinalDay + ",";
 	}
 
 	public String getHeader() {
