@@ -82,7 +82,11 @@ class ExperimentReader {
 			}
 		}
 		
-		
+	}
+	
+	
+	public int getNumberOfSessions() {
+		return this.sessions.size();
 	}
 
 	private void metaRead(File file) {

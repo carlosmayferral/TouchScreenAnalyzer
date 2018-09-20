@@ -5,32 +5,36 @@ import dataModels.Result;
 
 public class AnalyzerController {
 	
-	public static void analyze(String[] args) {
+	public static void analyze(String string, String resultString) {
 		
+		System.out.println("Reading experiment folder...");
 		
 		//Generate an experiment reader, this builds a priority queue of files to analyze
-		ExperimentReader experiment = new ExperimentReader(new File(args[0]));
+		ExperimentReader experiment = new ExperimentReader(new File(string));
+		
+		System.out.println("Number of sessions: " + experiment.getNumberOfSessions());
 		
 		//Open experiment writer
-		ExperimentWriter experimentWriter = new ExperimentWriter("results.csv");
+		ExperimentWriter experimentWriter = new ExperimentWriter(resultString);
 		experimentWriter.openFile();
 		
-		
-		
-		//Implemented: call next session to get a reference to the file, call get session info to get info on it
-		
 		File sessionFile;
+		int totalSessions = experiment.getNumberOfSessions();
 		
 		
 		
 		//Some variables for the analysis loop...
 		String currentAnimalId = "";
 		int currentDay = -1;
+		int finishedSessions = 0;
+		
+		System.out.println("Processing into results:");
+		
 		
 		//Analysis loop: for each sessionFile
 		while ((sessionFile = experiment.getNextSession()) != null) {
 			
-			System.out.println("Currently Processing " + sessionFile.getAbsolutePath());
+			System.out.println(((float)finishedSessions / (float)totalSessions) * 100 + "%");
 			
 			
 			//If animal is new start day from 0.
@@ -64,6 +68,7 @@ public class AnalyzerController {
 			//Increment day by 1.
 			currentDay++;
 			currentAnimalId = experiment.getSessionInfo(sessionFile).getAnimalId();
+			finishedSessions++;
 		}
 		
 		System.out.println("Finalizing results file");

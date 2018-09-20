@@ -35,7 +35,11 @@ public class ExperimentWriter {
 	}
 	
 	public void writeResult (Result result) {
-		if (row == 0) writer.println(result.getHeader());
+		if (row == 0) {
+			writer.println(result.getHeader()); //Print Header
+			writer.println(result.toString()); //And first trial
+			row++;
+		}
 		else writer.println(result.toString());
 		row++;
 	}

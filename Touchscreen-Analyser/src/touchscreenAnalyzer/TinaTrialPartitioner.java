@@ -51,8 +51,8 @@ public class TinaTrialPartitioner implements ITrialPartitioner {
 	@Override
 	public SessionParameters getParameters(ArrayList<Event> events) {
 		
-		float cue_time = -1;
-		float hold_time = -1;
+		float cue_time = Float.NaN;
+		float hold_time = Float.NaN;
 		
 		for(Event event: events) {
 			if (event.getItem_Name().equals("Cue_Time")) {
@@ -61,7 +61,7 @@ public class TinaTrialPartitioner implements ITrialPartitioner {
 			if (event.getItem_Name().equals("Hold_Time")) {
 				hold_time = event.getArgumentValue(1);
 			}
-			if ((cue_time > 0) && (hold_time > 0)) {
+			if ((cue_time >= 0) && (hold_time >= 0)) {
 				return new TinaSessionParameters(cue_time, hold_time);
 			}
 		}
