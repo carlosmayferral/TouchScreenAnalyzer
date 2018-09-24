@@ -45,7 +45,8 @@ class ExperimentReader {
 						return -1;
 					}
 					else {
-						System.out.println("Two sessions exist for animal ID " + animalId1 + ", see session IDs :"
+						System.out.println("Two sessions on same date exist for animal ID " + animalId1 + " on "
+								+ "date " + date1 + ", see session IDs: "
 								+ sessionInfoMap.get(arg1).getSessionId() + 
 								" and " + sessionInfoMap.get(arg2).getSessionId());
 						return 0;
@@ -71,6 +72,10 @@ class ExperimentReader {
 		
 		//For each File
 		for (File file : fileList) {
+			//Interrupt if file contains the word results
+			if (file.getName().equals("results.csv")) {
+				continue;
+			}
 			//Simple read if its a csv
 			if (file.getName().contains(".csv")){
 				simpleRead(file);
@@ -96,6 +101,11 @@ class ExperimentReader {
 	}
 
 	private void simpleRead(File file) {
+		
+		//Interrupt if file contains the word results
+		if (file.getAbsolutePath().contains("results")) {
+			return;
+		}
 		
 		//Prepare default variables for session info generation
 		String schedule = "null";
@@ -135,6 +145,9 @@ class ExperimentReader {
 				}
 				else if (line.split(",")[0].equals("Animal ID")){
 					animalId = line.split(",")[1];
+					if (animalId.equals("")) {
+						System.out.println("oops");
+					}
 				}
 				else if (line.split(",")[0].equals("Group ID")){
 					groupId = line.split(",")[1];
@@ -190,8 +203,8 @@ class ExperimentReader {
 	private long getNumericalDate(String date) {
 		String [] dateString = date.split(" ")[0].split("/");
 		String year = dateString[2];
-		String month = dateString[1];
-		String day =dateString[0];
+		String month = dateString[0];
+		String day =dateString[1];
 		return Long.parseLong(year+month+day);
 	}
 

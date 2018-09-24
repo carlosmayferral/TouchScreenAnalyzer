@@ -1,25 +1,42 @@
 package touchscreenAnalyzer;
 import java.io.File;
 
+import analysisSets.IAnalysisSet;
+import analysisSets.AnalysisSetFactory;
+import analysisSets.AnalysisType;
 import dataModels.Result;
+import dataModels.Session;
 
 public class AnalyzerController {
 	
-	public static void analyze(String string, String resultString) {
+	private IAnalysisSet analysisSet;
+	private String fileName;
+	private String resultName;
+	
+	public AnalyzerController(String fileName, AnalysisType analysisType) {
+		this.fileName = fileName;
+		this.resultName = fileName + "\\results.csv";
+		this.analysisSet = AnalysisSetFactory.getInstance().createAnalysisSet(analysisType);
+	}
+	
+	
+	public void analyze() {
 		
 		System.out.println("Reading experiment folder...");
 		
 		//Generate an experiment reader, this builds a priority queue of files to analyze
-		ExperimentReader experiment = new ExperimentReader(new File(string));
+		ExperimentReader experiment = new ExperimentReader(new File(fileName));
 		
 		System.out.println("Number of sessions: " + experiment.getNumberOfSessions());
 		
 		//Open experiment writer
-		ExperimentWriter experimentWriter = new ExperimentWriter(resultString);
+		ExperimentWriter experimentWriter = new ExperimentWriter(resultName);
 		experimentWriter.openFile();
 		
 		File sessionFile;
 		int totalSessions = experiment.getNumberOfSessions();
+		
+		
 		
 		
 		
@@ -49,14 +66,16 @@ public class AnalyzerController {
 			
 			
 			//each session file gets partitioned into trials and is returned as a session object (containing info and a set of trials)
-			Session session = new Session (sessionFile, experiment.getSessionInfo(sessionFile), new TinaTrialPartitioner());
+			Session session = new Session (sessionFile, experiment.getSessionInfo(sessionFile));
 			
-			session.generateTrials();
+			session.generateParametersFromEvents(analysisSet.getParameterReader());
 			
-			//TODO each session object is sent to a session analyzer, which then sends each trial to a trial analyzer
-			//this session analyzer will contain a set of results for each trial
+			session.generateTrialsfromEvents(analysisSet.getTrialPartitioner());
 			
-			session.generateResults(new tinaTrialAnalyzer(session.getParameters()));
+			//Set default session parameters in trial analyzer before it starts
+			analysisSet.getTrialAnalyzer().setParameters(session.getParameters());
+			
+			session.generateResults(analysisSet.getTrialAnalyzer());
 			
 			//communicate these results, and the session info, to something that writes results to disk (experiment writer?)
 			Result result;
@@ -71,7 +90,7 @@ public class AnalyzerController {
 			finishedSessions++;
 		}
 		
-		System.out.println("Finalizing results file");
+		System.out.println("Finalizing results file, located at " + fileName);
 		
 		//Finally close results file
 		experimentWriter.closeFile();
