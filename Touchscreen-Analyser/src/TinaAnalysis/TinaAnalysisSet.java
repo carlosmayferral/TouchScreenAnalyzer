@@ -1,11 +1,11 @@
 package TinaAnalysis;
 
-import analysisSets.AnalysisSet;
+import analysisSets.IAnalysisSet;
 import analysisSets.IParameterReader;
 import analysisSets.ITrialAnalyzer;
 import analysisSets.ITrialPartitioner;
 
-public class TinaAnalysisSet implements AnalysisSet {
+public class TinaAnalysisSet implements IAnalysisSet {
 
 	private ITrialPartitioner partitioner;
 	
@@ -16,8 +16,8 @@ public class TinaAnalysisSet implements AnalysisSet {
 	
 	public TinaAnalysisSet() {
 		this.partitioner = new TinaTrialPartitioner();
-		this.analyzer = new tinaTrialAnalyzer();
-		this.parameterReader = new tinaParameterReader();
+		this.analyzer = new TinaTrialAnalyzer();
+		this.parameterReader = new TinaParameterReader();
 	}
 	
 	

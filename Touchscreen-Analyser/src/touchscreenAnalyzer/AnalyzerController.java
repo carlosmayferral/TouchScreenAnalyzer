@@ -1,7 +1,7 @@
 package touchscreenAnalyzer;
 import java.io.File;
 
-import analysisSets.AnalysisSet;
+import analysisSets.IAnalysisSet;
 import analysisSets.AnalysisSetFactory;
 import analysisSets.AnalysisType;
 import dataModels.Result;
@@ -9,7 +9,7 @@ import dataModels.Session;
 
 public class AnalyzerController {
 	
-	private AnalysisSet analysisSet;
+	private IAnalysisSet analysisSet;
 	private String fileName;
 	private String resultName;
 	
@@ -90,7 +90,7 @@ public class AnalyzerController {
 			finishedSessions++;
 		}
 		
-		System.out.println("Finalizing results file");
+		System.out.println("Finalizing results file, located at " + fileName);
 		
 		//Finally close results file
 		experimentWriter.closeFile();

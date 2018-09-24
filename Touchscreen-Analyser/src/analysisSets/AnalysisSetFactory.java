@@ -1,6 +1,7 @@
 package analysisSets;
 
 import TinaAnalysis.TinaAnalysisSet;
+import extinctionAnalysisSet.ExtinctionAnalysisSet;
 
 public class AnalysisSetFactory {
 
@@ -16,10 +17,12 @@ public class AnalysisSetFactory {
 		}
 	}
 	
-	public AnalysisSet createAnalysisSet(AnalysisType type) {
+	public IAnalysisSet createAnalysisSet(AnalysisType type) {
 		switch (type) {
 		case TINA_BY_TRIAL:
 		return new TinaAnalysisSet();
+		case EXTINCTION:
+		return new ExtinctionAnalysisSet();
 		default:
 		return null;
 		}

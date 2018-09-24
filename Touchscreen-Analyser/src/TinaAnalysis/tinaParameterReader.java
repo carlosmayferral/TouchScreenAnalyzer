@@ -6,7 +6,7 @@ import analysisSets.IParameterReader;
 import dataModels.Event;
 import dataModels.SessionParameters;
 
-public class tinaParameterReader implements IParameterReader {
+public class TinaParameterReader implements IParameterReader {
 
 	@Override
 	public SessionParameters readParameters(ArrayList<Event> events) {

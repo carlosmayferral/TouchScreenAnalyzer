@@ -17,5 +17,11 @@ public class Trial {
 	public ArrayList <Event> copyEventList(){
 		return new ArrayList<Event>(events);
 	}
+	
+	public Event[] copyEventsAsArray() {
+		Event[] eventsArray = new Event[events.size()];
+		events.toArray(eventsArray);
+		return eventsArray;
+	}
 
 }

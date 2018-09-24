@@ -1,9 +1,6 @@
 package TinaAnalysis;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import analysisSets.ITrialAnalyzer;
 import dataModels.Event;
 import dataModels.Result;
@@ -11,7 +8,7 @@ import dataModels.SessionInfo;
 import dataModels.SessionParameters;
 import dataModels.Trial;
 
-public class tinaTrialAnalyzer implements ITrialAnalyzer {
+public class TinaTrialAnalyzer implements ITrialAnalyzer {
 	
 	private float currentCueTime;
 	

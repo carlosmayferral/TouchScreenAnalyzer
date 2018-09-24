@@ -1,5 +1,6 @@
 package analysisSets;
 
 public enum AnalysisType {
-	TINA_BY_TRIAL
+	TINA_BY_TRIAL,
+	EXTINCTION
 }
