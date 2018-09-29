@@ -126,7 +126,12 @@ class ExperimentReader {
 			
 			//Per line loop....
 			while ((line = br.readLine()) != null) {
-				if (line.split(",")[0].equals("Schedule Name")||
+				//If line is empty
+				if ((!line.equals("")) && line.charAt(0)==',') {
+					continue;
+				}
+				
+				else if (line.split(",")[0].equals("Schedule Name")||
 						line.split(",")[0].equals("Schedule")){
 					schedule = line.split(",")[1];
 				}
@@ -155,7 +160,7 @@ class ExperimentReader {
 				else if (line.split(",")[0].equals("Notes")){
 					notes = line.split(",")[1];
 				}
-				
+			
 				else if (line.contains("----")){
 					break;
 				}
