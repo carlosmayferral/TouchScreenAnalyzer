@@ -210,7 +210,7 @@ class ExperimentReader {
 		String year = dateString[2];
 		String month = dateString[0];
 		String day =dateString[1];
-		return Long.parseLong(year+month+day);
+		return Long.parseLong(year+day+month);
 	}
 
 	public SessionInfo getSessionInfo(File file) {

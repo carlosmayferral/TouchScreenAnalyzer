@@ -26,7 +26,8 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 			+ "CommissionError,"
 			+ "OmissionError,"
 			+ "Reaction_Time,"
-			+ "Movement_Time";
+			+ "Movement_Time,"
+			+ "Touchscreen_error";
 	
 	@Override
 	public void setParameters(SessionParameters parameters) {
@@ -71,6 +72,9 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 		//Movement time, the time from cue release to target selection
 		float movementTime = this.calculateMovementTime(trial);
 		
+		//Determine if there was a hardware error (no registered touch up)
+		int touchscreenError = this.determineIfError(trial, omissionError, anticipationError, comissionError);
+		
 		String resultContent = trialNumber + ","
 		+ cueType + ','
 		+ cueValidity + ','
@@ -81,13 +85,71 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 		+ comissionError + ','
 		+ omissionError + ','
 		+ responseTime + ','
-		+ movementTime;
+		+ movementTime + ','
+		+ touchscreenError;
 		
 		return new Result(sessionInfo, resultContent, resultHeader);
 		
 		
 	}
 	
+	private int determineIfError(Trial trial, int omission, int anticipationError, int comissionError) {
+		
+		if (omission ==1 || anticipationError == 1 || comissionError == 1) {
+			return 0;
+		}
+		
+		else {
+			ArrayList<Event> events = trial.getEventList();
+			
+			boolean targetIsDisplayed = false;
+			
+			for (Event event : events) {
+				
+				if (event.getEvent_Name().equals("Whisker - Display Image") &&
+						event.getArgumentName(2).equals("Target") && !targetIsDisplayed) {
+					targetIsDisplayed = true;
+					continue;
+				}
+				
+				//If target has been displayed, only return 0 (valid) if there is...
+				
+				if (targetIsDisplayed) {
+					
+					//A touch up in position 2
+					if (event.getEvent_Name().equals("Touch Up Event") && (event.getArgumentValue(1) == 2)){
+						return 0;
+						}
+					
+					//A touch up in position 4 (the expanded position 2)
+					if (event.getEvent_Name().equals("Touch Up Event") && (event.getArgumentValue(1) == 4)){
+						return 0;
+						}
+					
+					//Ignore if touch down in center
+					if (event.getEvent_Name().equals("Touch Down Event") && (event.getArgumentValue(1) == 2)){
+						continue;
+						}
+					
+					//Ignore if touch down on 4
+					if (event.getEvent_Name().equals("Touch Down Event") && (event.getArgumentValue(1) == 4)){
+						continue;
+						}
+					
+					//Any other kind of touch must be an error
+					if (event.getEvent_Name().equals("Touch Down Event") || event.getEvent_Name().equals("Touch Up Event")) {
+						return 1;
+					}
+					
+				}
+					
+			}
+			
+			return 1;
+			
+		}
+	}
+
 	private float calculateMovementTime(Trial trial) {
 		
 		ArrayList<Event> events = trial.copyEventList();
