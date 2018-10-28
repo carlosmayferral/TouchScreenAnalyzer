@@ -95,7 +95,7 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 	
 	private int determineIfError(Trial trial, int omission, int anticipationError, int comissionError) {
 		
-		if (omission ==1 || anticipationError == 1 || comissionError == 1) {
+		if (anticipationError == 1) {
 			return 0;
 		}
 		
@@ -127,14 +127,14 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 						}
 					
 					//Ignore if touch down in center
-					if (event.getEvent_Name().equals("Touch Down Event") && (event.getArgumentValue(1) == 2)){
-						continue;
-						}
+					//if (event.getEvent_Name().equals("Touch Down Event") && (event.getArgumentValue(1) == 2)){
+						//continue;
+						//}
 					
 					//Ignore if touch down on 4
-					if (event.getEvent_Name().equals("Touch Down Event") && (event.getArgumentValue(1) == 4)){
-						continue;
-						}
+					//if (event.getEvent_Name().equals("Touch Down Event") && (event.getArgumentValue(1) == 4)){
+						//continue;
+						//}
 					
 					//Any other kind of touch must be an error
 					if (event.getEvent_Name().equals("Touch Down Event") || event.getEvent_Name().equals("Touch Up Event")) {
