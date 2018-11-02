@@ -16,7 +16,8 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 	
 	private TinaSessionParameters parameters;
 	
-	private final String resultHeader = "Trial_Number,"
+	private final String resultHeader = "TimeStamp,"
+			+ "Trial_Number,"
 			+ "Cue_Type,"
 			+ "Cue_Validity,"
 			+ "Cue_Time,"
@@ -39,6 +40,9 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 	@Override
 	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo) {
 		
+		//Timestamp
+		float timeStamp = trial.copyEventsAsArray()[0].getEvent_Time();
+		
 		//The trial counter
 		int trialNumber = counter;
 		
@@ -51,7 +55,7 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 		//Predetermined cue time per trial
 		float cueTime = this.determineCueTime(trial);
 		
-		//Predetermined cue time per trial
+		//Predetermined hold time per trial
 		float holdTime = this.determineHoldTime(trial);
 		
 		//Correct target selection
@@ -75,7 +79,8 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 		//Determine if there was a hardware error (no registered touch up)
 		int touchscreenError = this.determineIfError(trial, omissionError, anticipationError, comissionError);
 		
-		String resultContent = trialNumber + ","
+		String resultContent = timeStamp + ","
+		+ trialNumber + ","
 		+ cueType + ','
 		+ cueValidity + ','
 		+ cueTime + ','
@@ -125,6 +130,17 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 					if (event.getEvent_Name().equals("Touch Up Event") && (event.getArgumentValue(1) == 4)){
 						return 0;
 						}
+					
+					//A touch up in position 1
+					if (event.getEvent_Name().equals("Touch Up Event") && (event.getArgumentValue(1) == 3)){
+						return 2;
+						}
+					
+					//A touch up in position 2
+					if (event.getEvent_Name().equals("Touch Up Event") && (event.getArgumentValue(1) == 1)){
+						return 2;
+						}
+					
 					
 					//Ignore if touch down in center
 					//if (event.getEvent_Name().equals("Touch Down Event") && (event.getArgumentValue(1) == 2)){
@@ -342,14 +358,14 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 				case 331:
 				case 313:
 				case 300:
-					return "Left";
+					return "Right";
 				case 14531:
 				case 14513:
 				case 14500:
 				case 113:
 				case 131:
 				case 100:
-					return "Right";
+					return "Left";
 				case 913:
 				case 931:
 					return "Neutral";
