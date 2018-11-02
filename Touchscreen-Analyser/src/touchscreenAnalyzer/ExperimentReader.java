@@ -72,6 +72,8 @@ class ExperimentReader {
 		
 		//For each File
 		for (File file : fileList) {
+			System.out.println("Checking integrity of file : " + file.getAbsolutePath());
+			
 			//Interrupt if file contains the word results
 			if (file.getName().equals("results.csv")) {
 				continue;
@@ -185,7 +187,7 @@ class ExperimentReader {
 		// Create new session info object
 	    SessionInfo newInfo = new SessionInfo(
 	    		schedule,
-	    		getNumericalChamber(environment),
+	    		getNumericalChamber(environment,file),
 	    		getNumericalDate(date),
 	    		database,
 	    		sessionId,
@@ -201,8 +203,16 @@ class ExperimentReader {
 	}
 
 	
-	private int getNumericalChamber(String chamber) {
-		return Integer.parseInt(chamber.replaceAll("\\[", "z").replaceAll("\\]","z").split("z")[1]);
+	private int getNumericalChamber(String chamber , File file) {
+		int numericalChamber = 0;
+		try {
+			numericalChamber = Integer.parseInt(chamber.replaceAll("\\[", "z").replaceAll("\\]","z").split("z")[1]);
+		} catch (Exception e) {
+			System.out.print("Error reading file");
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		return numericalChamber;
 	}
 	
 	private long getNumericalDate(String date) {
