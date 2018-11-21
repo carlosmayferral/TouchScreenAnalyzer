@@ -2,6 +2,7 @@ package analysisSets;
 
 import TinaAnalysis.TinaAnalysisSet;
 import extinctionAnalysisSet.ExtinctionAnalysisSet;
+import progressiveRatioAnalysis.ProgressiveRatioAnalysisSet;
 
 public class AnalysisSetFactory {
 
@@ -23,6 +24,8 @@ public class AnalysisSetFactory {
 		return new TinaAnalysisSet();
 		case EXTINCTION:
 		return new ExtinctionAnalysisSet();
+		case PROGRESSIVE_RATIO:
+		return new ProgressiveRatioAnalysisSet();
 		default:
 		return null;
 		}

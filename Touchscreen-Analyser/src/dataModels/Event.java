@@ -4,6 +4,10 @@ import java.util.Arrays;
 
 public class Event {
 	
+	//Generic Events:
+	
+	//Front Beam Break
+	
 	private float event_Time;
 	
 	private int event_Id;
@@ -17,6 +21,7 @@ public class Event {
 	private int group_Id;
 	
 	private EventArgument[] args;
+	
 
 	public Event(String line) {
 		String[] splitline = line.split(",");
@@ -39,6 +44,20 @@ public class Event {
 		else {
 			args = null;
 		}
+	}
+	
+	//For defining custom reference events
+	public Event(String event_name, String item_name, String[] eventNames, float[] eventValues) {
+		this.event_Name = event_name;
+		this.item_Name = item_name;
+		
+		if (eventNames != null){
+			int numberOfArgs = eventNames.length;
+			this.args = new EventArgument[numberOfArgs];
+			for (int i = 0; i < numberOfArgs; i++) {
+				args[i] = new EventArgument(eventNames[i], eventValues[i]);
+			}
+		} else this.args = null;
 	}
 
 	/**
@@ -84,10 +103,16 @@ public class Event {
 	}
 
 	public String getArgumentName(int index) {
+		if (args == null || (index-1) > (args.length - 1)) {
+			return null;
+		}
 		return args[index-1].getName();
 	}
 	
 	public float getArgumentValue(int index) {
+		if (args ==  null || (index-1) > (args.length - 1)) {
+			return 0;
+		}
 		return args[index-1].getValue();
 	}
 
@@ -101,6 +126,20 @@ public class Event {
 				+ Arrays.toString(args) + "]";
 	}
 	
+	public boolean equals(Event other) {
+		if(this.event_Name.equals(other.getEvent_Name())
+				&&
+				this.item_Name.equals(other.getItem_Name())) {
+			if (this.args != null) {
+				for (int i = 0; i < (this.args.length); i++) {
+					if (!args[i].getName().equals(other.getArgumentName(i))){
+						return false;
+					}
+				}
+			}
+			return true;
+		} else return false;
+	}
 	
 	
 	
