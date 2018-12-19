@@ -3,39 +3,31 @@ package dataModels;
 import java.io.File;
 
 public class SessionInfo {
-	
+
 	private String schedule;
-	
+
 	private int chamber;
-	
+
 	private long date;
-	
+
 	private String database;
-	
+
 	private int sessionId;
-	
+
 	private String animalId;
-	
+
 	private String groupId;
-	
+
 	private String notes;
-	
+
 	private File file;
-	
+
 	private int ordinalDay;
-	
+
 	private final String header = "Schedule,Animal_Id,Group_Id,Date,Database,Chamber,Session_Id,Day,";
 
-	public SessionInfo(
-			String schedule, 
-			int chamber, 
-			long date, 
-			String database,
-			int sessionId,
-			String animalId, 
-			String groupId,
-			String notes,
-			File file) {
+	public SessionInfo(String schedule, int chamber, long date, String database, int sessionId, String animalId,
+			String groupId, String notes, File file) {
 		this.schedule = schedule;
 		this.chamber = chamber;
 		this.date = date;
@@ -45,7 +37,7 @@ public class SessionInfo {
 		this.groupId = groupId;
 		this.notes = notes;
 		this.file = file;
-		this.ordinalDay = -1; //To point out that it has not been set
+		this.ordinalDay = -1; // To point out that it has not been set
 	}
 
 	/**
@@ -110,21 +102,21 @@ public class SessionInfo {
 	public File getFile() {
 		return file;
 	}
-	
+
 	public void setDay(int day) {
 		this.ordinalDay = day;
 	}
-	
+
 	public int getOrdinalDay() {
 		return this.ordinalDay;
 	}
 
 	public String toString() {
-		return this.schedule + "," + animalId + "," + groupId + "," + date + "," + database + "," + chamber + "," + sessionId + ',' + ordinalDay + ",";
+		return this.schedule + "," + animalId + "," + groupId + "," + date + "," + database + "," + chamber + ","
+				+ sessionId + ',' + ordinalDay + ",";
 	}
 
 	public String getHeader() {
 		return header;
 	}
 }
-
