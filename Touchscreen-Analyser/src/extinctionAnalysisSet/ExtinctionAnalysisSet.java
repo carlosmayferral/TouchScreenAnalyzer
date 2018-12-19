@@ -2,18 +2,19 @@ package extinctionAnalysisSet;
 
 import analysisSets.IAnalysisSet;
 import analysisSets.IParameterReader;
+import analysisSets.IPostProcessor;
 import analysisSets.ITrialAnalyzer;
 import analysisSets.ITrialPartitioner;
 
 public class ExtinctionAnalysisSet implements IAnalysisSet {
-	
+
 	private ITrialPartitioner trialPartitioner;
-	
+
 	private ITrialAnalyzer trialAnalyzer;
-	
+
 	private IParameterReader parameterReader;
-	
-	public ExtinctionAnalysisSet () {
+
+	public ExtinctionAnalysisSet() {
 		this.trialPartitioner = new ExtinctionTrialPartitioner();
 		this.parameterReader = new ExtinctionParameterReader();
 		this.trialAnalyzer = new ExtinctionTrialAnalyzer();
@@ -32,6 +33,12 @@ public class ExtinctionAnalysisSet implements IAnalysisSet {
 	@Override
 	public IParameterReader getParameterReader() {
 		return this.parameterReader;
+	}
+
+	@Override
+	public IPostProcessor getPostProcessor() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

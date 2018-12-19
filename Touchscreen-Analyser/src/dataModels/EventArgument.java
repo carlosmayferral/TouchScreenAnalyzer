@@ -1,17 +1,15 @@
 package dataModels;
 
 public class EventArgument {
-	
+
 	private String name;
 
 	private float value;
-	
-	
+
 	public EventArgument(String name, float value) {
 		this.name = name;
 		this.value = value;
 	}
-
 
 	/**
 	 * @return the name
@@ -20,7 +18,6 @@ public class EventArgument {
 		return name;
 	}
 
-
 	/**
 	 * @return the value
 	 */
@@ -28,17 +25,14 @@ public class EventArgument {
 		return value;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "EventArgument [name=" + name + ", value=" + value + "]";
 	}
-	
-	
-	
-	
-	
+
 }

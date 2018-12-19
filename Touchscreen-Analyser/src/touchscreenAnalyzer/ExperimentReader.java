@@ -1,9 +1,6 @@
 package touchscreenAnalyzer;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.PriorityQueue;
@@ -11,231 +8,165 @@ import java.util.PriorityQueue;
 import dataModels.SessionInfo;
 
 class ExperimentReader {
-	
+
 	private File experimentFolder;
-	
+
 	private HashMap<File, SessionInfo> sessionInfoMap;
-	
+
 	private HashMap<String, String> groupInfoMap;
-	
+
 	private PriorityQueue<File> sessions;
-	
+
 	private Comparator<File> sessionComparator;
 
-	public ExperimentReader(File experimentFolder) {
-		this.experimentFolder = experimentFolder;
-		
-		//Initialize info Map
+	public ExperimentReader() {
+
+		this.experimentFolder = null;
+
+		// Initialize info Map
 		sessionInfoMap = new HashMap<File, SessionInfo>();
-		
-		System.out.println(experimentFolder.getAbsolutePath());
-		
-		//Initialize comparator
-		sessionComparator = new Comparator<File>(){
+
+		// Initialize group info
+		groupInfoMap = new HashMap<String, String>();
+
+		// Initialize comparator
+		sessionComparator = new Comparator<File>() {
 			public int compare(File arg1, File arg2) {
 				String animalId1 = sessionInfoMap.get(arg1).getAnimalId();
 				String animalId2 = sessionInfoMap.get(arg2).getAnimalId();
 				long date1 = sessionInfoMap.get(arg1).getDate();
 				long date2 = sessionInfoMap.get(arg2).getDate();
-				if (animalId1.equals(animalId2)){
+				if (animalId1.equals(animalId2)) {
 					if (date1 > date2) {
 						return 1;
-					}
-					else if (date1 < date2) {
+					} else if (date1 < date2) {
 						return -1;
-					}
-					else {
+					} else {
 						System.out.println("Two sessions on same date exist for animal ID " + animalId1 + " on "
-								+ "date " + date1 + ", see session IDs: "
-								+ sessionInfoMap.get(arg1).getSessionId() + 
-								" and " + sessionInfoMap.get(arg2).getSessionId());
+								+ "date " + date1 + ", see session IDs: " + sessionInfoMap.get(arg1).getSessionId()
+								+ " and " + sessionInfoMap.get(arg2).getSessionId());
 						return 0;
 					}
-				}
-				else {
-					if (Integer.parseInt(animalId1.replaceAll("[^0-9]", "")) > Integer.parseInt(animalId2.replaceAll("[^0-9]", ""))) {
+				} else {
+					if (Integer.parseInt(animalId1.replaceAll("[^0-9]", "")) > Integer
+							.parseInt(animalId2.replaceAll("[^0-9]", ""))) {
 						return 1;
-					}
-					else {
+					} else {
 						return -1;
 					}
 				}
 			}
 		};
-		
-		//initialize comparator
+
+		// Initialize sessions queue
 		sessions = new PriorityQueue<File>(sessionComparator);
-				
-		
-		//Read obtain all files in directory
+
+	}
+
+	public void readExperimentFolder(File experimentFolder) {
+
+		this.experimentFolder = experimentFolder;
+
+		// Initialize express reader
+		CSVExpressReader csvExpressReader = new CSVExpressReader();
+
+		// Read obtain all files in directory
 		File[] fileList = this.experimentFolder.listFiles();
-		
-		//For each File
+
+		if (fileList == null) {
+			System.out.println("No files were found in directory provided");
+		}
+
+		// For each File
 		for (File file : fileList) {
 			System.out.println("Checking integrity of file : " + file.getAbsolutePath());
-			
-			//Interrupt if file contains the word results
+
+			// Interrupt if file contains the word results
 			if (file.getName().equals("results.csv")) {
 				continue;
 			}
-			//Simple read if its a csv
-			if (file.getName().contains(".csv")){
-				simpleRead(file);
-				sessions.add(file);
+			// CSV expressRead if it is a csv file
+			if (file.getName().contains(".csv")) {
+				SessionInfo info = csvExpressReader.readFile(file);
+				if (info != null) {
+					this.sessionInfoMap.put(file, csvExpressReader.readFile(file));
+					sessions.add(file);
+				} else {
+					System.out.println("Format of csv file " + file.getName() + " not recognized, skipping file");
+				}
 			}
-			//Record group data if its a meta file
+			// XML expressRead if it is an XML file
+			// TODO
+			// Record group data if its a meta file
 			else if (file.getName().contains(".meta")) {
 				metaRead(file);
 			}
 		}
-		
+
+		// Assign correct ordinal days in session info structure
+		this.assignOrdinalDays();
+
 	}
-	
-	
+
+	private void assignOrdinalDays() {
+		if (sessions.size() > 0) {
+			File[] tempsessions = new File[sessions.size()];
+
+			String currentAnimal = null;
+			int currentDay = 0;
+
+			// Read all of queue into file array to set days
+			for (int i = 0; i < tempsessions.length; i++) {
+				tempsessions[i] = sessions.poll();
+				// If animal Id is new
+				if (currentAnimal == null || !currentAnimal.equals(sessionInfoMap.get(tempsessions[i]).getAnimalId())) {
+					currentDay = 0;
+					currentAnimal = sessionInfoMap.get(tempsessions[i]).getAnimalId();
+				}
+				// Else increment day
+				else {
+					currentDay++;
+				}
+				// Set day
+				sessionInfoMap.get(tempsessions[i]).setDay(currentDay);
+			}
+
+			// Copy file array back into priority queue
+			for (int i = 0; i < tempsessions.length; i++) {
+				sessions.add(tempsessions[i]);
+			}
+
+		}
+	}
+
 	public int getNumberOfSessions() {
 		return this.sessions.size();
 	}
 
 	private void metaRead(File file) {
-		
+
 		// TODO generate method for reading meta files
-		
-	}
 
-	private void simpleRead(File file) {
-		
-		//Interrupt if file contains the word results
-		if (file.getAbsolutePath().contains("results")) {
-			return;
-		}
-		
-		//Prepare default variables for session info generation
-		String schedule = "null";
-		String environment = "null";
-		String date = "null";
-		String database = "null";
-		int sessionId = -1;
-		String animalId = "null";
-		String groupId = "null";
-		String notes = "";
-		
-		//Try opening file
-		String line = "";
-		BufferedReader br = null;
-		
-		 try {
-			br = new BufferedReader(new FileReader(file));
-			
-			//Per line loop....
-			while ((line = br.readLine()) != null) {
-				//If line is empty
-				if ((!line.equals("")) && line.charAt(0)==',') {
-					continue;
-				}
-				
-				else if (line.split(",")[0].equals("Schedule Name")||
-						line.split(",")[0].equals("Schedule")){
-					schedule = line.split(",")[1];
-				}
-				else if (line.split(",")[0].equals("Environment")){
-					environment = line.split(",")[1];
-				}
-				else if (line.split(",")[0].equals("Date/Time")){
-					date = line.split(",")[1];
-				}
-				else if (line.split(",")[0].equals("Database")){
-					database = line.split(",")[1];
-				}
-				else if (line.split(",")[0].equals("Schedule Run ID") ||
-						line.split(",")[0].equals("SessionId")){
-					sessionId = Integer.parseInt(line.split(",")[1]);
-				}
-				else if (line.split(",")[0].equals("Animal ID")){
-					animalId = line.split(",")[1];
-					if (animalId.equals("")) {
-						System.out.println("oops");
-					}
-				}
-				else if (line.split(",")[0].equals("Group ID")){
-					groupId = line.split(",")[1];
-				}
-				else if (line.split(",")[0].equals("Notes")){
-					notes = line.split(",")[1];
-				}
-			
-				else if (line.contains("----")){
-					break;
-				}
-				
-			}
-
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				if (br != null) {
-					br.close();
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	
-		// Create new session info object
-	    SessionInfo newInfo = new SessionInfo(
-	    		schedule,
-	    		getNumericalChamber(environment,file),
-	    		getNumericalDate(date),
-	    		database,
-	    		sessionId,
-	    		animalId,
-	    		groupId,
-	    		notes,
-	    		file
-	    		) ;  
-	    
-	    
-	    //Associate the sessionInfo to a file
-	    this.sessionInfoMap.put(file, newInfo);
-	}
-
-	
-	private int getNumericalChamber(String chamber , File file) {
-		int numericalChamber = 0;
-		try {
-			numericalChamber = Integer.parseInt(chamber.replaceAll("\\[", "z").replaceAll("\\]","z").split("z")[1]);
-		} catch (Exception e) {
-			System.out.print("Error reading file");
-			e.printStackTrace();
-			System.exit(-1);
-		}
-		return numericalChamber;
-	}
-	
-	private long getNumericalDate(String date) {
-		String [] dateString = date.split(" ")[0].split("/");
-		String year = dateString[2];
-		String month = dateString[0];
-		String day =dateString[1];
-		return Long.parseLong(year+day+month);
 	}
 
 	public SessionInfo getSessionInfo(File file) {
-		return sessionInfoMap.get(file);
+		if (sessionInfoMap.size() > 0) {
+			return sessionInfoMap.get(file);
+		} else
+			return null;
 	}
-	
+
 	public String getGroupInfo(String animalId) {
-		return this.groupInfoMap.get(animalId);
+		if (groupInfoMap.size() > 0) {
+			return this.groupInfoMap.get(animalId);
+		} else
+			return null;
 	}
-	
-	public File getNextSession(){
+
+	public File getNextSession() {
 		if (sessions.size() > 0) {
 			return sessions.poll();
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

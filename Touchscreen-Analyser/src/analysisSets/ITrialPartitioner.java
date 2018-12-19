@@ -7,6 +7,6 @@ import dataModels.Trial;
 
 public interface ITrialPartitioner {
 
-	public ArrayList<Trial> partition (ArrayList <Event> events);
+	public ArrayList<Trial> partition(Event[] events);
 
 }
