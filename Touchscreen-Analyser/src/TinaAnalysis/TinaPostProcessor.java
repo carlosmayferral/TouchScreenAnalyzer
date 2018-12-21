@@ -39,12 +39,6 @@ public class TinaPostProcessor implements IPostProcessor {
 		
 		while (currentIndex < resultLines.size()) {
 			
-			//Count if anticipation error or not
-			if (resultLines.get(currentIndex).getAnticipationError() > 0) {
-				numberOfAnticipationErrors++;
-			}
-			else numberOfNonAnticipationErrors++;
-			
 			//If within same session, proceed to writing
 			if (resultLines.get(currentIndex).isSameSession(resultLines.get(indexOfStartOfSession))) {
 				//if there is an active train
@@ -98,6 +92,17 @@ public class TinaPostProcessor implements IPostProcessor {
 				numberOfAnticipationErrors = 0;
 				numberOfNonAnticipationErrors = 0;
 				indexOfFirstErrorInTrain =-1;
+			}
+			
+			//Finally count if anticipation error or not
+			if (resultLines.get(currentIndex).getAnticipationError() > 0) {
+				numberOfAnticipationErrors++;
+			}
+			else if (
+					resultLines.get(currentIndex).getAnticipationError() < 1
+					&&
+					resultLines.get(currentIndex).getIfTouchscreenError() < 1) {
+				numberOfNonAnticipationErrors++;
 			}
 			
 			currentIndex++;

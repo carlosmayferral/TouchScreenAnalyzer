@@ -15,12 +15,15 @@ public class PostProcessedResult {
 	private int errorTrainPostTrial;
 	
 	private float percentageAnticipationErrors;
+
+	private int touchscreenError;
 	
 	public PostProcessedResult(String original) {
 		this.original = original;
 		this.animalId = original.split(",")[1];
 		this.sessionID = original.split(",")[6];
 		this.anticipationError = Integer.parseInt(original.split(",")[15]);
+		this.touchscreenError = Integer.parseInt(original.split(",")[20]);
 		this.errorTrainPostTrial = -1;
 		this.errorTrainPostTrial = -1;
 	}
@@ -81,6 +84,10 @@ public class PostProcessedResult {
 	 */
 	public int getAnticipationError() {
 		return anticipationError;
+	}
+
+	public int getIfTouchscreenError() {
+		return touchscreenError;
 	}
 	
 	
