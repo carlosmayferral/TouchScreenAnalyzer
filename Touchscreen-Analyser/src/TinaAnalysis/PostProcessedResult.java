@@ -22,8 +22,8 @@ public class PostProcessedResult {
 		this.original = original;
 		this.animalId = original.split(",")[1];
 		this.sessionID = original.split(",")[6];
-		this.anticipationError = Integer.parseInt(original.split(",")[15]);
-		this.touchscreenError = Integer.parseInt(original.split(",")[20]);
+		this.anticipationError = Integer.parseInt(original.split(",")[16]);
+		this.touchscreenError = Integer.parseInt(original.split(",")[21]);
 		this.errorTrainPostTrial = -1;
 		this.errorTrainPostTrial = -1;
 	}

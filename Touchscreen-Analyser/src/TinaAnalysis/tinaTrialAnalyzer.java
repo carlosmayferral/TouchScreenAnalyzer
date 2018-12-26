@@ -12,18 +12,33 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 	private float currentCueTime;
 
 	private float currentHoldTime;
+	
+	private float currentTargetTime;
 
 	private TinaSessionParameters parameters;
 
-	private final String resultHeader = "TimeStamp," + "Trial_Number," + "Cue_Type," + "Cue_Validity," + "Cue_Time,"
-			+ "Hold_Time," + "Correct_Selection," + "AnticipationError," + "CommissionError," + "OmissionError,"
-			+ "Reaction_Time," + "Movement_Time," + "Touchscreen_error";
+	private final String resultHeader = 
+	"TimeStamp," +
+	"Trial_Number," +
+	"Cue_Type," +
+	"Cue_Validity," +
+	"Cue_Time," + 
+	"Hold_Time," + 
+	"Target_Time," +
+	"Correct_Selection," + 
+	"AnticipationError," + 
+	"CommissionError," +
+	"OmissionError," +
+	"Reaction_Time," +
+	"Movement_Time," + 
+	"Touchscreen_error";
 
 	@Override
 	public void setParameters(SessionParameters parameters) {
 		this.parameters = (TinaSessionParameters) parameters;
 		this.currentCueTime = this.parameters.getCueTime();
 		this.currentHoldTime = this.parameters.getHoldTime();
+		this.currentTargetTime = this.parameters.getTargetTime();
 	}
 
 	@Override
@@ -46,6 +61,9 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 
 		// Predetermined hold time per trial
 		float holdTime = this.determineHoldTime(trial);
+		
+		// Predetermined target time per trial
+		float targetTime = this.currentTargetTime;
 
 		// Correct target selection
 		int correctSelection = this.determineCorrectSelection(trial);
@@ -69,7 +87,7 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 		int touchscreenError = this.determineIfError(trial, omissionError, anticipationError, comissionError);
 
 		String resultContent = timeStamp + "," + trialNumber + "," + cueType + ',' + cueValidity + ',' + cueTime + ','
-				+ holdTime + ',' + correctSelection + ',' + anticipationError + ',' + comissionError + ','
+				+ holdTime + ',' + targetTime + ',' + correctSelection + ',' + anticipationError + ',' + comissionError + ','
 				+ omissionError + ',' + responseTime + ',' + movementTime + ',' + touchscreenError;
 
 		return new Result(sessionInfo, resultContent, resultHeader);
