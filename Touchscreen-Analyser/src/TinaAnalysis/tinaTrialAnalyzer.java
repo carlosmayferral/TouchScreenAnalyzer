@@ -63,7 +63,7 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 		float holdTime = this.determineHoldTime(trial);
 		
 		// Predetermined target time per trial
-		float targetTime = this.currentTargetTime;
+		float targetTime = this.determineTargetTime(trial);
 
 		// Correct target selection
 		int correctSelection = this.determineCorrectSelection(trial);
@@ -92,6 +92,19 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 
 		return new Result(sessionInfo, resultContent, resultHeader);
 
+	}
+
+	private float determineTargetTime(Trial trial) {
+
+		Event[] events = trial.copyEventsAsArray();
+		
+		for(Event event : events) {
+			if (event.getItem_Name().equals("Target_Time")){
+				currentTargetTime = event.getArgumentValue(1);
+			}
+		}
+		
+		return currentTargetTime;
 	}
 
 	private int determineIfError(Trial trial, int omission, int anticipationError, int comissionError) {
