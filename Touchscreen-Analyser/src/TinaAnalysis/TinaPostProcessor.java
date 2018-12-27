@@ -88,10 +88,29 @@ public class TinaPostProcessor implements IPostProcessor {
 				for (int i = indexOfStartOfSession; i < currentIndex; i++) {
 					resultLines.get(i).setPercentageAnticipationErrors(percentage);
 				}
+				
+				
+				//settle existing train?
+				if (indexOfFirstErrorInTrain > -1) {
+					int trainLength = currentIndex - indexOfFirstErrorInTrain;
+					resultLines.get(indexOfFirstErrorInTrain).setErrorTrainPostTrial(trainLength);
+				}
+				
+				
 				indexOfStartOfSession = currentIndex;
 				numberOfAnticipationErrors = 0;
 				numberOfNonAnticipationErrors = 0;
 				indexOfFirstErrorInTrain =-1;
+				
+				//if not in same session (new session but is an anticipation error)
+				//then start a train
+				if (resultLines.get(currentIndex).getAnticipationError() > 0) {
+					indexOfFirstErrorInTrain = currentIndex;
+				}
+				else {
+					resultLines.get(currentIndex).setErrorTrainPostTrial(0);
+				}
+				
 			}
 			
 			//Finally count if anticipation error or not
