@@ -3,6 +3,7 @@ package touchscreenAnalyzer;
 import java.io.File;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 
 import dataModels.SessionInfo;
@@ -12,8 +13,6 @@ class ExperimentReader {
 	private File experimentFolder;
 
 	private HashMap<File, SessionInfo> sessionInfoMap;
-
-	private HashMap<String, String> groupInfoMap;
 
 	private PriorityQueue<File> sessions;
 
@@ -25,9 +24,6 @@ class ExperimentReader {
 
 		// Initialize info Map
 		sessionInfoMap = new HashMap<File, SessionInfo>();
-
-		// Initialize group info
-		groupInfoMap = new HashMap<String, String>();
 
 		// Initialize comparator
 		sessionComparator = new Comparator<File>() {
@@ -66,9 +62,14 @@ class ExperimentReader {
 	public void readExperimentFolder(File experimentFolder) {
 
 		this.experimentFolder = experimentFolder;
+		
+		HashMap<String, String> groupMap = null;
 
 		// Initialize express reader
 		CSVExpressReader csvExpressReader = new CSVExpressReader();
+		
+		//Initialize meta reader
+		MetaFileReader metaReader = new MetaFileReader();
 
 		// Read obtain all files in directory
 		File[] fileList = this.experimentFolder.listFiles();
@@ -97,15 +98,43 @@ class ExperimentReader {
 			}
 			// XML expressRead if it is an XML file
 			// TODO
+			
 			// Record group data if its a meta file
 			else if (file.getName().contains(".meta")) {
-				metaRead(file);
+				groupMap = new HashMap<String, String>();
+				metaReader.read(file, groupMap);
 			}
 		}
+		
+		//Assign groups to sessions
+		if (groupMap == null) {
+			System.out.println("No group information was provided in a .meta file,"
+					+ " group column will be null");
+		}else this.assignGroupsToAnimals(groupMap);
 
 		// Assign correct ordinal days in session info structure
 		this.assignOrdinalDays();
 
+	}
+
+	private void assignGroupsToAnimals(HashMap<String, String> groupInfoMap) {
+		
+		if(groupInfoMap != null) {
+			Iterator<SessionInfo> iterator = this.sessionInfoMap.values().iterator();
+			
+			while (iterator.hasNext()) {
+				SessionInfo info = iterator.next();
+				if (groupInfoMap.get(info.getAnimalId()) == null) {
+					System.out.println("No group information provided for animal ID: " + info.getAnimalId());
+					continue;
+				}
+				else {
+					info.setGroupId(groupInfoMap.get(info.getAnimalId()));
+				}
+			}
+			
+		}
+		
 	}
 
 	private void assignOrdinalDays() {
@@ -143,22 +172,9 @@ class ExperimentReader {
 		return this.sessions.size();
 	}
 
-	private void metaRead(File file) {
-
-		// TODO generate method for reading meta files
-
-	}
-
 	public SessionInfo getSessionInfo(File file) {
 		if (sessionInfoMap.size() > 0) {
 			return sessionInfoMap.get(file);
-		} else
-			return null;
-	}
-
-	public String getGroupInfo(String animalId) {
-		if (groupInfoMap.size() > 0) {
-			return this.groupInfoMap.get(animalId);
 		} else
 			return null;
 	}
