@@ -113,7 +113,7 @@ public class Session {
 				e.printStackTrace();
 			}
 		}
-		if (events.size() > 0) {
+		if (events.size() >= 0) {
 			Event[] eventsCopy = new Event[events.size()];
 			return (Event[]) events.toArray(eventsCopy);
 		} else
