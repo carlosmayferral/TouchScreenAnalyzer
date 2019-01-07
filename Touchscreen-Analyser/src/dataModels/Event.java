@@ -1,6 +1,12 @@
 package dataModels;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Event {
 
@@ -139,6 +145,30 @@ public class Event {
 			return true;
 		} else
 			return false;
+	}
+	
+	public static Event[] readEventsFromFile (File file) {
+		try {
+			Scanner sc = new Scanner(file);
+			
+			ArrayList <Event> events = new ArrayList<Event>();
+			
+			//Read in all events
+			while(sc.hasNextLine()) {
+				events.add(new Event(sc.nextLine()));
+			}
+			
+			Event[] eventArray = new Event[events.size()];
+			
+			sc.close();
+			
+			return events.toArray(eventArray);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			fail("Test file not found");
+			return null;
+		}
 	}
 
 }
