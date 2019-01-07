@@ -44,6 +44,11 @@ public class Session {
 	public void generateTrialsfromEvents(ITrialPartitioner partitionProtocol) {
 
 		this.trials = partitionProtocol.partition(events);
+		
+		if (trials.size()< 5) {
+			System.out.println("Warning: session # " + sessionInfo.getSessionId() 
+			+ " has less than five trials, session might be accidental.");
+		}
 
 		return;
 	}

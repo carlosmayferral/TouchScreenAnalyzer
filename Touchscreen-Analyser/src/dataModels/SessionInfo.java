@@ -119,4 +119,11 @@ public class SessionInfo {
 	public String getHeader() {
 		return header;
 	}
+
+	/**
+	 * @param groupId the groupId to set
+	 */
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
 }
