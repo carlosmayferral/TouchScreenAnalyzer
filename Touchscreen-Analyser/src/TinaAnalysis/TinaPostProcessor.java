@@ -32,8 +32,11 @@ public class TinaPostProcessor implements IPostProcessor {
 		
 		int indexOfFirstErrorInTrain=-1;
 		int indexOfStartOfSession = 0;
+		int indexOfStartOfMouse = 0;
 		int numberOfAnticipationErrors=0;
 		int numberOfNonAnticipationErrors=0;
+		int numberOfAnticipationErrorsPerMouse = 0;
+		int numberOfNonAnticipationErrorsPerMouse = 0;
 		
 		int currentIndex = 0;
 		
@@ -96,6 +99,19 @@ public class TinaPostProcessor implements IPostProcessor {
 					resultLines.get(indexOfFirstErrorInTrain).setErrorTrainPostTrial(trainLength);
 				}
 				
+				//set new mouse if mouse is new, fill mouse column
+				if (!resultLines.get(currentIndex).getAnimalId().equals(resultLines.get(indexOfStartOfMouse).getAnimalId())) {
+					float mouseAverage = (float)numberOfAnticipationErrorsPerMouse /
+							(numberOfNonAnticipationErrorsPerMouse + numberOfAnticipationErrorsPerMouse);
+					mouseAverage *= 100;
+					System.out.println("Writing Mouse Average until" + currentIndex);
+					for (int i = indexOfStartOfMouse; i < currentIndex; i++) {
+						resultLines.get(i).setPercentageAnticipationErrorsPerMouse(mouseAverage);
+					}
+					indexOfStartOfMouse = currentIndex;
+					numberOfAnticipationErrorsPerMouse = 0;
+					numberOfNonAnticipationErrorsPerMouse = 0;
+				}
 				
 				indexOfStartOfSession = currentIndex;
 				numberOfAnticipationErrors = 0;
@@ -116,22 +132,31 @@ public class TinaPostProcessor implements IPostProcessor {
 			//Finally count if anticipation error or not
 			if (resultLines.get(currentIndex).getAnticipationError() > 0) {
 				numberOfAnticipationErrors++;
+				numberOfAnticipationErrorsPerMouse++;
 			}
 			else if (
 					resultLines.get(currentIndex).getAnticipationError() < 1
 					&&
 					resultLines.get(currentIndex).getIfTouchscreenError() < 1) {
 				numberOfNonAnticipationErrors++;
+				numberOfNonAnticipationErrorsPerMouse++;
 			}
 			
 			currentIndex++;
 			
 		}
-		//Set percentage of last session
+		//Set percentage of last session after loop
 		float percentage = (float)numberOfAnticipationErrors / (numberOfAnticipationErrors + numberOfNonAnticipationErrors);
 		percentage = percentage * 100;
 		for (int i = indexOfStartOfSession; i < currentIndex; i++) {
 			resultLines.get(i).setPercentageAnticipationErrors(percentage);
+		}
+		//Set percentage for last Mouse
+		float mouseAverage = (float)numberOfAnticipationErrorsPerMouse /
+				(numberOfNonAnticipationErrorsPerMouse + numberOfAnticipationErrorsPerMouse);
+		mouseAverage *= 100;
+		for (int i = indexOfStartOfMouse; i < currentIndex; i++) {
+			resultLines.get(i).setPercentageAnticipationErrorsPerMouse(mouseAverage);
 		}
 		//Close in stream
 		sc.close();
@@ -142,7 +167,9 @@ public class TinaPostProcessor implements IPostProcessor {
 			pw.print(header);
 			pw.print(",Concecutive_Ant_Errors_Before_Trial");
 			pw.print(",Ant_Error_Train_After_Trial");
-			pw.println(",Percentage_Anticipation_Errors");
+			pw.print(",Percentage_Anticipation_Errors");
+			pw.println(",Percentage_Anticipation_Errors_Per_Mouse");
+			
 			
 			for (PostProcessedResult ppr : resultLines) {
 				pw.println(ppr.generateResultString());

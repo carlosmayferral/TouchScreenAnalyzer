@@ -15,6 +15,8 @@ public class PostProcessedResult {
 	private int errorTrainPostTrial;
 	
 	private float percentageAnticipationErrors;
+	
+	private float percentageAnticipationErrorsPerMouse;
 
 	private int touchscreenError;
 	
@@ -26,6 +28,7 @@ public class PostProcessedResult {
 		this.touchscreenError = Integer.parseInt(original.split(",")[21]);
 		this.errorTrainPostTrial = -1;
 		this.errorTrainPostTrial = -1;
+		this.percentageAnticipationErrorsPerMouse = Float.NaN;
 	}
 	
 	public boolean isSameSession(PostProcessedResult other) {
@@ -57,6 +60,10 @@ public class PostProcessedResult {
 	public void setPercentageAnticipationErrors(float percentageAnticipationErrors) {
 		this.percentageAnticipationErrors = percentageAnticipationErrors;
 	}
+	
+	public void setPercentageAnticipationErrorsPerMouse(float percentageAnticipationErrorsPerMouse) {
+		this.percentageAnticipationErrorsPerMouse = percentageAnticipationErrorsPerMouse;
+	}
 
 	/**
 	 * @return the animalId
@@ -76,7 +83,8 @@ public class PostProcessedResult {
 		return original 
 				+ "," + this.errorTrainPreTrial
 				+ "," +  this.errorTrainPostTrial
-				+ "," + this.percentageAnticipationErrors;
+				+ "," + this.percentageAnticipationErrors
+				+ "," + this.percentageAnticipationErrorsPerMouse;
 	}
 
 	/**
