@@ -44,7 +44,7 @@ public class AnalyzerController {
 		// Analysis loop: for each sessionFile
 		while ((sessionFile = experiment.getNextSession()) != null) {
 
-			System.out.println(((float) finishedSessions / (float) totalSessions) * 100 + "%");
+			//System.out.println(((float) finishedSessions / (float) totalSessions) * 100 + "%");
 
 			// Create session object using file and recorded info
 			Session session = new Session(sessionFile, experiment.getSessionInfo(sessionFile));

@@ -80,7 +80,7 @@ class ExperimentReader {
 
 		// For each File
 		for (File file : fileList) {
-			System.out.println("Checking integrity of file : " + file.getAbsolutePath());
+			//System.out.println("Checking integrity of file : " + file.getAbsolutePath());
 
 			// Interrupt if file contains the word results
 			if (file.getName().equals("results.csv")) {

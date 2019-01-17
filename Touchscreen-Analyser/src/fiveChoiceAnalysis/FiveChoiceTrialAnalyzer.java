@@ -69,6 +69,8 @@ class FiveChoiceTrialAnalyzer implements ITrialAnalyzer {
 		
 		result.setTargetPosition(settings.getTargetLocation());
 		
+		result.setDelayBlock(this.delayBlock);
+		
 		//Initialize touch and latency scanner
 		FiveChoiceTouchRecorder touchRecorder = new FiveChoiceTouchRecorder();
 		touchRecorder.scanTouches(events, settings.getTargetLocation());
