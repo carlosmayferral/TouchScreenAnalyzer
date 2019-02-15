@@ -137,10 +137,10 @@ class FiveChoiceTrialAnalyzerTest {
 	}
 	
 	@Test 
-	void prematureTrialWasRespondedto(){
+	void prematureTrialWasNotRespondedto(){
 		Trial trial = this.createTrialFromEventFile(prematureTrialFileName);
 		FiveChoiceResult result = analyzer.generateResult(trial, 0, null);
-		Assert.assertTrue(result.isResponse());
+		Assert.assertFalse(result.isResponse());
 	}
 	
 	@Test 

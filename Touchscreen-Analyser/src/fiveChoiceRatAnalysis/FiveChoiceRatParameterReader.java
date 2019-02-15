@@ -1,15 +1,15 @@
-package fiveChoiceAnalysis;
+package fiveChoiceRatAnalysis;
 
 import analysisSets.IParameterReader;
 import dataModels.Event;
 import dataModels.SessionParameters;
 
-class FiveChoiceParameterReader implements IParameterReader {
+class FiveChoiceRatParameterReader implements IParameterReader {
 
 	@Override
 	public SessionParameters readParameters(Event[] events) {
 		
-		FiveChoiceSessionParameters parameters = new FiveChoiceSessionParameters();
+		FiveChoiceRatSessionParameters parameters = new FiveChoiceRatSessionParameters();
 		
 		for(Event event : events) {
 			switch(event.getItem_Name()) {
@@ -44,6 +44,17 @@ class FiveChoiceParameterReader implements IParameterReader {
 						&&
 						parameters.getDelayBlock() == 0) {
 					parameters.setStimulusDelay(event.getArgumentValue(2));
+				}	
+				continue;
+			case "Play_Distracter":
+				int distracter = event.getArgumentValue(1) == 1 ? 1 : 0;
+				parameters.setDistractorPlayed(distracter);
+				continue;
+			case "Time_to_Distracter":
+				if (event.getEvent_Name().equals("List Change - Set") 
+						&&
+						parameters.getDistractorPlayed() == 1) {
+					parameters.setTimeToDistractor((event.getArgumentValue(2)));
 				}	
 				continue;
 			case "TrayLight #1":

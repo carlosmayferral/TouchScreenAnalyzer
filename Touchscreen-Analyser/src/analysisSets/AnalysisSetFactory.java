@@ -4,6 +4,7 @@ import TinaAnalysis.TinaAnalysisSet;
 import cptBaselineAnalysis.CPTBaselineAnalysisSet;
 import extinctionAnalysisSet.ExtinctionAnalysisSet;
 import fiveChoiceAnalysis.FiveChoiceAnalysisSet;
+import fiveChoiceRatAnalysis.FiveChoiceRatAnalysisSet;
 import progressiveRatioAnalysis.ProgressiveRatioAnalysisSet;
 
 public class AnalysisSetFactory {
@@ -31,6 +32,8 @@ public class AnalysisSetFactory {
 			return new CPTBaselineAnalysisSet();
 		case FIVE_CHOICE:
 			return new FiveChoiceAnalysisSet();
+		case FIVE_CHOICE_RAT:
+			return new FiveChoiceRatAnalysisSet();
 		default:
 			return null;
 		}

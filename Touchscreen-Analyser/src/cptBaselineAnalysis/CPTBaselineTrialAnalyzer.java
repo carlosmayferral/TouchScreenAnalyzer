@@ -12,7 +12,7 @@ import dataModels.Trial;
 
 class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 	
-	
+	private int currentCorrectImage  = -1;
 
 	@Override
 	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo) {
@@ -28,6 +28,7 @@ class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 		
 		result.setTrialNumber(counter);
 		result.setTimeStamp(events[0].getEvent_Time());
+		result.setCorrectImage(this.currentCorrectImage);
 		result.setCorrectionTrial((events[0].equals(CPTBaselineReferenceEvents.CORRECTION_ITI_START)) ? true : false);
 		result.setImageShown(determineImageShown(events));
 		result.setCorrect(determineIfCorrect(events));
@@ -82,7 +83,8 @@ class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 
 	@Override
 	public void setParameters(SessionParameters parameters) {
-		// TODO Auto-generated method stub
+		CPTBaselineParameters cptParameters = (CPTBaselineParameters) parameters;
+		this.currentCorrectImage = cptParameters.getCorrectImageIndex();
 	}
 	
 	private int sumArray(int[] array) {

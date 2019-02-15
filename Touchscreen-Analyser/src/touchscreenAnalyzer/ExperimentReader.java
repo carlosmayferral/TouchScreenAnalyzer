@@ -44,8 +44,7 @@ class ExperimentReader {
 						return 0;
 					}
 				} else {
-					if (Integer.parseInt(animalId1.replaceAll("[^0-9]", "")) > Integer
-							.parseInt(animalId2.replaceAll("[^0-9]", ""))) {
+					if (animalId1.hashCode() > animalId2.hashCode()) {
 						return 1;
 					} else {
 						return -1;

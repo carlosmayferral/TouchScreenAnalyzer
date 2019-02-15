@@ -10,17 +10,16 @@ import dataModels.Session;
 
 public class AnalyzerController {
 
-	private IAnalysisSet analysisSet;
-	private String fileName;
-	private String resultName;
-
-	public AnalyzerController(String fileName, AnalysisType analysisType) {
-		this.fileName = fileName;
-		this.resultName = fileName + "\\results.csv";
-		this.analysisSet = AnalysisSetFactory.getInstance().createAnalysisSet(analysisType);
+	public AnalyzerController() {
 	}
 
-	public void analyze() {
+	public void analyze(String fileName, AnalysisType analysisType) {
+		
+		//Name to be used for the result
+		String resultName = fileName + "\\results.csv";
+		
+		//Generate analysis set to use
+		IAnalysisSet analysisSet = AnalysisSetFactory.getInstance().createAnalysisSet(analysisType);
 
 		System.out.println("Reading experiment folder...");
 
@@ -44,7 +43,7 @@ public class AnalyzerController {
 		// Analysis loop: for each sessionFile
 		while ((sessionFile = experiment.getNextSession()) != null) {
 
-			//System.out.println(((float) finishedSessions / (float) totalSessions) * 100 + "%");
+			System.out.println(((float) finishedSessions / (float) totalSessions) * 100 + "%");
 
 			// Create session object using file and recorded info
 			Session session = new Session(sessionFile, experiment.getSessionInfo(sessionFile));
@@ -64,8 +63,7 @@ public class AnalyzerController {
 			// Analyze trials
 			session.generateResults(analysisSet.getTrialAnalyzer());
 
-			// communicate these results, and the session info, to something that writes
-			// results to disk (experiment writer?)
+			// communicate these results to writer
 			Result result;
 			while ((result = session.getResult()) != null) {
 				experimentWriter.writeResult(result);

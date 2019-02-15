@@ -32,7 +32,7 @@ public class CSVExpressReader implements IExpressReader {
 				return null;
 			}
 
-			// Per line loop....
+			// Per line loop.... sometimes quotation marks must be removed, for certain csv formats
 			while ((line = br.readLine()) != null) {
 				// If line is empty
 				if ((!line.equals("")) && line.charAt(0) == ',') {
@@ -105,9 +105,9 @@ public class CSVExpressReader implements IExpressReader {
 	private long getNumericalDate(String date) {
 		String[] dateString = date.split(" ")[0].split("/");
 		String year = dateString[2];
-		String month = dateString[0];
-		String day = dateString[1];
-		return Long.parseLong(year + day + month);
+		String month = dateString[1];
+		String day = dateString[0];
+		return Long.parseLong(year + month + day);
 	}
 
 }
