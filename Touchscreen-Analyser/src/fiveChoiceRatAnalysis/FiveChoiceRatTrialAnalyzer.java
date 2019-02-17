@@ -3,6 +3,7 @@ package fiveChoiceRatAnalysis;
 import analysisSets.BeamBreakCounter;
 import analysisSets.ITrialAnalyzer;
 import dataModels.Event;
+import dataModels.MetaData;
 import dataModels.Result;
 import dataModels.SessionInfo;
 import dataModels.SessionParameters;
@@ -23,9 +24,9 @@ class FiveChoiceRatTrialAnalyzer implements ITrialAnalyzer {
 	
 	
 	@Override
-	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo) {
+	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo , MetaData metaData) {
 		FiveChoiceRatResult result = this.analyze(trial, counter);
-		return new Result(sessionInfo, result.toString(), FiveChoiceRatResult.HEADER);
+		return new Result(sessionInfo, metaData, result.toString(), FiveChoiceRatResult.HEADER);
 	}
 	
 	public FiveChoiceRatResult analyze(Trial trial, int counter) {

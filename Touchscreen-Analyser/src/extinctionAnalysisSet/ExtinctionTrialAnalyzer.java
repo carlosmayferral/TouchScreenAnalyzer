@@ -2,6 +2,7 @@ package extinctionAnalysisSet;
 
 import analysisSets.ITrialAnalyzer;
 import dataModels.Event;
+import dataModels.MetaData;
 import dataModels.Result;
 import dataModels.SessionInfo;
 import dataModels.SessionParameters;
@@ -18,7 +19,7 @@ public class ExtinctionTrialAnalyzer implements ITrialAnalyzer {
 	}
 
 	@Override
-	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo) {
+	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo , MetaData metaData) {
 
 		// Extract events
 		Event[] events = trial.copyEventsAsArray();
@@ -60,7 +61,7 @@ public class ExtinctionTrialAnalyzer implements ITrialAnalyzer {
 				+ "," + centerITItouches + "," + rightITItouches + "," + trayEntries + "," + backBeamBreaks + ","
 				+ frontBeamBreaks + "," + timeInTrial;
 
-		return new Result(sessionInfo, resultContent, resultHeader);
+		return new Result(sessionInfo, metaData, resultContent, resultHeader);
 	}
 
 	private int getBeamBreaks(Event[] events, BeamType type) {

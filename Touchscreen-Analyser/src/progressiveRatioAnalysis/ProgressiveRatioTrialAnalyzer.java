@@ -3,6 +3,7 @@ package progressiveRatioAnalysis;
 import analysisSets.BeamBreakCounter;
 import analysisSets.ITrialAnalyzer;
 import dataModels.Event;
+import dataModels.MetaData;
 import dataModels.Result;
 import dataModels.SessionInfo;
 import dataModels.SessionParameters;
@@ -15,7 +16,7 @@ public class ProgressiveRatioTrialAnalyzer implements ITrialAnalyzer {
 	public static final int RAMP_VALUE = 4;
 
 	@Override
-	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo) {
+	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo, MetaData metaData) {
 
 		Event[] events = trial.copyEventsAsArray();
 
@@ -54,7 +55,7 @@ public class ProgressiveRatioTrialAnalyzer implements ITrialAnalyzer {
 				+ medianTimeBeweenValidTouches + "," + beamBreaks.getFrontBeamBreaks() + ","
 				+ beamBreaks.getBackBeamBreaks() + "," + beamBreaks.getTrayBeamBreaks() + "," + timeInTrial;
 
-		return new Result(sessionInfo, resultContent, resultHeader);
+		return new Result(sessionInfo, metaData, resultContent, resultHeader);
 
 	}
 

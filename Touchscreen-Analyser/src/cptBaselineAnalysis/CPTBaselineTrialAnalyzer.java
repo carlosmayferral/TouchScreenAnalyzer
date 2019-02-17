@@ -5,6 +5,7 @@ import analysisSets.ITrialAnalyzer;
 import cptBaselineAnalysis.analyzerHelpers.CPTBaselineReferenceEvents;
 import cptBaselineAnalysis.analyzerHelpers.CPTBaselineTouchAndLatencyCounter;
 import dataModels.Event;
+import dataModels.MetaData;
 import dataModels.Result;
 import dataModels.SessionInfo;
 import dataModels.SessionParameters;
@@ -15,9 +16,9 @@ class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 	private int currentCorrectImage  = -1;
 
 	@Override
-	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo) {
+	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo, MetaData metaData) {
 		CPTBaselineResult result = analyze(trial, counter, sessionInfo);
-		return new Result (sessionInfo, result.toString(), result.getHeader());
+		return new Result (sessionInfo, metaData, result.toString(), result.getHeader());
 	}
 	
 	public CPTBaselineResult analyze(Trial trial, int counter, SessionInfo sessionInfo) {

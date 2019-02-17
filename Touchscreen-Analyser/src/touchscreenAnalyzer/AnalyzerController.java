@@ -1,12 +1,14 @@
 package touchscreenAnalyzer;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import analysisSets.IAnalysisSet;
 import analysisSets.AnalysisSetFactory;
 import analysisSets.AnalysisType;
 import dataModels.Result;
 import dataModels.Session;
+import dataModels.SessionComparator;
 
 public class AnalyzerController {
 
@@ -23,33 +25,42 @@ public class AnalyzerController {
 
 		System.out.println("Reading experiment folder...");
 
-		// Generate an experiment reader, this builds a priority queue of files to
-		// analyze
+		// Generate an experiment reader, this builds a list of sessions in the folder that contain basic information
 		ExperimentReader experiment = new ExperimentReader();
-		experiment.readExperimentFolder(new File(fileName));
+		
+		ArrayList<Session> sessions = experiment.readExperimentFolder(new File(fileName));
+		
+		//Abort if there is no sessions
+		if(sessions.size() == 0) {
+			System.exit(0);
+		}
 
-		System.out.println("Number of sessions: " + experiment.getNumberOfSessions());
+		//Sort sessions by identifier, then date using custom comparator
+		sessions.sort(new SessionComparator());
+		
+		//Assign ordinal days to sessions
+		assignOrdinalDay(sessions);
+		
+		System.out.println("Number of sessions: " + sessions.size());
 
 		// Open experiment writer
 		ExperimentWriter experimentWriter = new ExperimentWriter(resultName);
 		experimentWriter.openFile();
 
-		File sessionFile;
-		int totalSessions = experiment.getNumberOfSessions();
+		int totalSessions = sessions.size();
 		int finishedSessions = 0;
 
 		System.out.println("Processing into results:");
 
 		// Analysis loop: for each sessionFile
-		while ((sessionFile = experiment.getNextSession()) != null) {
+		for (Session session : sessions) {
 
 			System.out.println(((float) finishedSessions / (float) totalSessions) * 100 + "%");
 
-			// Create session object using file and recorded info
-			Session session = new Session(sessionFile, experiment.getSessionInfo(sessionFile));
-
 			// Read events into session
-			session.readEventsIntoSession();
+			if(!session.generateEventsFromFile()) {
+				System.out.println("Error parsing events in file " + session.getFileName() + "!! System will exit");
+			}
 
 			// Generate starting parameters if necessary
 			session.generateParametersFromEvents(analysisSet.getParameterReader());
@@ -77,10 +88,34 @@ public class AnalyzerController {
 		// Finally close results file
 		experimentWriter.closeFile();
 		
-		//Apply any post processing?
+		//Apply any post processing? **WARNING** broken after meta data addition
 		if (analysisSet.getPostProcessor() != null) {
 			analysisSet.getPostProcessor().process(new File(resultName));
 		}
+	}
+
+	/**
+	 * Assigns ordinal days to an arraylist of sessions. Assumes sessions are sorted by animal then date.
+	 * @param sessions
+	 */
+	public static void assignOrdinalDay(ArrayList<Session> sessions) {
+		
+		int currentDay = 0;
+		SessionComparator comparator = new SessionComparator();
+		
+		//for each session
+		for(int i = 0 ; i < (sessions.size() - 1); i++) {
+			Session first = sessions.get(i);
+			Session second = sessions.get(i+1);
+			first.setDay(currentDay);
+			currentDay ++;
+			if (comparator.compareAnimalId(first, second) != 0) {
+				currentDay = 0;
+			}
+		}
+		
+		//set last day
+		sessions.get(sessions.size()-1).setDay(currentDay);
 	}
 
 }

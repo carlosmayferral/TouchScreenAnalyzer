@@ -4,12 +4,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import dataModels.Event;
 import dataModels.SessionInfo;
 
-public class CSVExpressReader implements IExpressReader {
+public class CsvReader implements IFileReader {
 
-	public SessionInfo readFile(File file) {
+	@Override
+	public SessionInfo expressRead(File file) {
 
 		// Prepare default variables for session info generation
 		String schedule = "null";
@@ -18,7 +21,7 @@ public class CSVExpressReader implements IExpressReader {
 		String database = "null";
 		int sessionId = -1;
 		String animalId = "null";
-		String groupId = "null";
+		String groupId = null;
 		String notes = "";
 
 		// Try opening file
@@ -84,30 +87,72 @@ public class CSVExpressReader implements IExpressReader {
 		}
 
 		// Create new session info object
-		SessionInfo newInfo = new SessionInfo(schedule, getNumericalChamber(environment, file), getNumericalDate(date),
-				database, sessionId, animalId, groupId, notes, file);
+		SessionInfo newInfo = new SessionInfo(
+				schedule,
+				IFileReader.getNumericalChamber(environment), 
+				IFileReader.getNumericalDate(date),
+				database, 
+				sessionId, 
+				animalId, 
+				groupId, 
+				notes, 
+				file);
 
 		return newInfo;
 	}
 
-	private int getNumericalChamber(String chamber, File file) {
-		int numericalChamber = 0;
-		try {
-			numericalChamber = Integer.parseInt(chamber.replaceAll("\\[", "z").replaceAll("\\]", "z").split("z")[1]);
-		} catch (Exception e) {
-			System.out.print("Error reading file");
-			e.printStackTrace();
-			System.exit(-1);
-		}
-		return numericalChamber;
-	}
+	@Override
+	public Event[] readEvents(File file) {
+		// Initialize events array
+		ArrayList<Event> events = new ArrayList<Event>();
 
-	private long getNumericalDate(String date) {
-		String[] dateString = date.split(" ")[0].split("/");
-		String year = dateString[2];
-		String month = dateString[1];
-		String day = dateString[0];
-		return Long.parseLong(year + month + day);
+		// Try opening file
+		String line = "";
+		BufferedReader br = null;
+
+		// Read startup
+		boolean eventsHaveStarted = false;
+
+		try {
+			br = new BufferedReader(new FileReader(file));
+
+			// Per line loop....
+			while ((line = br.readLine()) != null) {
+				// Only Start reading if events have started
+				if (!eventsHaveStarted) {
+					if (line.contains("Item_Name")) {
+						eventsHaveStarted = true;
+						continue;
+					} else {
+						continue;
+					}
+				}
+
+				// If events have started, convert each line into an event by using the csv
+				// format
+				else {
+					events.add(new Event(line));
+				}
+
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null) {
+					br.close();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (events.size() >= 0) {
+			Event[] eventsCopy = new Event[events.size()];
+			return (Event[]) events.toArray(eventsCopy);
+		} else
+			return null;
 	}
 
 }

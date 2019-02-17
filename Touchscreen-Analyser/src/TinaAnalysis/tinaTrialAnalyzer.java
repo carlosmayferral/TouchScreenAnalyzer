@@ -2,6 +2,7 @@ package TinaAnalysis;
 
 import analysisSets.ITrialAnalyzer;
 import dataModels.Event;
+import dataModels.MetaData;
 import dataModels.Result;
 import dataModels.SessionInfo;
 import dataModels.SessionParameters;
@@ -42,7 +43,7 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 	}
 
 	@Override
-	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo) {
+	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo, MetaData metaData) {
 
 		// Timestamp
 		float timeStamp = trial.copyEventsAsArray()[0].getEvent_Time();
@@ -90,7 +91,7 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 				+ holdTime + ',' + targetTime + ',' + correctSelection + ',' + anticipationError + ',' + comissionError + ','
 				+ omissionError + ',' + responseTime + ',' + movementTime + ',' + touchscreenError;
 
-		return new Result(sessionInfo, resultContent, resultHeader);
+		return new Result(sessionInfo, metaData, resultContent, resultHeader);
 
 	}
 
