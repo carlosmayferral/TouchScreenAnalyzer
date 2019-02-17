@@ -63,7 +63,7 @@ class ExperimentReader {
 		}
 		
 		//Link each session to some metadata
-		if (metadataMap == null) {
+		if (metadataMap.size() == 0) {
 			System.out.println("No metadata information was provided in a .meta file,"
 					+ " no metadata will be appended");
 		}else {
