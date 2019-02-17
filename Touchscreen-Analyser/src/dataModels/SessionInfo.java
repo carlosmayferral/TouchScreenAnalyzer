@@ -17,6 +17,10 @@ public class SessionInfo {
 	private String animalId;
 
 	private String groupId;
+	
+	private String user;
+	
+	private Float weight;
 
 	private String notes;
 
@@ -24,10 +28,20 @@ public class SessionInfo {
 
 	private int ordinalDay;
 
-	private final String header = "Schedule,Animal_Id,Group_Id,Date,Database,Chamber,Session_Id,Day,";
+	private final String header = "Schedule,Animal_Id,Group_Id,User,Weight,Date,Database,Chamber,Session_Id,Day,";
 
-	public SessionInfo(String schedule, int chamber, long date, String database, int sessionId, String animalId,
-			String groupId, String notes, File file) {
+	public SessionInfo(
+			String schedule, 
+			int chamber, 
+			long date, 
+			String database, 
+			int sessionId, 
+			String animalId,
+			String groupId, 
+			String user,
+			Float weight,
+			String notes, 
+			File file) {
 		this.schedule = schedule;
 		this.chamber = chamber;
 		this.date = date;
@@ -35,6 +49,8 @@ public class SessionInfo {
 		this.sessionId = sessionId;
 		this.animalId = animalId;
 		this.groupId = groupId;
+		this.user = user;
+		this.weight = weight;
 		this.notes = notes;
 		this.file = file;
 		this.ordinalDay = -1; // To point out that it has not been set
@@ -112,7 +128,7 @@ public class SessionInfo {
 	}
 
 	public String toString() {
-		return this.schedule + "," + animalId + "," + groupId + "," + date + "," + database + "," + chamber + ","
+		return this.schedule + "," + animalId + "," + groupId + "," + user + "," + weight + "," + date + "," + database + "," + chamber + ","
 				+ sessionId + ',' + ordinalDay + ",";
 	}
 
@@ -125,5 +141,19 @@ public class SessionInfo {
 	 */
 	public void setGroupId(String groupId) {
 		this.groupId = groupId;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public String getUser() {
+		return user;
+	}
+
+	/**
+	 * @return the weight
+	 */
+	public Float getWeight() {
+		return weight;
 	}
 }

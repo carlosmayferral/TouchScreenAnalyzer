@@ -112,6 +112,15 @@ public class AnalyzerController {
 			if (comparator.compareAnimalId(first, second) != 0) {
 				currentDay = 0;
 			}
+			else {
+				//Print warning message for two sessions on the same day
+				if (comparator.compare(first, second) == 0) {
+					System.out.println("Warning, animal id " + first.getIdentifier().getAnimalId() + " seems to "
+							+ "have been tested twice on " + first.getDate() + " check file " + first.getFileName()
+							+ " and " + second.getFileName());
+					
+				}
+			}
 		}
 		
 		//set last day

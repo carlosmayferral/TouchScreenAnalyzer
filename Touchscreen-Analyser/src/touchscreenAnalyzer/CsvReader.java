@@ -22,6 +22,8 @@ public class CsvReader implements IFileReader {
 		int sessionId = -1;
 		String animalId = "null";
 		String groupId = null;
+		String user = null;
+		Float weight = Float.NaN;
 		String notes = "";
 
 		// Try opening file
@@ -95,6 +97,8 @@ public class CsvReader implements IFileReader {
 				sessionId, 
 				animalId, 
 				groupId, 
+				user,
+				weight,
 				notes, 
 				file);
 

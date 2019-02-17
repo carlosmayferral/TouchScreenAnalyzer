@@ -27,6 +27,10 @@ public interface IFileReader {
 		String[] dateString = date.split(" ")[0].split("/");
 		String year = dateString[2];
 		String month = dateString[1];
+		//padding of month
+		if(month.length() == 1) {
+			month = "0" + month;
+		}
 		String day = dateString[0];
 		return Long.parseLong(year + month + day);
 	}
