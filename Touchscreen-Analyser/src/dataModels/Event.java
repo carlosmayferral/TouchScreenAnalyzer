@@ -10,10 +10,6 @@ import java.util.Scanner;
 
 public class Event {
 
-	// Generic Events:
-
-	// Front Beam Break
-
 	private float event_Time;
 
 	private int event_Id;
