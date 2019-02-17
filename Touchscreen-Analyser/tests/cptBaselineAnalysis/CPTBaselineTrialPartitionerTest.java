@@ -25,8 +25,8 @@ class CPTBaselineTrialPartitionerTest {
 
 	@BeforeAll
 	static void setup() {
-		Session noTrials = new Session(new File("testfiles/CPTTrialPartitioner/NoTrialsInEvents.csv"), null);
-		noTrials.readEventsIntoSession();
+		Session noTrials = new Session(new File("testfiles/CPTTrialPartitioner/NoTrialsInEvents.csv"));
+		noTrials.generateEventsFromFile();
 		eventsWithNoTrials = noTrials.getEventArrayCopy();
 	}
 
@@ -40,8 +40,8 @@ class CPTBaselineTrialPartitionerTest {
 	
 	@Test
 	void partitionReturnsTwoTrialsTrialWhen2TrialsArePresent() {
-		Session singleTrial = new Session(new File("testfiles/CPTTrialPartitioner/SingleTrial.csv"),null);
-		singleTrial.readEventsIntoSession();
+		Session singleTrial = new Session(new File("testfiles/CPTTrialPartitioner/SingleTrial.csv"));
+		singleTrial.generateEventsFromFile();
 		eventsWithSingleTrial = singleTrial.getEventArrayCopy();
 		if (fixture.partition(eventsWithSingleTrial).size() == 2) {
 			return;
@@ -52,8 +52,8 @@ class CPTBaselineTrialPartitionerTest {
 	
 	@Test
 	void partitionReturnsEmptyArrayListWhenHalfAtrialIsToBeFound() {
-		Session halfTrial = new Session(new File("testfiles/CPTTrialPartitioner/HalfTrial.csv"), null);
-		halfTrial.readEventsIntoSession();
+		Session halfTrial = new Session(new File("testfiles/CPTTrialPartitioner/HalfTrial.csv"));
+		halfTrial.generateEventsFromFile();
 		eventsWithHalfTrial = halfTrial.getEventArrayCopy();
 		if (fixture.partition(eventsWithHalfTrial).isEmpty()){
 			return;
@@ -65,8 +65,8 @@ class CPTBaselineTrialPartitionerTest {
 	
 	@Test
 	void partitionReturns306TrialsWhenThereIsIndeed306Trials() {
-		Session threeHundredSixtyEightTrialSession = new Session(new File("testfiles/CPTTrialPartitioner/368Trials.csv"),null);
-		threeHundredSixtyEightTrialSession.readEventsIntoSession();
+		Session threeHundredSixtyEightTrialSession = new Session(new File("testfiles/CPTTrialPartitioner/368Trials.csv"));
+		threeHundredSixtyEightTrialSession.generateEventsFromFile();
 		eventsWith368Trials = threeHundredSixtyEightTrialSession.getEventArrayCopy();
 		if (fixture.partition(eventsWith368Trials).size() == 306) {
 			return;

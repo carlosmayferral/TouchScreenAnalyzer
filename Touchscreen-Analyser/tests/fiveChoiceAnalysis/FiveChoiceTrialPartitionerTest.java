@@ -147,8 +147,8 @@ class FiveChoiceTrialPartitionerTest {
 	
 	Event[] readTestSession(String fileName) {
 		String fileLocation = "testfiles/FiveChoiceTrialPartitioner/" + fileName;
-		Session toBeRead = new Session(new File(fileLocation),null);
-		toBeRead.readEventsIntoSession();
+		Session toBeRead = new Session(new File(fileLocation));
+		toBeRead.generateEventsFromFile();
 		return toBeRead.getEventArrayCopy();
 	}
 }

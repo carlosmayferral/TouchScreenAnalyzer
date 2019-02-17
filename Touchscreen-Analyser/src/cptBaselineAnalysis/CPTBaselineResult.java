@@ -9,6 +9,8 @@ public class CPTBaselineResult{
 	private boolean correctionTrial;
 	private boolean correctionTrialHasBeenSet;
 	
+	private int correctImage;
+	
 	private int imageShown;
 	
 	private boolean correct;
@@ -36,6 +38,7 @@ public class CPTBaselineResult{
 	private final static String HEADER = 
 			"TimeStamp" + "," +
 			"Trial_Number" + "," + 
+			"Correct_Image" + "," + 
 			"Correction_Trial" + "," +
 			"Image_Displayed"  + "," +
 			"Correct"  + "," +
@@ -53,6 +56,7 @@ public class CPTBaselineResult{
 		timeStamp = Float.NaN;
 		trialNumber = -1;
 		correctionTrial = Boolean.FALSE;
+		this.correctImage = -1;
 		this.correctionTrialHasBeenSet = false;
 		this.imageShown = -1;
 		this.correct = Boolean.FALSE;
@@ -72,6 +76,7 @@ public class CPTBaselineResult{
 	public String toString() {
 		return timeStamp + "," + 
 				trialNumber  + "," +
+				this.correctImage + "," +
 				(correctionTrial ? "1" : "0")  + "," +
 				imageShown  + "," +
 				(correct ? "1" : "0")  + "," +
@@ -129,6 +134,10 @@ public class CPTBaselineResult{
 		return correctionTrial;
 	}
 
+	public void setCorrectImage(int imageIndex) {
+		this.correctImage = imageIndex;
+	}
+	
 	/**
 	 * @param correctionTrial the correctionTrial to set
 	 */

@@ -1,4 +1,4 @@
-package fiveChoiceAnalysis;
+package fiveChoiceRatAnalysis;
 
 import analysisSets.BeamBreakCounter;
 import analysisSets.ITrialAnalyzer;
@@ -11,32 +11,29 @@ import dataModels.Trial;
 import fiveChoiceAnalysis.AnalyzerHelpers.FiveChoiceTouchRecorder;
 import fiveChoiceAnalysis.AnalyzerHelpers.TrialSettingsReader;
 
-class FiveChoiceTrialAnalyzer implements ITrialAnalyzer {
+class FiveChoiceRatTrialAnalyzer implements ITrialAnalyzer {
 	
-	private float bufferedStimulusDuration;
+	//Some parameters are constant for the whole session, they only change when parameters are set
 	
-	private float bufferedStimulusDelay;
-	
-	private float bufferedStimulusBrightness;
-	
+	private float currentStimulusDuration;
+	private float currentStimulusDelay;
+	private float currentStimulusBrightness;
 	private int delayBlock;
+	private int distracterPlayed;
+	private float timeToDistracter;
 	
-	public FiveChoiceTrialAnalyzer() {
-		this.bufferedStimulusBrightness = Float.NaN;
-		this.bufferedStimulusDelay = Float.NaN;
-		this.bufferedStimulusDuration = Float.NaN;
-		this.delayBlock = -1;
-	}
 	
-
 	@Override
 	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo , MetaData metaData) {
-		FiveChoiceResult result = this.generateResult(trial,counter,sessionInfo);
-		return new Result(sessionInfo, metaData, result.toString(), result.getHeader());
+		FiveChoiceRatResult result = this.analyze(trial, counter);
+		return new Result(sessionInfo, metaData, result.toString(), FiveChoiceRatResult.HEADER);
 	}
-
-	public FiveChoiceResult generateResult(Trial trial, int counter, SessionInfo sessionInfo) {
-		FiveChoiceResult result = new FiveChoiceResult();
+	
+	public FiveChoiceRatResult analyze(Trial trial, int counter) {
+		FiveChoiceRatResult result = new FiveChoiceRatResult();
+		
+		//Trial analysis logic goes here
+		
 		Event[] events = trial.copyEventsAsArray();
 		
 		result.setTimeStamp(events[0].getEvent_Time());
@@ -49,28 +46,40 @@ class FiveChoiceTrialAnalyzer implements ITrialAnalyzer {
 		//Stimulus duration
 		if (!((Float)settings.getStimulusDuration()).isNaN()) {
 			result.setStimulusDuration(settings.getStimulusDuration());
-			bufferedStimulusDuration = settings.getStimulusDuration();
-		} else result.setStimulusDuration(bufferedStimulusDuration);
+			this.currentStimulusDuration = settings.getStimulusDuration();
+		} else result.setStimulusDuration(this.currentStimulusDuration);
 		
 		//Stimulus delay
 		if (!((Float)settings.getStimulusDelay()).isNaN()) {
 			result.setStimulusDelay(settings.getStimulusDelay());
-			bufferedStimulusDelay = settings.getStimulusDelay();
+			this.currentStimulusDelay = settings.getStimulusDelay();
 		} else {
-			result.setStimulusDelay(bufferedStimulusDelay);
+			result.setStimulusDelay(this.currentStimulusDelay);
 		}
 		
 		//Stimulus brightness
 		if (!((Float)settings.getStimulusBrightness()).isNaN()) {
 			result.setStimulusBrightness(settings.getStimulusBrightness());
-			bufferedStimulusBrightness = settings.getStimulusBrightness();
+			this.currentStimulusBrightness = settings.getStimulusBrightness();
 		} else {
-			result.setStimulusBrightness(bufferedStimulusBrightness);
+			result.setStimulusBrightness(this.currentStimulusBrightness);
 		}
 		
-		result.setTargetPosition(settings.getTargetLocation());
+		//If distracter was played
+		if (!(settings.getPlayDistracter() == -1)) {
+			result.setDistractorPlayed(settings.getPlayDistracter());
+			this.distracterPlayed= settings.getPlayDistracter();
+		} else {
+			result.setDistractorPlayed(this.distracterPlayed);
+		}
 		
-		result.setDelayBlock(this.delayBlock);
+		//The time to the distracter
+		if (!((Float)settings.getTimeToDistractor()).isNaN()) {
+			result.setTimeToDistractor(settings.getTimeToDistractor());
+			this.timeToDistracter = settings.getTimeToDistractor();
+		} else {
+			result.setTimeToDistractor(this.timeToDistracter);
+		}
 		
 		//Initialize touch and latency scanner
 		FiveChoiceTouchRecorder touchRecorder = new FiveChoiceTouchRecorder();
@@ -86,6 +95,8 @@ class FiveChoiceTrialAnalyzer implements ITrialAnalyzer {
 		
 		result.setResponseLatency(touchRecorder.getResponse_latency());
 		
+		result.setTimeInTrial(events[events.length -1].getEvent_Time() - events[0].getEvent_Time());
+		
 		result.setRewardCollectionLatency(touchRecorder.getResponse_to_tray_latency());
 		
 		result.setInitiationPeriodTouches(touchRecorder.getInitiationPeriodTouches());
@@ -95,6 +106,10 @@ class FiveChoiceTrialAnalyzer implements ITrialAnalyzer {
 		result.setPerseverativeTouches(touchRecorder.getPerseverativeTouches());
 		
 		result.setTotalTouchesDuringITI(touchRecorder.getItiTouches());
+		
+		result.setTargetPosition(settings.getTargetLocation());
+		
+		result.setDelayBlock(this.delayBlock);
 		
 		BeamBreakCounter beams = new BeamBreakCounter();
 		beams.countBeamBreaks(events);
@@ -108,15 +123,17 @@ class FiveChoiceTrialAnalyzer implements ITrialAnalyzer {
 		return result;
 	}
 
-
 	@Override
-	public void setParameters(SessionParameters rawParameters) {
-		FiveChoiceSessionParameters parameters;
-		parameters = (FiveChoiceSessionParameters) rawParameters;
-		this.bufferedStimulusBrightness = parameters.getStimulusBrightness();
-		this.bufferedStimulusDelay = parameters.getStimulusDelay();
-		this.bufferedStimulusDuration = parameters.getStimulusDuration();
-		this.delayBlock = parameters.getDelayBlock();
+	public void setParameters(SessionParameters parameters) {
+		
+		FiveChoiceRatSessionParameters ratParameters = (FiveChoiceRatSessionParameters) parameters;
+		this.currentStimulusDuration = ratParameters.getStimulusDuration();
+		this.currentStimulusDelay =ratParameters.getStimulusDelay();
+		this.currentStimulusBrightness = ratParameters.getStimulusBrightness();
+		this.delayBlock = ratParameters.getDelayBlock();
+		this.distracterPlayed = ratParameters.getDistractorPlayed();
+		this.timeToDistracter = ratParameters.getTimeToDistractor();
+
 	}
 
 }

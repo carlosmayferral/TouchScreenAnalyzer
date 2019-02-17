@@ -19,7 +19,7 @@ class CPTBaselineTrialAnalyzerTest {
 
 	private static CPTBaselineTrialAnalyzer trialAnalyzer = new CPTBaselineTrialAnalyzer();
 	
-	Session original = new Session(new File("testfiles/CPTTrialAnalyzer/OriginalSession.csv"),null);
+	Session original = new Session(new File("testfiles/CPTTrialAnalyzer/OriginalSession.csv"));
 	
 	private static Trial hitTrial;
 	

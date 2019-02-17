@@ -38,8 +38,8 @@ public class Main {
 		// Perform analysis, keep as instantiation in case multiple analyses need to be
 		// done in the future.
 
-		AnalyzerController analysisEngine = new AnalyzerController(fileName, chosenType);
-		analysisEngine.analyze();
+		AnalyzerController analysisEngine = new AnalyzerController();
+		analysisEngine.analyze(fileName, chosenType);
 		sc.close();
 	}
 }
