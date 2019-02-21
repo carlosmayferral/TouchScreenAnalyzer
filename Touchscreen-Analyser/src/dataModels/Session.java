@@ -10,7 +10,7 @@ import analysisSets.ITrialPartitioner;
 import touchscreenAnalyzer.FileReaderFactory;
 import touchscreenAnalyzer.IFileReader;
 
-public class Session {
+public class Session implements Comparable<Session> {
 
 	private File file;
 
@@ -129,6 +129,40 @@ public class Session {
 	
 	public String getFileName() {
 		return file.getName();
+	}
+
+	@Override
+	public int compareTo(Session arg1) {
+		//First sort by identifier
+		if (this.getIdentifier().hashCode() > arg1.getIdentifier().hashCode()) {
+			return 1;
+		}
+		else if (this.getIdentifier().hashCode() < arg1.getIdentifier().hashCode()) {
+			return -1;
+		}
+		//If animal is the same sort on day
+		else {
+			if(this.getDate() > arg1.getDate()) {
+				return 1;
+			}
+			else if(this.getDate() < arg1.getDate()) {
+				return -1;
+			}
+			else {
+				return 0;
+			}
+		}
+	}
+	
+	public int compareAnimalIdTo(Session arg1) {
+		if (this.getIdentifier().hashCode() > arg1.getIdentifier().hashCode()) {
+			return 1;
+		}
+		else if (this.getIdentifier().hashCode() < arg1.getIdentifier().hashCode()) {
+			return -1;
+		}
+		else return 0;
+		
 	}
 
 }

@@ -6,7 +6,5 @@ import dataModels.SessionParameters;
 public interface IParameterReader {
 
 	public SessionParameters readParameters(Event[] events);
-	
-	
 
 }

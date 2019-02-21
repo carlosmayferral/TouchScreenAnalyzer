@@ -18,7 +18,7 @@ public class Result {
 	}
 
 	public String toString() {
-		return this.sessionInfo.toString() + metaData.getDataString() + content;
+		return this.sessionInfo.toString() + ((metaData != null) ? metaData.getDataString() : "") + content;
 	}
 
 	public String getHeader() {

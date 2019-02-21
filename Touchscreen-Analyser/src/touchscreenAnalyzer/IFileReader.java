@@ -32,6 +32,9 @@ public interface IFileReader {
 			month = "0" + month;
 		}
 		String day = dateString[0];
+		if(day.length() == 1) {
+			day = "0" + day;
+		}
 		return Long.parseLong(year + month + day);
 	}
 

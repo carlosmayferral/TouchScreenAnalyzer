@@ -25,16 +25,20 @@ public class MetaData {
 	
 	public static String getHeaderString() {
 		String headerString = "";
-		for (String header : headers) {
-			headerString += header + ",";
+		if (headers != null) {
+			for (String header : headers) {
+				headerString += header + ",";
+			}
 		}
 		return headerString;
 	}
 	
 	public String getDataString() {
 		String dataString = "";
-		for(String datum : data) {
-			dataString += datum + ",";
+		if (data != null) {
+			for(String datum : data) {
+				dataString += datum + ",";
+			}
 		}
 		return dataString;
 	}
