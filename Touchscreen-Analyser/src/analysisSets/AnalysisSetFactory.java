@@ -5,6 +5,7 @@ import cptBaselineAnalysis.CPTBaselineAnalysisSet;
 import extinctionAnalysisSet.ExtinctionAnalysisSet;
 import fiveChoiceAnalysis.FiveChoiceAnalysisSet;
 import fiveChoiceRatAnalysis.FiveChoiceRatAnalysisSet;
+import pdAnalysis.PdAnalysisSet;
 import progressiveRatioAnalysis.ProgressiveRatioAnalysisSet;
 
 public class AnalysisSetFactory {
@@ -34,6 +35,8 @@ public class AnalysisSetFactory {
 			return new FiveChoiceAnalysisSet();
 		case FIVE_CHOICE_RAT:
 			return new FiveChoiceRatAnalysisSet();
+		case PAIRWISE_DISCRIMINATION:
+			return new PdAnalysisSet();
 		default:
 			return null;
 		}

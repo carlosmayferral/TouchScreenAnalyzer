@@ -36,7 +36,6 @@ class ExperimentReader {
 
 		//Error if no files present...
 		if (fileList == null) {
-			System.out.println("No files were found in directory provided");
 			return sessions;
 		}
 
