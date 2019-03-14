@@ -232,7 +232,7 @@ public class XmlReader implements IFileReader {
 				e.printStackTrace();
 			}
 		}
-		if (events.size() >= 0) {
+		if (events.size() >= 0 && (events.get(events.size() -1).getEvent_Time() > IFileReader.MIN_TIME_ELAPSED)) {
 			Event[] eventsCopy = new Event[events.size()];
 			return (Event[]) events.toArray(eventsCopy);
 		} else

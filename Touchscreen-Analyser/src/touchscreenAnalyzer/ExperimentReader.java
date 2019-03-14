@@ -55,8 +55,11 @@ class ExperimentReader {
 			// Else attempt creating a session
 			else {
 				Session session = new Session(file);
-				if (session.readInfo()) {
+				if (session.readInfo() && session.generateEventsFromFile()) {
 					sessions.add(session);
+				}
+				else {
+					System.out.println("Error reading events from file " + file.getName());
 				}
 			}
 		}

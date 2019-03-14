@@ -38,10 +38,10 @@ public class AnalyzerController {
 		// Name to be used for the result
 		String resultName = fileName + STRING_APPENDED_TO_RESULT;
 		
+		System.out.println("Reading experiment folder...");
+		
 		// Retrieve list of sessions from reader
 		sessions = experiment.readExperimentFolder(new File(fileName));
-		
-		System.out.println("Reading experiment folder...");
 		
 		//Abort if there is no sessions
 		if(sessions.size() == 0) {
@@ -73,11 +73,6 @@ public class AnalyzerController {
 		for (Session session : sessions) {
 
 			System.out.println(((float) finishedSessions / (float) totalSessions) * 100 + "%");
-
-			// Read events into session
-			if(!session.generateEventsFromFile()) {
-				System.out.println("Error parsing events in file " + session.getFileName() + "!! System will exit");
-			}
 
 			// Generate starting parameters if necessary
 			session.generateParametersFromEvents(analysisSet.getParameterReader());
