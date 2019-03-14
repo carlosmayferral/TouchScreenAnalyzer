@@ -62,7 +62,7 @@ public class Session implements Comparable<Session> {
 		events = this.fileReader.readEvents(file);
 		if (this.events != null) {
 			return true;
-		} else
+		} else // null events to be returned when there is no apparent trials
 			return false;
 	}
 

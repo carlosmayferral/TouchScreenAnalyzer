@@ -7,6 +7,8 @@ import dataModels.SessionInfo;
 
 public interface IFileReader {
 	
+	public static float MIN_TIME_ELAPSED = 180;
+	
 	public SessionInfo expressRead(File file);
 	
 	public Event[] readEvents(File file);

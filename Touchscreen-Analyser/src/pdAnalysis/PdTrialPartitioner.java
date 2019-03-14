@@ -19,7 +19,7 @@ class PdTrialPartitioner implements ITrialPartitioner {
 		int iterator = 0;
 		
 		//scan events to detect start of first trial
-		while (!events[iterator].getItem_Name().equals("TrayLight #1")){
+		while ((!events[iterator].getItem_Name().equals("TrayLight #1")) && iterator < events.length){
 			iterator++;
 		}
 		
