@@ -9,6 +9,8 @@ public class SessionInfo {
 	private int chamber;
 
 	private long date;
+	
+	private int timeOfDay;
 
 	private String database;
 
@@ -28,12 +30,24 @@ public class SessionInfo {
 
 	private int ordinalDay;
 
-	private final String header = "Schedule,Animal_Id,Group_Id,User,Weight,Date,Database,Chamber,Session_Id,Day,";
+	private final String header = 
+			"Schedule"
+			+ ",Animal_Id"
+			+ ",Group_Id"
+			+ ",User"
+			+ ",Weight"
+			+ ",Date"
+			+ ",Time"
+			+ ",Database"
+			+ ",Chamber"
+			+ ",Session_Id"
+			+ ",Day,";
 
 	public SessionInfo(
 			String schedule, 
 			int chamber, 
-			long date, 
+			long date,
+			int timeOfDay,
 			String database, 
 			int sessionId, 
 			String animalId,
@@ -45,6 +59,7 @@ public class SessionInfo {
 		this.schedule = schedule;
 		this.chamber = chamber;
 		this.date = date;
+		this.timeOfDay = timeOfDay;
 		this.database = database;
 		this.sessionId = sessionId;
 		this.animalId = animalId;
@@ -128,8 +143,18 @@ public class SessionInfo {
 	}
 
 	public String toString() {
-		return this.schedule + "," + animalId + "," + groupId + "," + user + "," + weight + "," + date + "," + database + "," + chamber + ","
-				+ sessionId + ',' + ordinalDay + ",";
+		return 
+				this.schedule 
+				+ "," + animalId 
+				+ "," + groupId 
+				+ "," + user 
+				+ "," + weight 
+				+ "," + date 
+				+ "," + timeOfDay 
+				+ "," + database 
+				+ "," + chamber 
+				+ "," + sessionId 
+				+ ',' + ordinalDay + ",";
 	}
 
 	public String getHeader() {
@@ -155,5 +180,9 @@ public class SessionInfo {
 	 */
 	public Float getWeight() {
 		return weight;
+	}
+
+	public int getTime() {
+		return this.timeOfDay;
 	}
 }

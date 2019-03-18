@@ -99,6 +99,7 @@ public class XmlReader implements IFileReader {
 				schedule, 
 				IFileReader.getNumericalChamber(environment), 
 				IFileReader.getNumericalDate(date),
+				IFileReader.getNumericalTimeFromDateString(date),
 				database, 
 				sessionId, 
 				animalId, 
@@ -232,7 +233,7 @@ public class XmlReader implements IFileReader {
 				e.printStackTrace();
 			}
 		}
-		if (events.size() >= 0 && (events.get(events.size() -1).getEvent_Time() > IFileReader.MIN_TIME_ELAPSED)) {
+		if (events.size() >= 0) {
 			Event[] eventsCopy = new Event[events.size()];
 			return (Event[]) events.toArray(eventsCopy);
 		} else

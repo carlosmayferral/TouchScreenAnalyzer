@@ -56,6 +56,8 @@ class ExperimentReader {
 			else {
 				Session session = new Session(file);
 				if (session.readInfo() && session.generateEventsFromFile()) {
+					//Furthermore, check if there is enough time recorded
+					if (session.getEventArrayCopy()[session.getEventArrayCopy().length-1].getEvent_Time() > IFileReader.MIN_TIME_ELAPSED)
 					sessions.add(session);
 				}
 				else {
