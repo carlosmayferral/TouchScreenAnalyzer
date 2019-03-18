@@ -112,6 +112,9 @@ class PdTrialAnalyzer implements ITrialAnalyzer {
 			}
 		}
 		
+		if (interactions.getCorrectAccordingToEvent() != interactions.getCorrect()) {
+			System.out.println("DEBUG: trial has correct event but seemingly no correct touch");
+		}
 		
 		return result;
 	}

@@ -97,6 +97,10 @@ public class PdScreenInteractionStateMachine {
 						this.correct = 1;
 						this.state = TrialState.REWARD_PERIOD;
 					}
+					//Special case where they touch outside the bounds of the screen
+					else if((int)event.getArgumentValue(1) == 0){
+						continue;
+					}
 					else {
 						this.correct = 0;
 						this.state = TrialState.TIMEOUT_PERIOD;
