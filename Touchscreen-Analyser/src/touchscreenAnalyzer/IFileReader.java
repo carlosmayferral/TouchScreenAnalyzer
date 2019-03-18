@@ -39,6 +39,12 @@ public interface IFileReader {
 		}
 		return Long.parseLong(year + month + day);
 	}
+	
+	public static int getNumericalTimeFromDateString(String dateString) {
+		String[] timeStringArray = dateString.split("[\\s\\p{Z}]+")[1].split(":");
+		String timeString = timeStringArray[0] + timeStringArray[1];
+		return Integer.parseInt(timeString);
+	}
 
 	
 }
