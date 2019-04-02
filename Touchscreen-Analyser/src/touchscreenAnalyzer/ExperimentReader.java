@@ -57,8 +57,15 @@ class ExperimentReader {
 				Session session = new Session(file);
 				if (session.readInfo() && session.generateEventsFromFile()) {
 					//Furthermore, check if there is enough time recorded
-					if (session.getEventArrayCopy()[session.getEventArrayCopy().length-1].getEvent_Time() > IFileReader.MIN_TIME_ELAPSED)
-					sessions.add(session);
+					if (session.getEventArrayCopy()[session.getEventArrayCopy().length-1].getEvent_Time() > IFileReader.MIN_TIME_ELAPSED) {
+						//return a version of the session without events, otherwise memory will be overloaded
+						Session toBeReturned = new Session(file);
+						toBeReturned.readInfo();
+						sessions.add(toBeReturned);
+					}
+					else {
+						System.out.println("Not enough time recorded on " + file.getName() + ", ignoring... (less than 3 minutes worth of data)");
+					}
 				}
 				else {
 					System.out.println("Error reading events from file " + file.getName());

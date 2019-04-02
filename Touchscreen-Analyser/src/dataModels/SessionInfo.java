@@ -10,7 +10,7 @@ public class SessionInfo {
 
 	private long date;
 	
-	private int timeOfDay;
+	private String timeOfDay;
 
 	private String database;
 
@@ -47,7 +47,7 @@ public class SessionInfo {
 			String schedule, 
 			int chamber, 
 			long date,
-			int timeOfDay,
+			String time,
 			String database, 
 			int sessionId, 
 			String animalId,
@@ -59,7 +59,7 @@ public class SessionInfo {
 		this.schedule = schedule;
 		this.chamber = chamber;
 		this.date = date;
-		this.timeOfDay = timeOfDay;
+		this.timeOfDay = time;
 		this.database = database;
 		this.sessionId = sessionId;
 		this.animalId = animalId;
@@ -182,7 +182,7 @@ public class SessionInfo {
 		return weight;
 	}
 
-	public int getTime() {
+	public String getTime() {
 		return this.timeOfDay;
 	}
 }

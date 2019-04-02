@@ -74,25 +74,25 @@ class FiveChoiceTrialAnalyzer implements ITrialAnalyzer {
 		
 		//Initialize touch and latency scanner
 		FiveChoiceTouchRecorder touchRecorder = new FiveChoiceTouchRecorder();
-		touchRecorder.scanTouches(events, settings.getTargetLocation());
-		
-		result.setPremature(touchRecorder.isTrialPremature());
-		
-		result.setResponse(touchRecorder.isResponded());
-		
-		result.setCorrect(touchRecorder.isCorrect());
-		
-		result.setInitiationLatency(touchRecorder.getInitiation_latency());
-		
-		result.setResponseLatency(touchRecorder.getResponse_latency());
-		
-		result.setRewardCollectionLatency(touchRecorder.getResponse_to_tray_latency());
-		
-		result.setInitiationPeriodTouches(touchRecorder.getInitiationPeriodTouches());
-		
-		result.setTotalPostStimulusPeriodTouches(touchRecorder.getPostStimulusTouches());
-		
-		result.setPerseverativeTouches(touchRecorder.getPerseverativeTouches());
+//		touchRecorder.scanTouches(events, settings.getTargetLocation());
+//		
+//		result.setPremature(touchRecorder.isTrialPremature());
+//		
+//		result.setResponse(touchRecorder.isResponded());
+//		
+//		result.setCorrect(touchRecorder.isCorrect());
+//		
+//		result.setInitiationLatency(touchRecorder.getInitiation_latency());
+//		
+//		result.setResponseLatency(touchRecorder.getResponse_latency());
+//		
+//		result.setRewardCollectionLatency(touchRecorder.getResponse_to_tray_latency());
+//		
+//		result.setInitiationPeriodTouches(touchRecorder.getInitiationPeriodTouches());
+//		
+//		result.setTotalPostStimulusPeriodTouches(touchRecorder.getPostStimulusTouches());
+//		
+//		result.setPerseverativeTouches(touchRecorder.getPerseverativeTouches());
 		
 		result.setTotalTouchesDuringITI(touchRecorder.getItiTouches());
 		

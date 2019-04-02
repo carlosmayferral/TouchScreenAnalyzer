@@ -93,7 +93,7 @@ public class CsvReader implements IFileReader {
 				schedule,
 				IFileReader.getNumericalChamber(environment), 
 				IFileReader.getNumericalDate(date),
-				IFileReader.getNumericalTimeFromDateString(date),
+				IFileReader.getTimeFromDateString(date),
 				database, 
 				sessionId, 
 				animalId, 

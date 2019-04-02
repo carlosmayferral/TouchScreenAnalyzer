@@ -18,7 +18,7 @@ public class FiveChoiceAnalysisSet implements IAnalysisSet {
 	
 	public FiveChoiceAnalysisSet() {
 		this.partitioner = new FiveChoiceTrialPartitioner();
-		this.analyzer = new FiveChoiceTrialAnalyzer();
+		this.analyzer = new FiveChoiceTrialAnalyzer2();
 		this.parameterReader = new FiveChoiceParameterReader();
 		this.postProcessor = null;
 	}
