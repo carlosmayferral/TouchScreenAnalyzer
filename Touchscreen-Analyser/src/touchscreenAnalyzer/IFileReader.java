@@ -40,10 +40,21 @@ public interface IFileReader {
 		return Long.parseLong(year + month + day);
 	}
 	
-	public static int getNumericalTimeFromDateString(String dateString) {
+	public static String getTimeFromDateString(String dateString) {
 		String[] timeStringArray = dateString.split("[\\s\\p{Z}]+")[1].split(":");
-		String timeString = timeStringArray[0] + timeStringArray[1];
-		return Integer.parseInt(timeString);
+		int hour = Integer.parseInt(timeStringArray[0]);
+		String minute = timeStringArray[1];
+		if (dateString.toLowerCase().contains("p.m.")) {
+			if (hour != 12) {
+				hour += 12;
+			}
+		}
+		else {
+			if (hour == 12) {
+				hour = 0;
+			}
+		}
+		return hour + ":" + minute;
 	}
 
 	

@@ -70,10 +70,14 @@ public class AnalyzerController {
 		System.out.println("Processing into results:");
 
 		// Analysis loop: for each session File
-		for (Session session : sessions) {
+		for (int i = 0 ; i< totalSessions-1; i++) {
+			
+			Session session = sessions.remove(0);
 
 			System.out.println(((float) finishedSessions / (float) totalSessions) * 100 + "%");
 
+			session.generateEventsFromFile();
+			
 			// Generate starting parameters if necessary
 			session.generateParametersFromEvents(analysisSet.getParameterReader());
 

@@ -42,6 +42,8 @@ public class FiveChoiceResult {
 	
 	private int trayBeamBreaks;
 	
+	private float timeInTrial;
+	
 	
 	public FiveChoiceResult(){
 		this.timeStamp = Float.NaN;
@@ -61,6 +63,7 @@ public class FiveChoiceResult {
 		this.frontBeamBreaks = -1;
 		this.backBeamBreaks = -1;
 		this.trayBeamBreaks = -1;
+		this.setTimeInTrial(Float.NaN);
 	}
 	
 	public String toString() {
@@ -84,7 +87,8 @@ public class FiveChoiceResult {
 				this.totalTouchesDuringITI + "," +
 				this.frontBeamBreaks + "," +
 				this.backBeamBreaks + "," +
-				this.trayBeamBreaks;
+				this.trayBeamBreaks + "," +
+				this.timeInTrial;
 	}
 	
 	public String getHeader() {
@@ -108,7 +112,8 @@ public class FiveChoiceResult {
 				"Total_Touches_During_ITI" + "," +
 				"Front_Beam_Breaks" + "," +
 				"Back_Beam_Breaks" + "," +
-				"Tray_Beam_Breaks"; 
+				"Tray_Beam_Breaks" + "," +
+				"Time_In_Trial"; 
 	}
 
 	/**
@@ -389,6 +394,20 @@ public class FiveChoiceResult {
 	 */
 	public void setTrayBeamBreaks(int trayBeamBreaks) {
 		this.trayBeamBreaks = trayBeamBreaks;
+	}
+
+	/**
+	 * @return the timeInTrial
+	 */
+	public float getTimeInTrial() {
+		return timeInTrial;
+	}
+
+	/**
+	 * @param timeInTrial the timeInTrial to set
+	 */
+	public void setTimeInTrial(float timeInTrial) {
+		this.timeInTrial = timeInTrial;
 	}
 
 
