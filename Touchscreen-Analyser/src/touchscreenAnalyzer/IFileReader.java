@@ -49,7 +49,7 @@ public interface IFileReader {
 				hour += 12;
 			}
 		}
-		else {
+		else if (dateString.toLowerCase().contains("a.m.")) {
 			if (hour == 12) {
 				hour = 0;
 			}
