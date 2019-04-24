@@ -44,12 +44,12 @@ public interface IFileReader {
 		String[] timeStringArray = dateString.split("[\\s\\p{Z}]+")[1].split(":");
 		int hour = Integer.parseInt(timeStringArray[0]);
 		String minute = timeStringArray[1];
-		if (dateString.toLowerCase().contains("p.m.")) {
+		if (dateString.toLowerCase().contains("p")) {
 			if (hour != 12) {
 				hour += 12;
 			}
 		}
-		else if (dateString.toLowerCase().contains("a.m.")) {
+		else if (dateString.toLowerCase().contains("a")) {
 			if (hour == 12) {
 				hour = 0;
 			}
