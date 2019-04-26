@@ -26,14 +26,14 @@ public interface IFileReader {
 	}
 
 	public static long getNumericalDate(String date) {
-		String[] dateString = date.split(" ")[0].split("/");
-		String year = dateString[2];
+		String[] dateString = date.split("-");
+		String year = dateString[0];
 		String month = dateString[1];
 		//padding of month
 		if(month.length() == 1) {
 			month = "0" + month;
 		}
-		String day = dateString[0];
+		String day = dateString[2];
 		if(day.length() == 1) {
 			day = "0" + day;
 		}
@@ -41,7 +41,7 @@ public interface IFileReader {
 	}
 	
 	public static String getTimeFromDateString(String dateString) {
-		String[] timeStringArray = dateString.split("[\\s\\p{Z}]+")[1].split(":");
+		String[] timeStringArray = dateString.split(":");
 		int hour = Integer.parseInt(timeStringArray[0]);
 		String minute = timeStringArray[1];
 		if (dateString.toLowerCase().contains("p")) {
