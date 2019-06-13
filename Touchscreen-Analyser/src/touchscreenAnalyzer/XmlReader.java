@@ -97,6 +97,11 @@ public class XmlReader implements IFileReader {
 				e.printStackTrace();
 			}
 		}
+		
+		//if no schedule start time was detected, skip
+		if(date == "null") {
+			return null;
+		}
 
 		// Create new session info object
 		SessionInfo newInfo = new SessionInfo(
