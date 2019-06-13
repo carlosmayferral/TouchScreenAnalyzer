@@ -12,7 +12,7 @@ public class Event {
 
 	private float event_Time;
 
-	private int event_Id;
+	private String event_Id;
 
 	private String event_Name;
 
@@ -28,7 +28,7 @@ public class Event {
 		String[] splitline = line.split(",");
 
 		this.event_Time = Float.parseFloat(splitline[0]);
-		this.event_Id = Integer.parseInt(splitline[1]);
+		this.event_Id = splitline[1];
 		this.event_Name = splitline[2];
 		this.item_Name = splitline[3];
 		this.alias_Name = splitline[4];
@@ -71,7 +71,7 @@ public class Event {
 	/**
 	 * @return the event_Id
 	 */
-	public int getEvent_Id() {
+	public String getEvent_Id() {
 		return event_Id;
 	}
 

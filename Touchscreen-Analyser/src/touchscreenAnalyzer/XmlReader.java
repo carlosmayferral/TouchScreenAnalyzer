@@ -69,6 +69,10 @@ public class XmlReader implements IFileReader {
 				else if (line.contains("Animal ID")) {
 					animalId = detag(br.readLine());
 				}
+				else if (line.toLowerCase().contains("group") &&
+						line.toLowerCase().contains("id")) {
+					groupId = detag(br.readLine());
+				}
 				else if (line.contains("User")) {
 					user = detag(br.readLine());
 				}
@@ -138,7 +142,7 @@ public class XmlReader implements IFileReader {
 		
 		//Initialize event structure
 		float eventTime = Float.NaN;
-		int eventId = -1;
+		String eventId = "";
 		String eventName = null;
 		String itemName = null;
 		String aliasName = null;
@@ -171,7 +175,7 @@ public class XmlReader implements IFileReader {
 						eventTime = Float.parseFloat(detag(line));
 					}
 					else if (line.contains("<EventId>")) {
-						eventId = Integer.parseInt(detag(line));
+						eventId = detag(line);
 					}
 					else if (line.contains("<EventText>")) {
 						eventName = detag(line);
@@ -208,7 +212,7 @@ public class XmlReader implements IFileReader {
 						events.add(newEvent);
 						//reset variables
 						eventTime = Float.NaN;
-						eventId = -1;
+						eventId = "";
 						eventName = null;
 						itemName = null;
 						aliasName = null;

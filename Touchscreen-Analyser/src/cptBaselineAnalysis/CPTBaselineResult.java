@@ -13,6 +13,8 @@ public class CPTBaselineResult{
 	
 	private int imageShown;
 	private float stimulusDuration;
+	private float stimulusContrast;
+	
 	
 	private boolean correct;
 	private boolean correctHasBeenSet;
@@ -43,6 +45,7 @@ public class CPTBaselineResult{
 			"Correction_Trial" + "," +
 			"Image_Displayed"  + "," +
 			"Stimulus_Duration" + "," +
+			"Stimulus_Contrast" + "," +
 			"Correct"  + "," +
 			"Center_Touches_ITI"  + "," +
 			"Total_Touches_SD"  + "," +
@@ -62,6 +65,7 @@ public class CPTBaselineResult{
 		this.correctionTrialHasBeenSet = false;
 		this.imageShown = -1;
 		this.stimulusDuration = Float.NaN;
+		this.stimulusContrast = Float.NaN;
 		this.correct = Boolean.FALSE;
 		this.correctHasBeenSet = false;
 		this.itiCenterTouches = -1;
@@ -83,6 +87,7 @@ public class CPTBaselineResult{
 				(correctionTrial ? "1" : "0")  + "," +
 				imageShown  + "," +
 				stimulusDuration + "," +
+				stimulusContrast + "," +
 				(correct ? "1" : "0")  + "," +
 				itiCenterTouches  + "," +
 				this.totalTouchesDuringSD  + "," +
@@ -322,6 +327,20 @@ public class CPTBaselineResult{
 	 */
 	public void setStimulusDuration(float stimulusDuration) {
 		this.stimulusDuration = stimulusDuration;
+	}
+
+	/**
+	 * @return the stimulusContrast
+	 */
+	public float getStimulusContrast() {
+		return stimulusContrast;
+	}
+
+	/**
+	 * @param stimulusContrast the stimulusContrast to set
+	 */
+	public void setStimulusContrast(float stimulusContrast) {
+		this.stimulusContrast = stimulusContrast;
 	}
 	
 
