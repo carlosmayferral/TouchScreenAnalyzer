@@ -12,6 +12,7 @@ public class CPTBaselineResult{
 	private int correctImage;
 	
 	private int imageShown;
+	private float stimulusDuration;
 	
 	private boolean correct;
 	private boolean correctHasBeenSet;
@@ -41,6 +42,7 @@ public class CPTBaselineResult{
 			"Correct_Image" + "," + 
 			"Correction_Trial" + "," +
 			"Image_Displayed"  + "," +
+			"Stimulus_Duration" + "," +
 			"Correct"  + "," +
 			"Center_Touches_ITI"  + "," +
 			"Total_Touches_SD"  + "," +
@@ -59,6 +61,7 @@ public class CPTBaselineResult{
 		this.correctImage = -1;
 		this.correctionTrialHasBeenSet = false;
 		this.imageShown = -1;
+		this.stimulusDuration = Float.NaN;
 		this.correct = Boolean.FALSE;
 		this.correctHasBeenSet = false;
 		this.itiCenterTouches = -1;
@@ -79,6 +82,7 @@ public class CPTBaselineResult{
 				this.correctImage + "," +
 				(correctionTrial ? "1" : "0")  + "," +
 				imageShown  + "," +
+				stimulusDuration + "," +
 				(correct ? "1" : "0")  + "," +
 				itiCenterTouches  + "," +
 				this.totalTouchesDuringSD  + "," +
@@ -304,6 +308,20 @@ public class CPTBaselineResult{
 	 */
 	public void setTrayBeamBreaks(int trayBeamBreaks) {
 		this.trayBeamBreaks = trayBeamBreaks;
+	}
+
+	/**
+	 * @return the stimulusDuration
+	 */
+	public float getStimulusDuration() {
+		return stimulusDuration;
+	}
+
+	/**
+	 * @param stimulusDuration the stimulusDuration to set
+	 */
+	public void setStimulusDuration(float stimulusDuration) {
+		this.stimulusDuration = stimulusDuration;
 	}
 	
 

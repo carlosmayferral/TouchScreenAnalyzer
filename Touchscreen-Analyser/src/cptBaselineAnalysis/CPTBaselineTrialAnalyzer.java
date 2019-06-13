@@ -32,6 +32,10 @@ class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 		result.setCorrectImage(this.currentCorrectImage);
 		result.setCorrectionTrial((events[0].equals(CPTBaselineReferenceEvents.CORRECTION_ITI_START)) ? true : false);
 		result.setImageShown(determineImageShown(events));
+		
+		//Stimulus duration is relevant to stimulus duration probe.
+		result.setStimulusDuration(determineStimulusDuration(events));
+		
 		result.setCorrect(determineIfCorrect(events));
 		
 		CPTBaselineTouchAndLatencyCounter touches = new CPTBaselineTouchAndLatencyCounter();
@@ -55,6 +59,16 @@ class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 		
 		return result;
 		
+	}
+
+	private float determineStimulusDuration(Event[] events) {
+		for (Event event : events) {
+			if (event.getEvent_Name().equalsIgnoreCase("Variable Event") && 
+					event.getItem_Name().equalsIgnoreCase("stimulus_duration")) {
+				return event.getArgumentValue(1);
+			}
+		}
+		return 0;
 	}
 
 	private int determineImageShown(Event[] events) {
