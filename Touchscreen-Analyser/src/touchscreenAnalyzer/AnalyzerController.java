@@ -70,7 +70,7 @@ public class AnalyzerController {
 		System.out.println("Processing into results:");
 
 		// Analysis loop: for each session File
-		for (int i = 0 ; i< totalSessions-1; i++) {
+		for (int i = 0 ; i< totalSessions; i++) {
 			
 			Session session = sessions.remove(0);
 

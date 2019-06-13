@@ -13,6 +13,8 @@ import dataModels.Trial;
 
 class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 	
+	private static final float DEFAULT_DURATION = 2;
+	private static final float DEFAULT_CONTRAST = 100;
 	private int currentCorrectImage  = -1;
 
 	@Override
@@ -32,6 +34,17 @@ class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 		result.setCorrectImage(this.currentCorrectImage);
 		result.setCorrectionTrial((events[0].equals(CPTBaselineReferenceEvents.CORRECTION_ITI_START)) ? true : false);
 		result.setImageShown(determineImageShown(events));
+		
+		//Stimulus duration is relevant to stimulus duration probe.
+		result.setStimulusDuration(determineStimulusDuration(events));
+		
+		//Stimulus contrast is only relevant for the stimulus contrast probe
+		result.setStimulusContrast(determineStimulusContrast(events));
+		
+		//TODO: add sensing for ITI duration
+		
+		//TODO: add sensing for distracter
+		
 		result.setCorrect(determineIfCorrect(events));
 		
 		CPTBaselineTouchAndLatencyCounter touches = new CPTBaselineTouchAndLatencyCounter();
@@ -55,6 +68,38 @@ class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 		
 		return result;
 		
+	}
+
+	private float determineStimulusContrast(Event[] events) {
+		for (Event event : events) {
+			if(event.getEvent_Name().equalsIgnoreCase("Condition Event") &&
+					event.getItem_Name().contains("Select")) {
+				switch(event.getItem_Name()) {
+				case "Select 12.5 pc image":
+					return (float)12.5;
+				case "Select 25 pc image":
+					return (float) 25;
+				case "Select 50 pc image":
+					return (float)50;
+				case "Select 100 pc image":
+					return (float)100;
+				default:
+					System.out.println("error determining contrast");
+					return (Float.NaN);
+				}
+			}
+		}
+		return DEFAULT_CONTRAST;
+	}
+
+	private float determineStimulusDuration(Event[] events) {
+		for (Event event : events) {
+			if (event.getEvent_Name().equalsIgnoreCase("Variable Event") && 
+					event.getItem_Name().equalsIgnoreCase("stimulus_duration")) {
+				return event.getArgumentValue(1);
+			}
+		}
+		return DEFAULT_DURATION;
 	}
 
 	private int determineImageShown(Event[] events) {
