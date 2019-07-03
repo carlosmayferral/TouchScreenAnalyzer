@@ -1,6 +1,5 @@
 package dataModels;
 
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -162,7 +161,7 @@ public class Event {
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			fail("Test file not found");
+			System.out.println("Test file not found");
 			return null;
 		}
 	}
