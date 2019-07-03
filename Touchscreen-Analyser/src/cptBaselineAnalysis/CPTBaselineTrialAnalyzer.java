@@ -15,15 +15,20 @@ class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 	
 	private static final float DEFAULT_DURATION = 2;
 	private static final float DEFAULT_CONTRAST = 100;
+	private static final float DEFAULT_ITI_DURATION = 5;
 	private int currentCorrectImage  = -1;
 
 	@Override
 	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo, MetaData metaData) {
-		CPTBaselineResult result = analyze(trial, counter, sessionInfo);
+		
+		CPTBaselineResult result;
+		result = analyze(trial, counter, sessionInfo);
+		
+		
 		return new Result (sessionInfo, metaData, result.toString(), result.getHeader());
 	}
 	
-	public CPTBaselineResult analyze(Trial trial, int counter, SessionInfo sessionInfo) {
+	public CPTBaselineResult analyze(Trial trial, int counter, SessionInfo sessionInfo){
 		
 		CPTBaselineResult result = new CPTBaselineResult();
 		
@@ -41,9 +46,18 @@ class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 		//Stimulus contrast is only relevant for the stimulus contrast probe
 		result.setStimulusContrast(determineStimulusContrast(events));
 		
-		//TODO: add sensing for ITI duration
+		//ITI duration is only relevant for the ITI probe
+		result.setItiDuration(determineITIduration(events));
 		
-		//TODO: add sensing for distracter
+		//Distracter values are only relevant to the distracter probe
+		result.setDistracter(determineIfDistracted(events));
+		try {
+			result.setCongruentDistracter(determineIfCongruentDistracter(events));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		result.setCorrect(determineIfCorrect(events));
 		
@@ -68,6 +82,44 @@ class CPTBaselineTrialAnalyzer implements ITrialAnalyzer {
 		
 		return result;
 		
+	}
+
+	private boolean determineIfCongruentDistracter(Event[] events) throws Exception {
+		for (Event event : events) {
+			if (event.getEvent_Name().equalsIgnoreCase("Condition Event") && 
+					event.getItem_Name().equalsIgnoreCase("Display Incongruent Images")) {
+				if (this.determineIfDistracted(events)) return false;
+				else throw new Exception("Distracter found in supposedly undistracted trial");
+			}
+			if (event.getEvent_Name().equalsIgnoreCase("Condition Event") && 
+					event.getItem_Name().equalsIgnoreCase("Display Congruent Images")) {
+				if (this.determineIfDistracted(events)) return true;
+				else throw new Exception("Distracter found in supposedly undistracted trial");
+			}
+		}
+		return false;
+	}
+
+	private boolean determineIfDistracted(Event[] events) {
+		for (Event event : events) {
+			if (event.getEvent_Name().equalsIgnoreCase("Variable Event") && 
+					event.getItem_Name().equalsIgnoreCase("Distractor")) {
+						if (event.getArgumentValue(1) != 0) {
+							return true;
+						} else return false;
+			}
+		}
+		return false;
+	}
+
+	private float determineITIduration(Event[] events) {
+		for (Event event : events) {
+			if (event.getEvent_Name().equalsIgnoreCase("Variable Event") && 
+					event.getItem_Name().equalsIgnoreCase("Current_ITI")) {
+				return event.getArgumentValue(1);
+			}
+		}
+		return DEFAULT_ITI_DURATION;
 	}
 
 	private float determineStimulusContrast(Event[] events) {

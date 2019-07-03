@@ -17,7 +17,7 @@ class CPTBaselineTrialPartitioner implements ITrialPartitioner {
 		int iterator = 0;
 		
 		//Iterate through array until the start of trials is found
-		while ((!events[iterator].equals(CPTBaselineReferenceEvents.ITI_START)) && (iterator+1) < events.length) {
+		while ((!events[iterator].getItem_Name().contains("Start ITI")) && (iterator+1) < events.length) {
 			iterator++;
 		}
 		
@@ -30,9 +30,11 @@ class CPTBaselineTrialPartitioner implements ITrialPartitioner {
 		//While there is still events to go...
 		while (iterator < events.length) {
 			
-			//If event is an end of trial
+			//If event is an end of trial, must accommodate for different starts in the distracter
 			if (events[iterator].equals(CPTBaselineReferenceEvents.ITI_START) || 
-					events[iterator].equals(CPTBaselineReferenceEvents.CORRECTION_ITI_START)) {
+					events[iterator].equals(CPTBaselineReferenceEvents.CORRECTION_ITI_START)
+						|| events[iterator].getItem_Name().contains("Start ITI-")
+							|| events[iterator].getItem_Name().contains("Start ITI -")) {
 				//do not add event...
 				
 				//create trial with current events

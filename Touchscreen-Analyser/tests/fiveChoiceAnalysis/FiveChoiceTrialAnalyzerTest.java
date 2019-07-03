@@ -17,7 +17,7 @@ class FiveChoiceTrialAnalyzerTest {
 	
 	private static final String brightnessTrialFileName = "BrightnessTrial.csv";
 
-	private FiveChoiceTrialAnalyzer analyzer;
+	private FiveChoiceTrialAnalyzer2 analyzer;
 	
 	private FiveChoiceSessionParameters trainingParameters;
 	
@@ -37,7 +37,7 @@ class FiveChoiceTrialAnalyzerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		analyzer = new FiveChoiceTrialAnalyzer();
+		analyzer = new FiveChoiceTrialAnalyzer2();
 		trainingParameters = new FiveChoiceSessionParameters();
 	}
 
@@ -238,7 +238,7 @@ class FiveChoiceTrialAnalyzerTest {
 	void prematureTrialHasCorrectCollectionLatency() {
 		Trial trial = this.createTrialFromEventFile(prematureTrialFileName);
 		FiveChoiceResult result = analyzer.generateResult(trial, 0, null);
-		Assert.assertEquals(4.709,result.getRewardCollectionLatency(),0.01);
+		Assert.assertTrue(((Float)result.getRewardCollectionLatency()).isNaN());
 	}
 	
 	@Test
@@ -267,20 +267,6 @@ class FiveChoiceTrialAnalyzerTest {
 		Trial trial = this.createTrialFromEventFile(correctTrialFileName);
 		FiveChoiceResult result = analyzer.generateResult(trial, 0, null);
 		Assert.assertEquals(0, result.getTotalPostStimulusPeriodTouches());
-	}
-	
-	@Test
-	void brightnessTrialHasOnePerseverativeTouch() {
-		Trial trial = this.createTrialFromEventFile(brightnessTrialFileName);
-		FiveChoiceResult result = analyzer.generateResult(trial, 0, null);
-		Assert.assertEquals(1, result.getPerseverativeTouches());
-	}
-	
-	@Test
-	void incorrectTrialHasOnePerseverativeTouch() {
-		Trial trial = this.createTrialFromEventFile(incorrectTrialFileName);
-		FiveChoiceResult result = analyzer.generateResult(trial, 0, null);
-		Assert.assertEquals(1, result.getPerseverativeTouches());
 	}
 
 	private Trial createTrialFromEventFile(String fileName) {

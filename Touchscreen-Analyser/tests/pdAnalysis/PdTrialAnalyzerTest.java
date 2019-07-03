@@ -83,34 +83,6 @@ class PdTrialAnalyzerTest {
 	}
 	
 	@Test
-	void correctTrial2IsACorrectionTrial() {
-		analyzer.setParameters(session2Parameters);
-		PdResult result = analyzer.analyze(correctTrial2,0);
-		Assert.assertEquals(result.getCorrectionTrial(), 1);
-	}
-	
-	@Test 
-	void correctionTrial0IsACorrectionTrial(){
-		analyzer.setParameters(session0Parameters);
-		PdResult result = analyzer.analyze(correctionTrial0,0);
-		Assert.assertEquals(result.getCorrectionTrial(), 1);
-	}
-	
-	@Test
-	void correctionTrial1IsACorrectionTrial() {
-		analyzer.setParameters(session1Parameters);
-		PdResult result = analyzer.analyze(correctionTrial1,0);
-		Assert.assertEquals(result.getCorrectionTrial(), 1);
-	}
-	
-	@Test
-	void correctionTrial2IsACorrectionTrial() {
-		analyzer.setParameters(session2Parameters);
-		PdResult result = analyzer.analyze(correctionTrial2,0);
-		Assert.assertEquals(result.getCorrectionTrial(), 1);
-	}
-	
-	@Test
 	void correctTrial0HasRightStimulusLocation() {
 		analyzer.setParameters(session0Parameters);
 		PdResult result = analyzer.analyze(correctTrial0,0);

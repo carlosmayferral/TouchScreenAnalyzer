@@ -2,6 +2,7 @@ package progressiveRatioAnalysis.analyzerHelpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import dataModels.Event;
 
@@ -101,7 +102,7 @@ public class ProgressiveRatioTouchCounter {
 				total += touch - touch1;
 				touch1 = touch;
 			}
-			return (total / this.getValidTouches());
+			return (total / (this.getValidTouches()-1));
 		}
 	}
 
@@ -125,7 +126,74 @@ public class ProgressiveRatioTouchCounter {
 				touch1 = touch;
 			}
 			Arrays.sort(intervals);
+			//if even, return midpoint between center values
+			if(intervals.length % 2 == 0) {
+				float centerRight = intervals[intervals.length/2];
+				float centerLeft = intervals[(intervals.length/2) -1];
+				return centerLeft + (centerRight - centerLeft)/2;
+			}
+			//if odd return the middle value
 			return intervals[intervals.length / 2];
+		}
+	}
+
+	public float getMedianTimeBetweenCenter() {
+		ArrayList<Float> centerTouches = new ArrayList<>();
+		centerTouches.addAll(validTouches);
+		centerTouches.addAll(itiTouches);
+		Collections.sort(centerTouches);
+		if (centerTouches.size() < 2) {
+			return Float.NaN;
+		} else {
+			float[] intervals = new float[centerTouches.size() - 1];
+			float touch1 = Float.NaN;
+			boolean skip = true;
+			int i = 0;
+
+			for (Float touch : centerTouches) {
+				if (skip) {
+					skip = false;
+					touch1 = touch;
+					continue;
+				}
+				intervals[i] = touch - touch1;
+				i++;
+				touch1 = touch;
+			}
+			Arrays.sort(intervals);
+			//if even, return midpoint between center values
+			if(intervals.length % 2 == 0) {
+				float centerLeft = intervals[(intervals.length/2)-1];
+				float centerRight = intervals[(intervals.length/2)];
+				return centerLeft + (centerRight - centerLeft)/2;
+			}
+			//if odd return the middle value
+			return intervals[intervals.length / 2];
+		}
+	}
+
+	public float getAverageTimeBetweenCenter() {
+		ArrayList<Float> centerTouches = new ArrayList<>();
+		centerTouches.addAll(validTouches);
+		centerTouches.addAll(itiTouches);
+		Collections.sort(centerTouches);
+		if (centerTouches.size() < 2) {
+			return Float.NaN;
+		} else {
+			float total = 0;
+			float touch1 = Float.NaN;
+			boolean skip = true;
+
+			for (Float touch : centerTouches) {
+				if (skip) {
+					skip = false;
+					touch1 = touch;
+					continue;
+				}
+				total += touch - touch1;
+				touch1 = touch;
+			}
+			return (total / (centerTouches.size()-1));
 		}
 	}
 

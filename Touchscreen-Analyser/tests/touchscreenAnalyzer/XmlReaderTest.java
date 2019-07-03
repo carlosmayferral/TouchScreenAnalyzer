@@ -41,7 +41,7 @@ class XmlReaderTest {
 	@Test
 	void session0HasRightDate() {
 		SessionInfo info = reader.expressRead(session0);
-		Assert.assertEquals(20150110, info.getDate());
+		Assert.assertEquals(20151001, info.getDate());
 	}
 	
 	@Test

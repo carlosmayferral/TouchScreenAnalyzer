@@ -11,11 +11,16 @@ public class CPTBaselineResult{
 	
 	private int correctImage;
 	
+	//Variables needed for probe analysis
 	private int imageShown;
 	private float stimulusDuration;
 	private float stimulusContrast;
-	
-	
+	private float itiDuration;
+	private boolean distracter;
+	private boolean distracterhasBeenSet;
+	private boolean congruentDistracter;
+	private boolean congruentDistracterHasBeenSet;
+
 	private boolean correct;
 	private boolean correctHasBeenSet;
 	
@@ -46,6 +51,9 @@ public class CPTBaselineResult{
 			"Image_Displayed"  + "," +
 			"Stimulus_Duration" + "," +
 			"Stimulus_Contrast" + "," +
+			"ITI_Duration" + "," +
+			"Distracted_Trial" + "," +
+			"Congruent_Distracter" + "," +
 			"Correct"  + "," +
 			"Center_Touches_ITI"  + "," +
 			"Total_Touches_SD"  + "," +
@@ -66,6 +74,11 @@ public class CPTBaselineResult{
 		this.imageShown = -1;
 		this.stimulusDuration = Float.NaN;
 		this.stimulusContrast = Float.NaN;
+		this.itiDuration= Float.NaN;
+		this.distracter = false;
+		this.distracterhasBeenSet = false;
+		this.congruentDistracter = false;
+		this.congruentDistracterHasBeenSet = false;
 		this.correct = Boolean.FALSE;
 		this.correctHasBeenSet = false;
 		this.itiCenterTouches = -1;
@@ -88,6 +101,9 @@ public class CPTBaselineResult{
 				imageShown  + "," +
 				stimulusDuration + "," +
 				stimulusContrast + "," +
+				itiDuration + "," +
+				(distracter ? "1": "0") + "," +
+				(congruentDistracter? "1" : "0") + "," +
 				(correct ? "1" : "0")  + "," +
 				itiCenterTouches  + "," +
 				this.totalTouchesDuringSD  + "," +
@@ -100,6 +116,30 @@ public class CPTBaselineResult{
 				this.trayBeamBreaks;
 	}
 	
+	public boolean isDistracter() throws Exception {
+		if (distracterhasBeenSet) {
+			return distracter;
+		}
+		else throw new Exception("Attempting to retrieve unset distracter value");
+	}
+
+	public void setDistracter(boolean distracter) {
+		this.distracter = distracter;
+		this.distracterhasBeenSet = true;
+	}
+
+	public boolean isCongruentDistracter() throws Exception {
+		if (this.congruentDistracterHasBeenSet) {
+			return congruentDistracter;
+		}
+		else throw new Exception("Attempting to retrieve unset congruent distracter value");
+	}
+
+	public void setCongruentDistracter(boolean congruentDistracter) {
+		this.congruentDistracter = congruentDistracter;
+		this.congruentDistracterHasBeenSet = true;
+	}
+
 	public String getHeader() {
 		return HEADER;
 	}
@@ -341,6 +381,14 @@ public class CPTBaselineResult{
 	 */
 	public void setStimulusContrast(float stimulusContrast) {
 		this.stimulusContrast = stimulusContrast;
+	}
+	
+	public float getItiDuration() {
+		return itiDuration;
+	}
+
+	public void setItiDuration(float itiDuration) {
+		this.itiDuration = itiDuration;
 	}
 	
 

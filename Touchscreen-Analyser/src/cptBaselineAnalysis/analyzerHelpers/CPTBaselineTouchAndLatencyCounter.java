@@ -58,7 +58,8 @@ public class CPTBaselineTouchAndLatencyCounter {
 		
 		for (Event event : events) {
 			
-			if (event.equals(CPTBaselineReferenceEvents.IMAGE_DISPLAY)) {
+			if (event.getItem_Name().contains("Display") &&
+					event.getItem_Name().contains("Image")) {
 				state = TrialState.SD;
 				referenceTime = event.getEvent_Time();
 			}

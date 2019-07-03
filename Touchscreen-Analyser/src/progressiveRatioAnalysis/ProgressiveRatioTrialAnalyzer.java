@@ -18,45 +18,46 @@ public class ProgressiveRatioTrialAnalyzer implements ITrialAnalyzer {
 	@Override
 	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo, MetaData metaData) {
 
+		ProgressiveRatioResult result = analyze(trial,counter,sessionInfo,metaData);
+		
+		return new Result(sessionInfo, metaData, result.toString(), result.getResultHeader());
+	}
+
+	public ProgressiveRatioResult analyze(Trial trial, int counter, SessionInfo sessionInfo, MetaData metaData) {
+		
+		//Initialize base result
+		ProgressiveRatioResult result = new ProgressiveRatioResult();
+		
+		//Set counter
+		result.setTrialNumber(counter);
+		
 		Event[] events = trial.copyEventsAsArray();
-
-		String resultHeader = "Trial_Number" + "," + "TimeStamp" + "," + "Required_Ratio" + "," + "Valid_Touches" + ","
-				+ "ITI_Touches" + "," + "Inter_Ratio_Touches" + "," + "Reward_Period_Touches" + ","
-				+ "Total_Center_Touches" + "," + "First_Response_Latency" + "," + "Reward_Collection_Latency" + ","
-				+ "Average_Time_Between_Valid_Touches" + "," + "Median_Time_Between_Valid_Touches" + ","
-				+ "Front_Beam_Breaks" + "," + "Back_Beam_Breaks" + "," + "Tray_Beam_Breaks" + ","
-				+ "Time_Spent_In_Trial";
-
+		
 		// Touch counter data structure
 		ProgressiveRatioTouchCounter touchCounter = new ProgressiveRatioTouchCounter(events);
-
+		
 		// Beam break data structure
 		BeamBreakCounter beamBreaks = new BeamBreakCounter();
 		beamBreaks.countBeamBreaks(events);
-
-		// Trial results
-		int trialNumber = counter;
-		float timeStamp = events[0].getEvent_Time();
-		int requiredRatio = this.getRequiredRatio(events, counter);
-		int validTouches = touchCounter.getValidTouches();
-		int itiTouches = touchCounter.getItiTouches();
-		int interRatioTouches = touchCounter.getInterRatioIntervalTouches();
-		int rewardTouches = touchCounter.getRewardPeriodTouches();
-		int totalCenterTouches = validTouches + interRatioTouches + rewardTouches + itiTouches;
-		float firstTouchLatency = this.calculateFirstTouchLatency(events);
-		float rewardCollectionLatency = this.calculateRewardCollectionLatency(events);
-		float averageTimeBetweenValidTouches = touchCounter.getAverageTimeBetweenValid();
-		float medianTimeBeweenValidTouches = touchCounter.getMedianTimeBetweenValid();
-		float timeInTrial = events[events.length - 1].getEvent_Time() - events[0].getEvent_Time();
-
-		String resultContent = trialNumber + "," + timeStamp + "," + requiredRatio + "," + validTouches + ","
-				+ itiTouches + "," + interRatioTouches + "," + rewardTouches + "," + totalCenterTouches + ","
-				+ firstTouchLatency + "," + rewardCollectionLatency + "," + averageTimeBetweenValidTouches + ","
-				+ medianTimeBeweenValidTouches + "," + beamBreaks.getFrontBeamBreaks() + ","
-				+ beamBreaks.getBackBeamBreaks() + "," + beamBreaks.getTrayBeamBreaks() + "," + timeInTrial;
-
-		return new Result(sessionInfo, metaData, resultContent, resultHeader);
-
+		
+		//All the other stuff
+		result.setTimeStamp(events[0].getEvent_Time());
+		result.setRequiredRatio(this.getRequiredRatio(events, counter));
+		result.setValidTouches(touchCounter.getValidTouches());
+		result.setItiTouches(touchCounter.getItiTouches());
+		result.setInterRatioTouches(touchCounter.getInterRatioIntervalTouches());
+		result.setRewardPeriodTouches(touchCounter.getRewardPeriodTouches());
+		result.setFirstTouchLatency(this.calculateFirstTouchLatency(events));
+		result.setRewardCollectionLatency(this.calculateRewardCollectionLatency(events));
+		result.setAverageTimeBetweenValidTouches(touchCounter.getAverageTimeBetweenValid());
+		result.setMedianTimeBetweenValidTouches(touchCounter.getMedianTimeBetweenValid());
+		result.setAverageTimeBetweenCenterTouches(touchCounter.getAverageTimeBetweenCenter());
+		result.setMedianTimeBetweenCenterTouches(touchCounter.getMedianTimeBetweenCenter());
+		result.setFrontBeamBreaks(beamBreaks.getFrontBeamBreaks());
+		result.setBackBeamBreaks(beamBreaks.getBackBeamBreaks());
+		result.setTrayBeamBreaks(beamBreaks.getTrayBeamBreaks());
+		result.setTimeInTrial(events[events.length - 1].getEvent_Time() - events[0].getEvent_Time());
+		return result;
 	}
 
 	private float calculateRewardCollectionLatency(Event[] events) {

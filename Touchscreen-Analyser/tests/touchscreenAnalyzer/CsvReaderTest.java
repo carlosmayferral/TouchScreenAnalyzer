@@ -31,6 +31,7 @@ class CsvReaderTest {
 	String realSchedule = "PROGRESSIVE RATIO";
 	int realChamber = 1;
 	long realDate = 20180727;
+	String realTime = "10:06";
 	String realDatabase = "Julia";
 	int realSessionId = 916;
 	String realAnimalId = "1";
@@ -39,7 +40,8 @@ class CsvReaderTest {
 	File validFile2;
 	String realSchedule2 = "Wonky Tonk";
 	int realChamber2 = 8;
-	long realDate2 = 20160122;
+	long realDate2 = 20180727;
+	String realTime2 = "10:06";
 	String realDatabase2 = "Carlos3";
 	int realSessionId2 = 1027;
 	String realAnimalId2 = "a16";
@@ -93,11 +95,23 @@ class CsvReaderTest {
 		SessionInfo info = reader.expressRead(validFile1);
 		Assert.assertEquals(realDate, info.getDate());
 	}
+	
+	@Test
+	public void expressReadReadsCorrectTime1() {
+		SessionInfo info = reader.expressRead(validFile1);
+		Assert.assertEquals(realTime, info.getTime());
+	}
 
 	@Test
 	public void expressReadReadsCorrectDate2016() {
 		SessionInfo info = reader.expressRead(validFile2);
 		Assert.assertEquals(realDate2, info.getDate());
+	}
+	
+	@Test
+	public void expressReadReadsCorrectTime2() {
+		SessionInfo info = reader.expressRead(validFile2);
+		Assert.assertEquals(realTime2, info.getTime());
 	}
 
 	@Test

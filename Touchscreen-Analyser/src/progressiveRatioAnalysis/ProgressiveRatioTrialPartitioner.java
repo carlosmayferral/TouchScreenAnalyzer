@@ -34,7 +34,8 @@ public class ProgressiveRatioTrialPartitioner implements ITrialPartitioner {
 			}
 
 			// if session timed out, still form a trial
-			if (currentEvent.equals(ProgressiveRatioReferenceEvents.TIMEOUT_EVENT)) {
+			if (currentEvent.equals(ProgressiveRatioReferenceEvents.TIMEOUT_EVENT)
+					|| currentEvent.equals(ProgressiveRatioReferenceEvents.SCHEDULE_SHUTDOWN_EVENT)) {
 				Event[] eventsCopy = new Event[trialEvents.size()];
 				trials.add(new Trial((Event[]) trialEvents.toArray(eventsCopy)));
 				break;
