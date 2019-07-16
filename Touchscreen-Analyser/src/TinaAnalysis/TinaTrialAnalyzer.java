@@ -32,7 +32,8 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 	"Reaction_Time," +
 	"Movement_Time," + 
 	"Touchscreen_error," +
-	"Audio_Tone";
+	"Audio_Tone," + 
+	"Session_Finish_Time";
 
 	@Override
 	public void setParameters(SessionParameters parameters) {
@@ -89,9 +90,12 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 
 		String audioTone = this.determineAudioTone(trial);
 		
+		float finishTime = parameters.getFinishTime();
+		
 		String resultContent = timeStamp + "," + trialNumber + "," + cueType + ',' + cueValidity + ',' + cueTime + ','
 				+ holdTime + ',' + targetTime + ',' + correctSelection + ',' + anticipationError + ',' + comissionError + ','
-				+ omissionError + ',' + responseTime + ',' + movementTime + ',' + touchscreenError + "," + audioTone;
+				+ omissionError + ',' + responseTime + ',' + movementTime + ',' + touchscreenError + "," + audioTone + 
+				"," + finishTime;
 
 		return new Result(sessionInfo, resultContent, resultHeader);
 

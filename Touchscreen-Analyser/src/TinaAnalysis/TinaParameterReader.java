@@ -11,6 +11,7 @@ public class TinaParameterReader implements IParameterReader {
 		float cue_time = Float.NaN;
 		float hold_time = Float.NaN;
 		float target_time = Float.NaN;
+		float finish_time = Float.NaN;
 		
 		boolean cue_time_found = false;
 		boolean hold_time_found = false;
@@ -30,7 +31,8 @@ public class TinaParameterReader implements IParameterReader {
 				target_time_found = true;
 			}
 			if (cue_time_found && hold_time_found && target_time_found) {
-				return new TinaSessionParameters(cue_time, hold_time, target_time);
+				finish_time = events[events.length-1].getEvent_Time();
+				return new TinaSessionParameters(cue_time, hold_time, target_time, finish_time);
 			}
 		}
 		System.out.println("Error reading all parameters");
