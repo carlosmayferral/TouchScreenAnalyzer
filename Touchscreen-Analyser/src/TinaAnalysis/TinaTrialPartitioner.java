@@ -23,9 +23,6 @@ public class TinaTrialPartitioner implements ITrialPartitioner {
 			i++;
 		}
 		
-		System.out.println(events[i].getEvent_Time());
-		System.out.println(events[i].getEvent_Name());
-		
 		// While there is events left in the list
 		while (i < events.length) {
 
@@ -65,7 +62,6 @@ public class TinaTrialPartitioner implements ITrialPartitioner {
 			}
 
 		}
-		System.out.println("First trial has timestamp " + trials.get(0).copyEventsAsArray()[0].getEvent_Time());
 		return trials;
 
 	}
