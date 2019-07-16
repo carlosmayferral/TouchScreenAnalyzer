@@ -42,7 +42,7 @@ public class ExperimentWriter {
 			row++;
 		} else
 			writer.println(result.toString());
-		row++;
+			row++;
 	}
 
 	public void closeFile() {

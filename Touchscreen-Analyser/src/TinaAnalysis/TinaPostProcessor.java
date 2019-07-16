@@ -25,7 +25,9 @@ public class TinaPostProcessor implements IPostProcessor {
 		String header = sc.nextLine();
 		
 		while(sc.hasNextLine()) {
-			resultLines.add(new PostProcessedResult(sc.nextLine()));
+			String currentResultText = sc.nextLine();
+			System.out.println(currentResultText);
+			resultLines.add(new PostProcessedResult(currentResultText));
 		}
 		
 		//Once it is all in memory, the writing loop commences

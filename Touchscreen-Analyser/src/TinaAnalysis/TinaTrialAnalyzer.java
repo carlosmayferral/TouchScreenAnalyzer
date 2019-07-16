@@ -31,7 +31,8 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 	"OmissionError," +
 	"Reaction_Time," +
 	"Movement_Time," + 
-	"Touchscreen_error";
+	"Touchscreen_error," +
+	"Audio_Tone";
 
 	@Override
 	public void setParameters(SessionParameters parameters) {
@@ -86,12 +87,30 @@ public class TinaTrialAnalyzer implements ITrialAnalyzer {
 		// Determine if there was a hardware error (no registered touch up)
 		int touchscreenError = this.determineIfError(trial, omissionError, anticipationError, comissionError);
 
+		String audioTone = this.determineAudioTone(trial);
+		
 		String resultContent = timeStamp + "," + trialNumber + "," + cueType + ',' + cueValidity + ',' + cueTime + ','
 				+ holdTime + ',' + targetTime + ',' + correctSelection + ',' + anticipationError + ',' + comissionError + ','
-				+ omissionError + ',' + responseTime + ',' + movementTime + ',' + touchscreenError;
+				+ omissionError + ',' + responseTime + ',' + movementTime + ',' + touchscreenError + "," + audioTone;
 
 		return new Result(sessionInfo, resultContent, resultHeader);
 
+	}
+
+	private String determineAudioTone(Trial trial) {
+		Event[] events = trial.copyEventsAsArray();
+		
+		for(Event event:events) {
+			if (event.getItem_Name().equals("aTone_Set")) {
+				if (Math.abs(event.getArgumentValue(1) - 1) < 0.01) {
+					return "tone";
+				}
+				else {
+					return "no_tone";
+				}
+			}
+		}
+		return "NA";
 	}
 
 	private float determineTargetTime(Trial trial) {

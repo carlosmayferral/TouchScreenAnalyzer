@@ -16,12 +16,15 @@ public class TinaTrialPartitioner implements ITrialPartitioner {
 		int i = 0;
 		
 		//Search for first trial start
-		while((events[i].getArgumentName(2) != null) && 
-				(!events[i].getArgumentName(2).equals("CentralStimulus")) &&
-				(!events[i].getEvent_Name().equals("Whisker - Display Image")) &&
+		while(
+				!((events[i].getEvent_Name().equals("Whisker - Display Image")) &&
+				(events[i].getArgumentName(2).equals("CentralStimulus"))) &&
 				i < events.length) {
 			i++;
 		}
+		
+		System.out.println(events[i].getEvent_Time());
+		System.out.println(events[i].getEvent_Name());
 		
 		// While there is events left in the list
 		while (i < events.length) {
@@ -62,6 +65,7 @@ public class TinaTrialPartitioner implements ITrialPartitioner {
 			}
 
 		}
+		System.out.println("First trial has timestamp " + trials.get(0).copyEventsAsArray()[0].getEvent_Time());
 		return trials;
 
 	}
