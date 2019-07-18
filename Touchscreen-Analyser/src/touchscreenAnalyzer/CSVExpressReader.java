@@ -43,7 +43,7 @@ public class CSVExpressReader implements IExpressReader {
 					schedule = line.split(",")[1];
 				} else if (line.split(",")[0].equals("Environment")) {
 					environment = line.split(",")[1];
-				} else if (line.split(",")[0].equals("Date/Time")) {
+				} else if (line.split(",")[0].equals("Schedule_Start_Time")) {
 					date = line.split(",")[1];
 				} else if (line.split(",")[0].equals("Database")) {
 					database = line.split(",")[1];
@@ -103,11 +103,14 @@ public class CSVExpressReader implements IExpressReader {
 	}
 
 	private long getNumericalDate(String date) {
-		String[] dateString = date.split(" ")[0].split("/");
-		String year = dateString[2];
-		String month = dateString[0];
-		String day = dateString[1];
-		return Long.parseLong(year + day + month);
+		String[] dateString = date.split("T")[0].split("-");
+		System.out.println(dateString);
+		String year = dateString[0];
+		String month = dateString[1];
+		if (month.length() == 1) month = "0" + month;
+		String day = dateString[2];
+		if (day.length() == 1) day = "0" + day;
+		return Long.parseLong(year + month + day);
 	}
 
 }

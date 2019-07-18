@@ -31,9 +31,18 @@ public class TinaParameterReader implements IParameterReader {
 				target_time_found = true;
 			}
 			if (cue_time_found && hold_time_found && target_time_found) {
-				finish_time = events[events.length-1].getEvent_Time();
-				return new TinaSessionParameters(cue_time, hold_time, target_time, finish_time);
+				break;
 			}
+		}
+		if (cue_time_found && hold_time_found && target_time_found) {
+			for(int i = events.length-1; i>0; i--) {
+				if(events[i].getEvent_Name().equals("Whisker - Display Image")
+				&& events[i].getArgumentName(2).equals("CentralStimulus")) {
+					finish_time =  events[i].getEvent_Time();
+					break;
+				}
+			}
+		return new TinaSessionParameters(cue_time, hold_time, target_time, finish_time);
 		}
 		System.out.println("Error reading all parameters");
 		return null;
