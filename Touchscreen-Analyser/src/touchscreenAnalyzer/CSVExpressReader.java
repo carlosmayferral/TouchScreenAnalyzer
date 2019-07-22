@@ -104,7 +104,6 @@ public class CSVExpressReader implements IExpressReader {
 
 	private long getNumericalDate(String date) {
 		String[] dateString = date.split("T")[0].split("-");
-		System.out.println(dateString);
 		String year = dateString[0];
 		String month = dateString[1];
 		if (month.length() == 1) month = "0" + month;

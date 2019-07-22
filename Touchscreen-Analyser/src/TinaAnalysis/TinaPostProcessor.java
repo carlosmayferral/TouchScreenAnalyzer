@@ -105,7 +105,6 @@ public class TinaPostProcessor implements IPostProcessor {
 					float mouseAverage = (float)numberOfAnticipationErrorsPerMouse /
 							(numberOfNonAnticipationErrorsPerMouse + numberOfAnticipationErrorsPerMouse);
 					mouseAverage *= 100;
-					System.out.println("Writing Mouse Average until" + currentIndex);
 					for (int i = indexOfStartOfMouse; i < currentIndex; i++) {
 						resultLines.get(i).setPercentageAnticipationErrorsPerMouse(mouseAverage);
 					}

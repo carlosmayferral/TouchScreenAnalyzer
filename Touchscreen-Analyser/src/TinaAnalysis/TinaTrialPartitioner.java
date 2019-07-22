@@ -19,7 +19,7 @@ public class TinaTrialPartitioner implements ITrialPartitioner {
 		while(
 				!((events[i].getEvent_Name().equals("Whisker - Display Image")) &&
 				(events[i].getArgumentName(2).equals("CentralStimulus"))) &&
-				i < events.length) {
+				i < events.length-1) {
 			i++;
 		}
 		
