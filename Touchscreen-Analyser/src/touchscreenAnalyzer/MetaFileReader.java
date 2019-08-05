@@ -23,9 +23,11 @@ public class MetaFileReader {
 			
 			String textLine = "";
 			
-			String[] fileHeader = reader.readLine().split(",");
+			textLine = reader.readLine();
+			
+			String[] fileHeader = textLine.split(",");
 			if(fileHeader.length < 2) {
-				fileHeader = reader.readLine().split("\t");
+				fileHeader = textLine.split("\t");
 			}
 			
 			String[] dataHeaders = new String[fileHeader.length - Identifier.NUMBER_OF_ID_VARIABLES];
