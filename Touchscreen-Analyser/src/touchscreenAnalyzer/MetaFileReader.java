@@ -24,6 +24,9 @@ public class MetaFileReader {
 			String textLine = "";
 			
 			String[] fileHeader = reader.readLine().split(",");
+			if(fileHeader.length < 2) {
+				fileHeader = reader.readLine().split("\t");
+			}
 			
 			String[] dataHeaders = new String[fileHeader.length - Identifier.NUMBER_OF_ID_VARIABLES];
 			
@@ -38,13 +41,19 @@ public class MetaFileReader {
 			//map identifiers to metadata
 			while((textLine = reader.readLine()) != null) {
 				//separate into array
-				String[] metadataArray = textLine.split(",");
+				String[] metadataArray = textLine.split(",",-1);
+				//if csv assumption failed, use tsv
+				if (metadataArray.length < 2) {
+					metadataArray = textLine.split("\t",-1);
+				}
 				//build ID
 				Identifier id = new Identifier(metadataArray[0], (metadataArray[1].equals("NULL")) ? null : metadataArray[1]);
 				//Build metadata
 				MetaData metadata = new MetaData();
 				String[] tempData = new String[dataHeaders.length];
 				for (int i = 0; i < tempData.length; i++) {
+					System.out.println("Setting tempdata " + i + " using metadata " + (i+Identifier.NUMBER_OF_ID_VARIABLES));
+					System.out.println(metadataArray[i + Identifier.NUMBER_OF_ID_VARIABLES]);
 					tempData[i] = metadataArray[i + Identifier.NUMBER_OF_ID_VARIABLES];
 				}
 				metadata.addData(tempData);
