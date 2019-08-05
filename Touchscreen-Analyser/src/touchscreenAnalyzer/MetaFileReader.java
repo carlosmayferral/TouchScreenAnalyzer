@@ -52,8 +52,6 @@ public class MetaFileReader {
 				MetaData metadata = new MetaData();
 				String[] tempData = new String[dataHeaders.length];
 				for (int i = 0; i < tempData.length; i++) {
-					System.out.println("Setting tempdata " + i + " using metadata " + (i+Identifier.NUMBER_OF_ID_VARIABLES));
-					System.out.println(metadataArray[i + Identifier.NUMBER_OF_ID_VARIABLES]);
 					tempData[i] = metadataArray[i + Identifier.NUMBER_OF_ID_VARIABLES];
 				}
 				metadata.addData(tempData);
