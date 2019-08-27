@@ -18,6 +18,7 @@ public class Result {
 	}
 
 	public String toString() {
+		if (metaData == null) System.out.println("null metadata!!!");
 		return this.sessionInfo.toString() + ((metaData != null) ? metaData.getDataString() : "") + content;
 	}
 

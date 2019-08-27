@@ -98,8 +98,10 @@ class ExperimentReader {
 				MetaData emptyMetaData = new MetaData();
 				session.setMetaData(emptyMetaData);
 			}
-			//metadata exists
-			session.setMetaData(metadataMap.get(session.getIdentifier()));
+			else {
+				//metadata exists
+				session.setMetaData(metadataMap.get(session.getIdentifier()));
+			}
 		}
 		
 	}
