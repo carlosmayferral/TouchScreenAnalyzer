@@ -6,6 +6,7 @@ import extinctionAnalysisSet.ExtinctionAnalysisSet;
 import fiveChoiceAnalysis.FiveChoiceAnalysisSet;
 import fiveChoiceRatAnalysis.FiveChoiceRatAnalysisSet;
 import pdAnalysis.PdAnalysisSet;
+import pdAnalysisOtago.PdOtagoSet;
 import progressiveRatioAnalysis.ProgressiveRatioAnalysisSet;
 
 public class AnalysisSetFactory {
@@ -37,6 +38,8 @@ public class AnalysisSetFactory {
 			return new FiveChoiceRatAnalysisSet();
 		case PAIRWISE_DISCRIMINATION:
 			return new PdAnalysisSet();
+		case OTAGO_PAIRWISE_DISCRIMINATION:
+			return new PdOtagoSet();
 		default:
 			return null;
 		}

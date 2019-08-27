@@ -78,6 +78,7 @@ class ExperimentReader {
 			System.out.println("No metadata information was provided in a .meta file,"
 					+ " no metadata will be appended");
 		}else {
+			System.out.println("Assigning metadata...");
 			this.assignMetaDataToAnimals(sessions);
 		}
 		
@@ -90,9 +91,14 @@ class ExperimentReader {
 		for (Session session : sessions) {
 			if (metadataMap.get(session.getIdentifier()) == null) {
 				System.out.println("No metadata was provided for animal " + session.getIdentifier().getAnimalId() + " of group "
-						+ session.getIdentifier().getGroupId() + ", program cannot continue. See file " + session.getFileName());
-				System.exit(-1);
+						+ session.getIdentifier().getGroupId() + ". See file " + session.getFileName());
+				System.out.println("Assigning empty metadata...");
+				
+				//create new empty metadata and assign to session
+				MetaData emptyMetaData = new MetaData();
+				session.setMetaData(emptyMetaData);
 			}
+			//metadata exists
 			session.setMetaData(metadataMap.get(session.getIdentifier()));
 		}
 		

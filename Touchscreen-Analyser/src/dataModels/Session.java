@@ -80,7 +80,9 @@ public class Session implements Comparable<Session> {
 
 	public void generateParametersFromEvents(IParameterReader parameterReader) {
 
-		this.parameters = parameterReader.readParameters(events);
+		if(!(parameterReader == null)) {
+			this.parameters = parameterReader.readParameters(events);
+		}
 
 	}
 
