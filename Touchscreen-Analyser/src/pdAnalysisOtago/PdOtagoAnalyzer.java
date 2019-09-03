@@ -37,10 +37,12 @@ public class PdOtagoAnalyzer implements ITrialAnalyzer {
 	public int determineIfCorrect(Event[] trialEvents) {
 		
 		for (Event event : trialEvents) {
-			if (event.getItem_Name().equals("Correct")) {
+			if (event.getItem_Name().equals("Correct")
+					|| event.getItem_Name().equals("Correct Correction Trial")) {
 				return 1;
 			}
-			else if (event.getItem_Name().equals("Incorrect")) {
+			else if (event.getItem_Name().equals("Incorrect")
+					|| event.getItem_Name().equals("Incorrect Correction Trial")) {
 				return 0;
 			}
 		}
@@ -59,7 +61,7 @@ public class PdOtagoAnalyzer implements ITrialAnalyzer {
 					return 1;
 				}
 			}
-			else if (event.getItem_Name().contains("Next trial non corrected Trial")) {
+			else if (event.getItem_Name().toLowerCase().contains("next trial non corrected trial")) {
 				return 0;
 			}
 		}
