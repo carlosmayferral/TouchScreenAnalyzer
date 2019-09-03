@@ -25,36 +25,81 @@ public interface IFileReader {
 		return numericalChamber;
 	}
 
+	
 	public static long getNumericalDate(String date) {
-		String[] dateString = date.split("-");
-		String year = dateString[0];
-		String month = dateString[1];
-		//padding of month
-		if(month.length() == 1) {
-			month = "0" + month;
+		
+		boolean isScheduleStartTime = false;
+		
+		//determine what kind of date was passed
+		if (date.contains("T")) isScheduleStartTime = true;
+		
+		//handling schedule start time
+		if (isScheduleStartTime) {
+			date = date.split("T")[0];
+			String[] dateString = date.split("-");
+			String year = dateString[0];
+			String month = dateString[1];
+			//padding of month
+			if(month.length() == 1) {
+				month = "0" + month;
+			}
+			String day = dateString[2];
+			if(day.length() == 1) {
+				day = "0" + day;
+			}
+			return Long.parseLong(year + month + day);
 		}
-		String day = dateString[2];
-		if(day.length() == 1) {
-			day = "0" + day;
+		//handling date time
+		else {
+			date = date.split(" ")[0];
+			String[] dateArray = date.split("/");
+			String year = dateArray[2];
+			String month = dateArray[1];
+			//padding of month
+			if(month.length() == 1) {
+				month = "0" + month;
+			}
+			String day = dateArray[0];
+			if(day.length() == 1) {
+				day = "0" + day;
+			}
+			return Long.parseLong(year + month + day);
 		}
-		return Long.parseLong(year + month + day);
 	}
 	
 	public static String getTimeFromDateString(String dateString) {
-		String[] timeStringArray = dateString.split(":");
-		int hour = Integer.parseInt(timeStringArray[0]);
-		String minute = timeStringArray[1];
-		if (dateString.toLowerCase().contains("p")) {
-			if (hour != 12) {
-				hour += 12;
+		
+		boolean isScheduleStartTime = false;
+		
+		//determine what kind of date was passed
+		if (dateString.contains("T")) isScheduleStartTime = true;
+		
+		//handle schedule start time
+		if(isScheduleStartTime) {
+			dateString = dateString.split("T")[1];
+			String[] timeStringArray = dateString.split(":");
+			int hour = Integer.parseInt(timeStringArray[0]);
+			String minute = timeStringArray[1];
+			if (dateString.toLowerCase().contains("p")) {
+				if (hour != 12) {
+					hour += 12;
+				}
 			}
-		}
-		else if (dateString.toLowerCase().contains("a")) {
-			if (hour == 12) {
-				hour = 0;
+			else if (dateString.toLowerCase().contains("a")) {
+				if (hour == 12) {
+					hour = 0;
+				}
 			}
+			return hour + ":" + minute;
 		}
-		return hour + ":" + minute;
+		//handle date / Time
+		else {
+			dateString = dateString.split(" ")[1];
+			String[] timeStringArray = dateString.split(":");
+			int hour = Integer.parseInt(timeStringArray[0]);
+			String minute = timeStringArray[1];
+			return hour + ":" + minute;
+		}
 	}
 
 	

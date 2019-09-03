@@ -48,7 +48,7 @@ public class CsvReader implements IFileReader {
 					schedule = line.split(",")[1];
 				} else if (line.split(",")[0].equals("Environment")) {
 					environment = line.split(",")[1];
-				} else if (line.split(",")[0].equals("Schedule_Start_Time")) {
+				} else if (line.split(",")[0].equals("Schedule_Start_Time") || line.split(",")[0].equals("Date/Time")) {
 					date = line.split(",")[1];
 				} else if (line.split(",")[0].equals("Database")) {
 					database = line.split(",")[1];
@@ -97,8 +97,8 @@ public class CsvReader implements IFileReader {
 		SessionInfo newInfo = new SessionInfo(
 				schedule,
 				IFileReader.getNumericalChamber(environment), 
-				IFileReader.getNumericalDate(date.split("T")[0]),
-				IFileReader.getTimeFromDateString(date.split("T")[1]),
+				IFileReader.getNumericalDate(date),
+				IFileReader.getTimeFromDateString(date),
 				database, 
 				sessionId, 
 				animalId, 

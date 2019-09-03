@@ -54,7 +54,7 @@ public class XmlReader implements IFileReader {
 				else if (line.contains("<EnvironmentName>")) {
 					environment = detag(line);
 				}
-				else if (line.contains("Schedule_Start_Time")) {
+				else if (line.contains("Schedule_Start_Time") || line.contains("Date/Time")) {
 					date = detag(br.readLine());
 				}
 				else if (line.contains("<DataBaseName>")) {
@@ -107,8 +107,8 @@ public class XmlReader implements IFileReader {
 		SessionInfo newInfo = new SessionInfo(
 				schedule, 
 				IFileReader.getNumericalChamber(environment), 
-				IFileReader.getNumericalDate(date.split("T")[0]),
-				IFileReader.getTimeFromDateString(date.split("T")[1]),
+				IFileReader.getNumericalDate(date),
+				IFileReader.getTimeFromDateString(date),
 				database, 
 				sessionId, 
 				animalId, 
