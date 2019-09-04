@@ -30,6 +30,7 @@ public interface IFileReader {
 		
 		boolean isScheduleStartTime = false;
 		
+		
 		//determine what kind of date was passed
 		if (date.contains("T")) isScheduleStartTime = true;
 		

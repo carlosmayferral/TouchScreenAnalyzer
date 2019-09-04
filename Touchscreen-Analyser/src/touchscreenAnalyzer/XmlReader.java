@@ -13,6 +13,8 @@ public class XmlReader implements IFileReader {
 
 	@Override
 	public SessionInfo expressRead(File file) {
+		
+		
 		// Prepare default variables for session info generation
 		String schedule = "null";
 		String environment = "null";
@@ -54,8 +56,11 @@ public class XmlReader implements IFileReader {
 				else if (line.contains("<EnvironmentName>")) {
 					environment = detag(line);
 				}
-				else if (line.contains("Schedule_Start_Time") || line.contains("Date/Time")) {
+				else if (line.contains("Schedule_Start_Time") ) {
 					date = detag(br.readLine());
+				}
+				else if (line.contains("Date")) {
+					date = detag(line);
 				}
 				else if (line.contains("<DataBaseName>")) {
 					database = detag(line);
