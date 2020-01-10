@@ -51,6 +51,7 @@ public class ExtinctionTrialPartitioner implements ITrialPartitioner {
 				}
 
 			}
+			i++;
 		}
 		return trials;
 	}
