@@ -2,12 +2,14 @@ package tunlAnalysisSet;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import dataModels.Event;
+import dataModels.Trial;
 
 public class TunlTrialPartitionerTest {
 	
@@ -142,6 +144,24 @@ public class TunlTrialPartitionerTest {
 		eventArray[18].setTrialTransition();
 		assertTrue(eventArray.length == listSize);
 		assertEquals(4,partitioner.partition(eventArray).size());
+	}
+	
+	@Test
+	public void ensureEventIntegrityAfterConversion() {
+		Random rnd = new Random(66);
+		int listSize = 28;
+		TunlEventStub[] eventArray = new TunlEventStub[listSize];
+		for (int i = 0; i < listSize; i++) {
+			eventArray[i] = new TunlEventStub(rnd.nextInt());
+		}
+		eventArray[4].setTrialStart();
+		eventArray[7].setTrialTransition();
+		eventArray[13].setTrialTransition();
+		eventArray[19].setTrialTransition();
+		eventArray[26].setTrialTransition();
+		assertTrue(eventArray.length == listSize);
+		ArrayList<Trial> result = partitioner.partition(eventArray);
+		assertTrue(result.get(0).copyEventsAsArray()[0].getItem_Name().equals(eventArray[4].getItem_Name()));
 	}
 	
 	
