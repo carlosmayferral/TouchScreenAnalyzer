@@ -17,8 +17,8 @@ public class TunlTrialPartitioner implements ITrialPartitioner {
 		int eventNumber = 0;
 		
 		//while start of trial is not encountered
-		while(!events[eventNumber].getItem_Name().equals("Tray Entry starts first trial")
-				&& eventNumber<events.length) {
+		while(eventNumber<events.length && !events[eventNumber].getItem_Name().equals("Tray Entry starts first trial")
+				) {
 			eventNumber++;
 		}
 		
@@ -33,7 +33,8 @@ public class TunlTrialPartitioner implements ITrialPartitioner {
 		while(eventNumber<events.length) {
 			trialEvents.add(events[eventNumber]);
 			if (events[eventNumber].getItem_Name().equals("Next trial")) {
-				Object[] trialArray = trialEvents.toArray();
+				Event[] trialArray = new Event[trialEvents.size()];
+				trialEvents.toArray(trialArray);
 				trials.add(new Trial((Event[]) trialArray));
 				trialEvents = new ArrayList<>();
 			}
