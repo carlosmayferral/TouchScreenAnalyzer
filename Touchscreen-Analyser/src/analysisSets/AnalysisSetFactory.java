@@ -8,6 +8,7 @@ import fiveChoiceRatAnalysis.FiveChoiceRatAnalysisSet;
 import pdAnalysis.PdAnalysisSet;
 import pdAnalysisOtago.PdOtagoSet;
 import progressiveRatioAnalysis.ProgressiveRatioAnalysisSet;
+import tunlAnalysisSet.TunlAnalysisSet;
 
 public class AnalysisSetFactory {
 
@@ -40,6 +41,8 @@ public class AnalysisSetFactory {
 			return new PdAnalysisSet();
 		case OTAGO_PAIRWISE_DISCRIMINATION:
 			return new PdOtagoSet();
+		case TUNL:
+			return new TunlAnalysisSet();
 		default:
 			return null;
 		}
