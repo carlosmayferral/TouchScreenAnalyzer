@@ -70,7 +70,7 @@ class PdTrialAnalyzer implements ITrialAnalyzer {
 		result.setInitiationLatency(interactions.getInitiationLatency());
 		result.setHeadWithdrawalTime(interactions.getHeadWithdrawalTime());
 		result.setResponseLatency(interactions.getResponseLatency());
-		if (interactions.getCorrect() == 1) {
+		if (interactions.getCorrectAccordingToEvent() == 1) {
 			result.setCorrect(1);
 			this.correctionTrialExpected = false;
 		}
@@ -113,7 +113,7 @@ class PdTrialAnalyzer implements ITrialAnalyzer {
 		}
 		
 		if (interactions.getCorrectAccordingToEvent() != interactions.getCorrect()) {
-			System.out.println("DEBUG: trial has correct event but seemingly no correct touch");
+			System.out.println("DEBUG: trial has correct event but seemingly no correct touch, setting correct");
 		}
 		
 		return result;

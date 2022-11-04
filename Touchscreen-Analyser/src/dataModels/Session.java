@@ -71,8 +71,8 @@ public class Session implements Comparable<Session> {
 		this.trials = partitionProtocol.partition(events);
 		
 		if (trials.size()< 5) {
-			System.out.println("Warning: session # " + sessionInfo.getSessionId() 
-			+ " has less than five trials, session might be accidental.");
+			System.out.println("Warning: session " + this.file.getName() 
+			+ " has less than five trials, session might be accidental. Its last event is at timestamp " + this.events[this.events.length-1].getEvent_Time());
 		}
 
 		return;
@@ -119,6 +119,10 @@ public class Session implements Comparable<Session> {
 	
 	public long getDate() {
 		return this.sessionInfo.getDate();
+	}
+	
+	public String getTime() {
+		return this.sessionInfo.getTime();
 	}
 
 	public void setDay(int day) {

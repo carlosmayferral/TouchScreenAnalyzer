@@ -37,7 +37,9 @@ public class TunlTrialPartitionerTest {
 	@Test
 	public void oneEventYielsNoTrials() {
 		Random rnd = new Random(123);
-		Event[] eventArray = {new TunlEventStub(rnd.nextInt())};
+		Event[] eventArray = {new TunlEventStub(rnd.nextInt())};		
+		
+		
 		assertEquals(0,partitioner.partition(eventArray).size());
 	}
 	

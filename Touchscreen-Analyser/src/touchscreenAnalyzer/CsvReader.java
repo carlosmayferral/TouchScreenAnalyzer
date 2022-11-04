@@ -34,6 +34,7 @@ public class CsvReader implements IFileReader {
 			br = new BufferedReader(new FileReader(file));
 
 			if (!br.readLine().contains("Name")) {
+				System.out.print("Header not present, so... ");
 				return null;
 			}
 
@@ -67,6 +68,7 @@ public class CsvReader implements IFileReader {
 
 				else if (line.contains("----")) {
 					if (date.equals("null") || animalId.equals("null")) {
+						System.out.print("Date or animal ID not present so... ");
 						return null;
 					}
 					break;
@@ -90,6 +92,7 @@ public class CsvReader implements IFileReader {
 		
 		//if no schedule start time was detected, skip
 		if(date == "null") {
+			System.out.println("No date detected so...");
 			return null;
 		}
 

@@ -17,6 +17,7 @@ public class TunlAnalysisSet implements IAnalysisSet {
 	public TunlAnalysisSet() {
 		parameterReader = null;
 		partitioner = new TunlTrialPartitioner();
+		analyzer = new TunlTrialAnalyzer();
 	}
 
 	@Override
@@ -27,17 +28,16 @@ public class TunlAnalysisSet implements IAnalysisSet {
 	@Override
 	public ITrialAnalyzer getTrialAnalyzer() {
 		// TODO Auto-generated method stub
-		return null;
+		return analyzer;
 	}
 
 	@Override
 	public IParameterReader getParameterReader() {
-		return null;
+		return parameterReader;
 	}
 
 	@Override
 	public IPostProcessor getPostProcessor() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

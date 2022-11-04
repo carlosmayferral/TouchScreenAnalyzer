@@ -68,14 +68,21 @@ public class AnalyzerController {
 		analysisSet = AnalysisSetFactory.getInstance().createAnalysisSet(analysisType);
 
 		System.out.println("Processing into results:");
+		
+		//This value will be used to print progress
+		int fivePercentOfTotal = totalSessions/20;
 
 		// Analysis loop: for each session File
 		for (int i = 0 ; i< totalSessions; i++) {
 			
 			Session session = sessions.remove(0);
-
-			System.out.println(((float) finishedSessions / (float) totalSessions) * 100 + "%");
-
+			
+			
+			//print progress if session number represents 5% increase
+			if (i % fivePercentOfTotal == 0) {
+				System.out.println(((float) finishedSessions / (float) totalSessions) * 100 + "%");
+			}
+			
 			session.generateEventsFromFile();
 			
 			// Generate starting parameters if necessary
@@ -131,8 +138,8 @@ public class AnalyzerController {
 				//Print warning message for two sessions on the same day
 				if (first.compareTo(second) == 0) {
 					System.out.println("Warning, animal id " + first.getIdentifier().getAnimalId() + " seems to "
-							+ "have been tested twice on " + first.getDate() + " check file " + first.getFileName()
-							+ " and " + second.getFileName());
+							+ "have been tested twice on " + first.getDate() + " check file " + first.getFileName() + " (" + first.getTime() + ")" 
+							+ " and " + second.getFileName() + " (" + second.getTime() + ")");
 					
 				}
 			}
