@@ -1,8 +1,10 @@
 package dataModels;
 
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -146,24 +148,36 @@ public class Event {
 		try {
 			Scanner sc = new Scanner(file);
 			
-			ArrayList <Event> events = new ArrayList<Event>();
-			
-			//Read in all events
-			while(sc.hasNextLine()) {
-				events.add(new Event(sc.nextLine()));
-			}
-			
-			Event[] eventArray = new Event[events.size()];
-			
-			sc.close();
-			
-			return events.toArray(eventArray);
+			return readEventsFromScanner(sc);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Test file not found");
 			return null;
 		}
+	}
+	
+	public static Event[] readEventsFromString(String csv) {
+		StringReader stringReader = new StringReader(csv);
+		Scanner sc = new Scanner(stringReader);
+		
+		return readEventsFromScanner(sc);
+	}
+
+	private static Event[] readEventsFromScanner(Scanner sc) {
+		
+		ArrayList <Event> events = new ArrayList<Event>();
+		//Read in all events
+		while(sc.hasNextLine()) {
+			events.add(new Event(sc.nextLine()));
+		}
+		
+		Event[] eventArray = new Event[events.size()];
+		
+		sc.close();
+		
+		return events.toArray(eventArray);
+		
 	}
 
 }

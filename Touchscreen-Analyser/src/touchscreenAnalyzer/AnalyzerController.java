@@ -79,7 +79,7 @@ public class AnalyzerController {
 			
 			
 			//print progress if session number represents 5% increase
-			if (i % fivePercentOfTotal == 0) {
+			if (totalSessions != 1 && i % fivePercentOfTotal == 0) {
 				System.out.println(((float) finishedSessions / (float) totalSessions) * 100 + "%");
 			}
 			
