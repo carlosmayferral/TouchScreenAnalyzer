@@ -29,6 +29,8 @@ public class SessionInfo {
 	private File file;
 
 	private int ordinalDay;
+	
+	private Double maxTime;
 
 	private final String header = 
 			"Schedule"
@@ -184,5 +186,13 @@ public class SessionInfo {
 
 	public String getTime() {
 		return this.timeOfDay;
+	}
+
+	public Double getMaxTime() {
+		return maxTime;
+	}
+
+	public void setMaxTime(Double maxTime) {
+		this.maxTime = maxTime;
 	}
 }

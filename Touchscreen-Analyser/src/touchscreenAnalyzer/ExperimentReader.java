@@ -43,9 +43,17 @@ class ExperimentReader {
 
 		// For each File...
 		for (File file : fileList) {
+			
+			// Only read csvs or xmls
+			if((!file.getName().contains(".csv")) && (!file.getName().contains(".xml"))) {
+				continue;
+			}
 
-			// Interrupt if file contains the word results
+			// Interrupt if file contains the word results or experimentCalendar
 			if (file.getName().equals("results.csv")) {
+				continue;
+			}
+			else if(file.getName().contains("experimentCalendar.csv")) {
 				continue;
 			}
 			// If file is a meta file, use it to fill metaData dictionary
@@ -62,6 +70,7 @@ class ExperimentReader {
 						//return a version of the session without events, otherwise memory will be overloaded
 						Session toBeReturned = new Session(file);
 						toBeReturned.readInfo();
+						toBeReturned.getSessionInfo().setMaxTime((double) session.getEventArrayCopy()[session.getEventArrayCopy().length-1].getEvent_Time());
 						sessions.add(toBeReturned);
 					}
 					else {

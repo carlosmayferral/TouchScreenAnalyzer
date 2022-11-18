@@ -26,6 +26,10 @@ public class Session implements Comparable<Session> {
 
 	private ArrayList<Result> results;
 
+	public SessionInfo getSessionInfo() {
+		return sessionInfo;
+	}
+
 	private MetaData metaData;
 	
 	//Set default values
