@@ -58,8 +58,11 @@ public class AnalyzerController {
 
 		// Sort sessions by identifier, then date using custom comparator
 		Collections.sort(sessions);
+		
+		//check for missing animal ids / warn of missing ids
+		this.checkForMissingIds();
 
-		// Assign ordinal days to sessions
+		// Assign ordinal days to sessions / warn of duplicates
 		this.assignOrdinalDay();
 
 		System.out.println("Number of sessions: " + sessions.size());
@@ -81,6 +84,10 @@ public class AnalyzerController {
 
 		// This value will be used to print progress
 		int fivePercentOfTotal = totalSessions / 20;
+		
+		if(fivePercentOfTotal == 0) {
+			fivePercentOfTotal = 1;
+		}
 
 		// Analysis loop: for each session File
 		for (int i = 0; i < totalSessions; i++) {
@@ -126,6 +133,17 @@ public class AnalyzerController {
 		}
 	}
 
+	private void checkForMissingIds() {
+		
+		for (Session session : sessions) {
+			//Noitify user if there is missing animal ID
+			if(session.getSessionInfo().getAnimalId().equals("null")) {
+				System.out.println("Warning: Database " + session.getSessionInfo().getDatabase() + " session ID " + session.getSessionInfo().getSessionId() + " on date " + session.getSessionInfo().getDate() + " has no animal ID.");
+			}
+		}
+		
+	}
+
 	private void generateCalendarFile(String folderName, ArrayList<Session> sessions) {
 
 		String calendarFileName = folderName + CALENDAR_FILENAME;
@@ -135,7 +153,8 @@ public class AnalyzerController {
 		try {
 			PrintWriter pw = new PrintWriter(new File(calendarFileName));
 
-			pw.println("Legend: R=Run number; T=Total time Recorded (in seconds); C=Chamber; D=Database; ID=Session ID");
+			pw.println(
+					"Legend: R=Run number; T=Time session was run; S= Total seconds recorded in session; C=Chamber; D=Database; ID=Session ID");
 
 			HashMap<Long, Boolean> dates = new HashMap<>();
 			HashMap<String, ArrayList<SessionInfo>> animalSessionInfos = new HashMap<>();
@@ -187,9 +206,9 @@ public class AnalyzerController {
 					}
 					// Write details of each sessionInfo
 					for (SessionInfo sessionInfo : infosForThisDate) {
-						pw.print("[R=" + sessionInfo.getOrdinalDay() + ";T=" + Math.floor(sessionInfo.getMaxTime())
-								+ ";C=" + sessionInfo.getChamber() + ";D=" + sessionInfo.getDatabase() + ";ID="
-								+ sessionInfo.getSessionId() + "]");
+						pw.print("[R=" + sessionInfo.getOrdinalDay() + ";T=" + sessionInfo.getTime() + ";S="
+								+ Math.floor(sessionInfo.getMaxTime()) + ";C=" + sessionInfo.getChamber() + ";D="
+								+ sessionInfo.getDatabase() + ";ID=" + sessionInfo.getSessionId() + "]");
 					}
 				}
 				pw.println("," + animalSessionInfos.get(animalId).size());

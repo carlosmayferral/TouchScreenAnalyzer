@@ -67,8 +67,8 @@ public class CsvReader implements IFileReader {
 				}
 
 				else if (line.contains("----")) {
-					if (date.equals("null") || animalId.equals("null")) {
-						System.out.print("Date or animal ID not present so... ");
+					if (date.equals("null")) {
+						System.out.print("Date not present so... ");
 						return null;
 					}
 					break;

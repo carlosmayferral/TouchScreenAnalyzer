@@ -54,10 +54,11 @@ public class PairwiseHabituationV2TrialPartitioner implements ITrialPartitioner 
 		}
 		
 		//Add orphan events to last trial (if there is extra events)
-		if(trialEvents.size()>0) {
-			Event[] eventArray = new Event[trialEvents.size()];
-			trials.add(new Trial(trialEvents.toArray(eventArray)));
-		}
+		//Actually drop the incomplete trial as it has integrity issues
+//		if(trialEvents.size()>0) {
+//			Event[] eventArray = new Event[trialEvents.size()];
+//			trials.add(new Trial(trialEvents.toArray(eventArray)));
+//		}
 		
 		
 		return trials;

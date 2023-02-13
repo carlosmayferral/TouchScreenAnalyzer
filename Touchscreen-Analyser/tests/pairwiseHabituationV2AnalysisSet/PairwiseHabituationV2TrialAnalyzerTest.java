@@ -953,5 +953,35 @@ class PairwiseHabituationV2TrialAnalyzerTest {
 		}
 		fail("No exception");
 	}
+	
+	//Having the schedule end mid way through a trial can result in tray beam break but no feeding latency, must not throw exception
+	void trialEndingMidWayDoesNotThrowIntegrityException() {
+			String input = "2399.201,1,Condition Event,Feed again,,5,0,,,,,,,,,,\r\n"
+				+ "2399.201,7,Pulse Output Event,Feeder #1,,5,1,Duration,0.28,,,,,,,,\r\n"
+				+ "2399.201,3,Output On Event,TrayLight #1,,5,0,,,,,,,,,,\r\n"
+				+ "2399.201,1,Condition Event,Pulse Tone if required 2,,5,0,,,,,,,,,,\r\n"
+				+ "2399.201,7,Pulse Output Event,Sound_On #1,,5,1,Duration,1,,,,,,,,\r\n"
+				+ "2399.201,21,Group Change Event,Group Change,,5,1,New Group,3,,,,,,,,\r\n"
+				+ "2399.734,38,Input Transition On Event,BIRBeam #1,,3,0,,,,,,,,,,\r\n"
+				+ "2400.053,38,Input Transition On Event,Tray #1,,3,0,,,,,,,,,,\r\n"
+				+ "2400.055,38,Input Transition On Event,FIRBeam #1,,3,0,,,,,,,,,,\r\n"
+				+ "2400.204,21,Group Change Event,Group Change,,3,1,New Group,6,,,,,,,,\r\n"
+				+ "2400.204,16,Variable Event,_Schedule_Timer,,6,1,Value,2400.204,,,,,,,,\r\n"
+				+ "2400.204,16,Variable Event,_Trial_Timer,,6,1,Value,0,,,,,,,,\r\n"
+				+ "2400.204,16,Variable Event,Acclimatisation_timer,,6,1,Value,2400.162,,,,,,,,\r\n"
+				+ "2400.204,16,Variable Event,Delay_Timer,,6,1,Value,11.003,,,,,,,,\r\n"
+				+ "2400.204,39,Input Transition Off Event,Tray #1,,6,0,,,,,,,,,,\r\n"
+				+ "2400.204,39,Input Transition Off Event,FIRBeam #1,,6,0,,,,,,,,,,\r\n"
+				+ "2400.204,39,Input Transition Off Event,BIRBeam #1,,6,0,,,,,,,,,,\r\n"
+				+ "2400.204,9999,Schedule Shutdown Event,(SYSTEM),,6,0,,,,,,,,,,";
+		Trial trial = new Trial(Event.readEventsFromString(input));
+		try {
+			PairwiseHabiutationV2Result result = analyzer.generateResult(trial, 0, null);
+		} catch (Exception e){
+			fail("Exception Thrown");
+		}
+		
+	}
+	
 
 }
