@@ -5,6 +5,7 @@ import cptBaselineAnalysis.CPTBaselineAnalysisSet;
 import extinctionAnalysisSet.ExtinctionAnalysisSet;
 import fiveChoiceAnalysis.FiveChoiceAnalysisSet;
 import fiveChoiceRatAnalysis.FiveChoiceRatAnalysisSet;
+import mPosnerAnalysis.MPosnerProbeAnalysisSet;
 import pairwiseHabituationV2AnalysisSet.PairwiseHabituationV2AnalysisSet;
 import pdAnalysis.PdAnalysisSet;
 import pdAnalysisOtago.PdOtagoSet;
@@ -46,6 +47,8 @@ public class AnalysisSetFactory {
 			return new TunlAnalysisSet();
 		case PAIRWISE_HABITUATION_V2:
 			return new PairwiseHabituationV2AnalysisSet();
+		case MPOSNER_PROBES:
+			return new MPosnerProbeAnalysisSet();
 		default:
 			return null;
 		}

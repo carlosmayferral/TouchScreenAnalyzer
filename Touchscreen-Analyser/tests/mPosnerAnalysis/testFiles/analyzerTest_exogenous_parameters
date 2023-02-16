@@ -1,0 +1,115 @@
+0,28,Input Definition,(SYSTEM),,0,5,Tray #1,0,BIRBeam #1,1,FIRBeam #1,2,RightFIRBeam #1,3,FeederFault #1,4
+0,28,Input Definition,(SYSTEM),,0,1,FeederReport #1,5,,,,,,,,
+0,27,Output Definition,(SYSTEM),,0,5,HouseLight #1,0,TrayLight #1,1,Feeder #1,2,Sound_On #1,3,White_Noise_Off #1,4
+0,27,Output Definition,(SYSTEM),,0,4,Sound #1,5,Sound #2,6,Sound #3,7,Feeder #2,8,,
+0,16,Variable Event,_Schedule_Timer,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,_Trial_Counter,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,_Trial_Timer,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,A1Sound1,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,A2Sound2,,0,1,Value,1,,,,,,,,
+0,16,Variable Event,A3Sound3,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Accuracy_NoAE,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,aCounter_NoAE,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,After_Reward_Pause,,0,1,Value,2,,,,,,,,
+0,16,Variable Event,After_Reward_Timer,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Analysed,,0,1,Value,1,,,,,,,,
+0,16,Variable Event,Anticipation_Error,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,aTrial_Set,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,CentralStimulus_Position,,0,1,Value,4,,,,,,,,
+0,16,Variable Event,Change_Hold_Time,,0,1,Value,1,,,,,,,,
+0,16,Variable Event,Correct_Percent,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Cue_Brightness,,0,1,Value,70,,,,,,,,
+0,16,Variable Event,Cue_Position,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Cue_Time,,0,1,Value,0.15,,,,,,,,
+0,16,Variable Event,Cue_Time_Adjuster,,0,1,Value,0.15,,,,,,,,
+0,16,Variable Event,Feeder_Pulse_Time,,0,1,Value,280,,,,,,,,
+0,16,Variable Event,First_Analysis,,0,1,Value,1,,,,,,,,
+0,16,Variable Event,Hold_Failure_Counter,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Hold_Success_Counter,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Hold_Time,,0,1,Value,0.175,,,,,,,,
+0,16,Variable Event,Hold_Time_Adjuster,,0,1,Value,0.175,,,,,,,,
+0,16,Variable Event,Hold_Timer,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Houselight_Normally_On,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Incorrect_Position,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Increment_this_trial,,0,1,Value,1,,,,,,,,
+0,16,Variable Event,ITI,,0,1,Value,5,,,,,,,,
+0,16,Variable Event,ITI_Timer,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Max_Hold_Time,,0,1,Value,0.2,,,,,,,,
+0,16,Variable Event,Max_No_AE,,0,1,Value,120,,,,,,,,
+0,16,Variable Event,MinHold_Time,,0,1,Value,0.175,,,,,,,,
+0,16,Variable Event,Omission_MTTime,,0,1,Value,2.5,,,,,,,,
+0,16,Variable Event,Omission_RTTime,,0,1,Value,1.5,,,,,,,,
+0,16,Variable Event,PunishAnticipationError,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Reward_counter,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,SkipTrial_inc,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Starting_Validity,,0,1,Value,1,,,,,,,,
+0,16,Variable Event,Target_Position,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Target_Time,,0,1,Value,1,,,,,,,,
+0,16,Variable Event,Target_Timer,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Time_Out,,0,1,Value,5,,,,,,,,
+0,16,Variable Event,Time_Out_Timer,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Timeout,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Tone_Duration,,0,1,Value,1000,,,,,,,,
+0,16,Variable Event,Tray_Light_Pulse,,0,1,Value,2000,,,,,,,,
+0,16,Variable Event,Trial_Counter_Min_Hold,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Trial_Type,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,Validity,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,zz_AnticipationError_Counter,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,zz_Correct_Counter,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,zz_Incorrect_Counter,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,zz_Omission_Counter,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,zzMT_Timer,,0,1,Value,0,,,,,,,,
+0,16,Variable Event,zzRT_Timer,,0,1,Value,0,,,,,,,,
+0,37,Image List Definition,Background,,0,1,Posner task,5,,,,,,,,
+0,36,List Array - Write,Background,,0,1,Image 1,1,,,,,,,,
+0,17,List Change - Set,Background,,0,2,Index,1,Value,1,,,,,,
+0,22,List Array - Write,First_10_Trial,,0,5,Item #1,113,Item #2,113,Item #3,113,Item #4,113,Item #5,113
+0,22,List Array - Write,First_10_Trial,,0,5,Item #6,331,Item #7,331,Item #8,331,Item #9,331,Item #10,331
+0,17,List Change - Set,First_10_Trial,,0,2,Index,1,Value,113,,,,,,
+0,37,Image List Definition,Image,,0,1,Posner task,5,,,,,,,,
+0,36,List Array - Write,Image,,0,5,CentralStimulus,1,Target,2,dim,3,Cue,4,Cue50,5
+0,36,List Array - Write,Image,,0,2,Cue25,6,Cue12.5,7,,,,,,
+0,17,List Change - Set,Image,,0,2,Index,1,Value,1,,,,,,
+0,22,List Array - Write,Invalid_CueBrightness,,0,5,Item #1,70,Item #2,70,Item #3,70,Item #4,50,Item #5,50
+0,22,List Array - Write,Invalid_CueBrightness,,0,5,Item #6,50,Item #7,25,Item #8,25,Item #9,25,Item #10,12.5
+0,22,List Array - Write,Invalid_CueBrightness,,0,2,Item #11,12.5,Item #12,12.5,,,,,,
+0,17,List Change - Set,Invalid_CueBrightness,,0,2,Index,7,Value,25,,,,,,
+0,22,List Array - Write,Invalid_Trials,,0,5,Item #1,131,Item #2,131,Item #3,131,Item #4,131,Item #5,131
+0,22,List Array - Write,Invalid_Trials,,0,5,Item #6,313,Item #7,313,Item #8,313,Item #9,313,Item #10,313
+0,17,List Change - Set,Invalid_Trials,,0,2,Index,6,Value,313,,,,,,
+0,22,List Array - Write,Valid_CueBrightness,,0,5,Item #1,70,Item #2,70,Item #3,70,Item #4,50,Item #5,50
+0,22,List Array - Write,Valid_CueBrightness,,0,5,Item #6,50,Item #7,25,Item #8,25,Item #9,25,Item #10,12.5
+0,22,List Array - Write,Valid_CueBrightness,,0,2,Item #11,12.5,Item #12,12.5,,,,,,
+0,17,List Change - Set,Valid_CueBrightness,,0,2,Index,6,Value,50,,,,,,
+0,22,List Array - Write,Valid_Trials,,0,5,Item #1,113,Item #2,113,Item #3,113,Item #4,113,Item #5,113
+0,22,List Array - Write,Valid_Trials,,0,5,Item #6,331,Item #7,331,Item #8,331,Item #9,331,Item #10,331
+0,17,List Change - Set,Valid_Trials,,0,2,Index,7,Value,331,,,,,,
+0,22,List Array - Write,Validity_List,,0,5,Item #1,1,Item #2,1,Item #3,0,Item #4,0,Item #5,1
+0,22,List Array - Write,Validity_List,,0,5,Item #6,0,Item #7,1,Item #8,0,Item #9,1,Item #10,1
+0,22,List Array - Write,Validity_List,,0,5,Item #11,0,Item #12,1,Item #13,0,Item #14,1,Item #15,1
+0,22,List Array - Write,Validity_List,,0,5,Item #16,0,Item #17,0,Item #18,1,Item #19,0,Item #20,1
+0,22,List Array - Write,Validity_List,,0,5,Item #21,0,Item #22,1,Item #23,0,Item #24,0,Item #25,0
+0,22,List Array - Write,Validity_List,,0,5,Item #26,1,Item #27,1,Item #28,0,Item #29,1,Item #30,1
+0,22,List Array - Write,Validity_List,,0,5,Item #31,0,Item #32,0,Item #33,0,Item #34,1,Item #35,1
+0,22,List Array - Write,Validity_List,,0,5,Item #36,0,Item #37,1,Item #38,0,Item #39,0,Item #40,1
+0,22,List Array - Write,Validity_List,,0,5,Item #41,1,Item #42,0,Item #43,0,Item #44,1,Item #45,0
+0,22,List Array - Write,Validity_List,,0,5,Item #46,1,Item #47,1,Item #48,0,Item #49,1,Item #50,0
+0,22,List Array - Write,Validity_List,,0,5,Item #51,1,Item #52,1,Item #53,0,Item #54,1,Item #55,1
+0,22,List Array - Write,Validity_List,,0,5,Item #56,0,Item #57,1,Item #58,0,Item #59,0,Item #60,1
+0,22,List Array - Write,Validity_List,,0,5,Item #61,1,Item #62,0,Item #63,1,Item #64,1,Item #65,0
+0,22,List Array - Write,Validity_List,,0,5,Item #66,1,Item #67,0,Item #68,1,Item #69,1,Item #70,0
+0,22,List Array - Write,Validity_List,,0,5,Item #71,1,Item #72,1,Item #73,0,Item #74,0,Item #75,1
+0,22,List Array - Write,Validity_List,,0,5,Item #76,1,Item #77,0,Item #78,1,Item #79,0,Item #80,1
+0,22,List Array - Write,Validity_List,,0,5,Item #81,0,Item #82,1,Item #83,1,Item #84,0,Item #85,1
+0,22,List Array - Write,Validity_List,,0,5,Item #86,1,Item #87,0,Item #88,1,Item #89,1,Item #90,0
+0,22,List Array - Write,Validity_List,,0,5,Item #91,1,Item #92,0,Item #93,1,Item #94,0,Item #95,0
+0,22,List Array - Write,Validity_List,,0,5,Item #96,0,Item #97,1,Item #98,1,Item #99,0,Item #100,1
+0,22,List Array - Write,Validity_List,,0,5,Item #101,0,Item #102,1,Item #103,1,Item #104,0,Item #105,1
+0,22,List Array - Write,Validity_List,,0,5,Item #106,1,Item #107,0,Item #108,1,Item #109,1,Item #110,0
+0,17,List Change - Set,Validity_List,,0,2,Index,1,Value,1,,,,,,
+0,0,Schedule Startup Event,(SYSTEM),,0,0,,,,,,,,,,
+0,29,Timer Event,_Schedule_Timer,,0,1,Value,0,,,,,,,,
+0,21,Group Change Event,Group Change,,0,1,New Group,1,,,,,,,,
+0.004,32,Whisker - Display Image,Posner task,Background,1,2,Position,1,Image 1,0,,,,,,
+0.004,32,Whisker - Display Image,Posner task,Background,1,2,Position,2,Image 1,0,,,,,,
+0.004,32,Whisker - Display Image,Posner task,Background,1,2,Position,3,Image 1,0,,,,,,

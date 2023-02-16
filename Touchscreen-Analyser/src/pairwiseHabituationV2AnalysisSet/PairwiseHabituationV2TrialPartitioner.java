@@ -36,7 +36,7 @@ public class PairwiseHabituationV2TrialPartitioner implements ITrialPartitioner 
 					trialsHaveStarted = true;
 				}
 				else {
-					//Add current events ro trial
+					//Add current events to trial
 					Event[] eventArray = new Event[trialEvents.size()];
 					trials.add(new Trial(trialEvents.toArray(eventArray)));
 					//Reset Events

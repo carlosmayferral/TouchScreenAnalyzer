@@ -36,7 +36,7 @@ class PairwiseHabituationV2TrialPartitionerTest {
 	}
 	
 	@Test
-	void partitionReturnsHalfATrialIfTrialIsIncomplete() {
+	void partitionReturnsZeroTrialsIfTrialIsIncomplete() {
 		String input = "0.043,1,Condition Event,Adjust Sound Level 2,,1,0,,,,,,,,,,\r\n"
 				+ "0.043,3,Output On Event,Sound #2,,1,0,,,,,,,,,,\r\n"
 				+ "0.043,32,Whisker - Display Image,Bussey Mouse Operant Mode 2 x 1 x low,Background,1,2,Position,1,Image 1,0,,,,,,\r\n"
@@ -52,11 +52,11 @@ class PairwiseHabituationV2TrialPartitionerTest {
 		Event[] events = Event.readEventsFromString(input);
 		ArrayList<Trial> trials = partitioner.partition(events);
 		
-		assertEquals(1,trials.size());
+		assertEquals(0,trials.size());
 	}
 	
 	@Test
-	void partitionReturnsHalfATrialIfTrialIsInterrupted() {
+	void partitionReturnszeroTrialsATrialIfTrialIsInterrupted() {
 		String input = "1196.524,1,Condition Event,Feed again,,5,0,,,,,,,,,,\r\n"
 				+ "1196.524,7,Pulse Output Event,Feeder #1,,5,1,Duration,0.28,,,,,,,,\r\n"
 				+ "1196.524,3,Output On Event,TrayLight #1,,5,0,,,,,,,,,,\r\n"
@@ -92,7 +92,7 @@ class PairwiseHabituationV2TrialPartitionerTest {
 		Event[] events = Event.readEventsFromString(input);
 		ArrayList<Trial> trials = partitioner.partition(events);
 		
-		assertEquals(1,trials.size());
+		assertEquals(0,trials.size());
 	}
 	
 	@Test
@@ -180,7 +180,7 @@ class PairwiseHabituationV2TrialPartitionerTest {
 				+ "501.415,39,Input Transition Off Event,BIRBeam #1,,5,0,,,,,,,,,,\r\n";
 		Event[] events = Event.readEventsFromString(input);
 		ArrayList<Trial> trials = partitioner.partition(events);
-		assertEquals(2,trials.size());
+		assertEquals(1,trials.size());
 	}
 	
 	@Test
@@ -222,7 +222,7 @@ class PairwiseHabituationV2TrialPartitionerTest {
 				+ "28.646,16,Variable Event,Delay_Time,,5,1,Value,1,,,,,,,,\r\n";
 		Event[] events = Event.readEventsFromString(input);
 		ArrayList<Trial> trials = partitioner.partition(events);
-		assertEquals(7,trials.size());
+		assertEquals(6,trials.size());
 	}
 	
 	@Test
@@ -342,7 +342,7 @@ class PairwiseHabituationV2TrialPartitionerTest {
 				+ "1200,9999,Schedule Shutdown Event,(SYSTEM),,6,0,,,,,,,,,,";
 		Event[] events = Event.readEventsFromString(input);
 		ArrayList<Trial> trials = partitioner.partition(events);
-		assertEquals(7,trials.size());
+		assertEquals(6,trials.size());
 	}
 	
 
