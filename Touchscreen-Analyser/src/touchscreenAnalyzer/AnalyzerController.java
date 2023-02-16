@@ -17,9 +17,9 @@ import dataModels.SessionInfo;
 
 public class AnalyzerController {
 
-	private static final String STRING_APPENDED_TO_RESULT = "\\results.csv";
+	private static final String STRING_APPENDED_TO_RESULT = "/results.csv";
 
-	private static final String CALENDAR_FILENAME = "\\experimentCalendar.csv";
+	private static final String CALENDAR_FILENAME = "/experimentCalendar.csv";
 
 	// The experiment reader to be used for reading raw data folders
 	private ExperimentReader experiment;
@@ -41,6 +41,9 @@ public class AnalyzerController {
 	}
 
 	public void analyze(String fileName, AnalysisType analysisType) {
+		
+		// Convert windows path to universal format
+		fileName = fileName.replaceAll("\\\\", "/");
 
 		// Name to be used for the result
 		String resultName = fileName + STRING_APPENDED_TO_RESULT;
