@@ -20,7 +20,7 @@ public class Main {
 	private static void start(String[] strings) {
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Touchscreen Analyzer.");
+		System.out.println("Welcome to the Recompiler of Onscreen-generated Data from Experiments in Neurobehavioural Training (RODENT)");
 		System.out.println("Please enter the full file path where the raw data is contained:");
 
 		String fileName = sc.nextLine();
