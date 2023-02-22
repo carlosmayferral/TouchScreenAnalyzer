@@ -75,12 +75,16 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 			try {
 				if (event.getItem_Name().equals("Group Change")) {
 					stateMachine.transition((int) event.getArgumentValue(1), (double) event.getEvent_Time());
-				} else {
-					stateMachine.transition(event.getGroup_Id(), (double) event.getEvent_Time());
-				}
+				} 
+				//Events that are not explicit group changes are usually laggy events and don't represent a group change
+//				else {
+//					stateMachine.transition(event.getGroup_Id(), (double) event.getEvent_Time());
+//				}
 			} catch (Exception e) {
 				System.out.println(
-						"Invalid transition between schedule groups. Transition to group " + event.getEvent_Id());
+						"Invalid transition between schedule groups. Transition to group " + event.getGroup_Id()
+						+ " from group " + stateMachine.getCurrentState()+ " in trial " + sessionInfo.getFile().getName()
+						+ " at timestamp " + event.getEvent_Time());
 				System.out.println("Transition history for trial: " + stateMachine.getTransitionHistory());
 				e.printStackTrace();
 				System.exit(-1);

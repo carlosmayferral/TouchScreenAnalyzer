@@ -456,6 +456,18 @@ class MPosnerProbeTrialAnalyzerTest {
 	}
 	
 	@Test
+	void analyzer_doesnt_throw_exception_event_is_in_laggy_group() {
+		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
+		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
+		Trial trial = new Trial(Event.readEventsFromFile(new File(TEST_FILES_ADDRESS + "analyzerTest_eventFromWrongGroup")));
+		sut.setParameters(parameters);
+		
+		MPosnerResult result = sut.generateResult(trial, 0, null);
+		
+		assert(true);
+	}
+	
+	@Test
 	void analyzer_determines_ITI_Touches() {
 		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
 		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();

@@ -312,5 +312,9 @@ public class MPosnerStateMachine {
 	public Double getRewardCollectionLatency() {
 		return this.rewardCollectionLatency;
 	}
+	
+	public Integer getCurrentState() {
+		return this.currentState;
+	}
 
 }
