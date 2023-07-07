@@ -1,2 +1,4 @@
 #ignore all class files
 *.class
+/target/
+/.idea/
