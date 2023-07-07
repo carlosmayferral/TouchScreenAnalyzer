@@ -1,7 +1,5 @@
 package progressiveRatioAnalysis;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -18,18 +16,18 @@ class ProgressiveRatioTrialPartitionerTest {
 	
 	//Session 0 Information
 	static File session0;
-	static final String session0Address = 
-			"testfiles/ProgressiveRatioAnalysis/ProgressiveRatioTrialPartitionerFiles/session0.csv";
+	static final String session0Address =
+            "testfiles/ProgressiveRatioAnalysis/ProgressiveRatioTrialPartitionerFiles/session0.csv";
 	static final int SESSION_0_NUMBER_TRIALS = 10;
 	
 	static File session1;
 	static final String session1Address =
-			"testfiles/ProgressiveRatioAnalysis/ProgressiveRatioTrialPartitionerFiles/session1.csv";
+            "testfiles/ProgressiveRatioAnalysis/ProgressiveRatioTrialPartitionerFiles/session1.csv";
 	static final int SESSION_1_NUMBER_TRIALS = 10;
 	
 	static File incompleteTrial;
-	static final String incompleteTrialAddress = 
-			"testfiles/ProgressiveRatioAnalysis/ProgressiveRatioTrialPartitionerFiles/IncompleteTrial.csv";
+	static final String incompleteTrialAddress =
+            "testfiles/ProgressiveRatioAnalysis/ProgressiveRatioTrialPartitionerFiles/IncompleteTrial.csv";
 	static final int INCOMPLETE_TRIAL_NUMBER_TRIALS = 1;
 	
 	

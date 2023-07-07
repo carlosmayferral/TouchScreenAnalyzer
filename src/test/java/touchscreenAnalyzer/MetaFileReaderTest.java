@@ -20,7 +20,7 @@ class MetaFileReaderTest {
 	static HashMap<Identifier, MetaData> groupInfoMap;
 	
 	static File testFile0;
-	static final String testFile0Address ="testfiles/MetaFileReader/metafiletest0.meta";
+	static final String testFile0Address = "testfiles/MetaFileReader/metafiletest0.meta";
 	static Identifier testFile0Id0;
 	static final String testFile0Header = "Genotype,Experimenter,Facepaint,";
 	static final String testFile0AnimalId0 = "11";
@@ -29,7 +29,7 @@ class MetaFileReaderTest {
 	
 	static File testFile1;
 	static final String testFile1Header = "Genotype,Experimenta!,Facepaint,";
-	static final String testFile1Address ="testfiles/MetaFileReader/metafiletest1.meta";
+	static final String testFile1Address = "testfiles/MetaFileReader/metafiletest1.meta";
 	static Identifier testFile1Id0;
 	static final String testFile1AnimalId0 = "11G";
 	static final String testFile1GroupId0 = "Ethanol";

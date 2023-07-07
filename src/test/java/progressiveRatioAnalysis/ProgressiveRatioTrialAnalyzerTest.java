@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import dataModels.Event;
-import dataModels.Result;
 import dataModels.Trial;
 
 class ProgressiveRatioTrialAnalyzerTest {
@@ -16,7 +15,7 @@ class ProgressiveRatioTrialAnalyzerTest {
 	
 	//reference to a PR session that has plenty of trial material
 	private File session0;
-	private final String SESSION_0_ADDRESS = 
+	private final String SESSION_0_ADDRESS =
 			"testfiles/ProgressiveRatioAnalysis/ProgressiveRatioTrialAnalyzerFiles/session0.csv";
 
 	@BeforeEach

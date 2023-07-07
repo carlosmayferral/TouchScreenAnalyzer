@@ -15,7 +15,7 @@ import dataModels.Trial;
 
 class MPosnerProbeTrialAnalyzerTest {
 
-	private static final String TEST_FILES_ADDRESS = "tests/MPosnerAnalysis/testFiles/";
+	private static final String TEST_FILES_ADDRESS = "src/test/java/mPosnerAnalysis/testFiles/";
 
 	@Test
 	void anayzer_parses_timestamp_from_first_event() {

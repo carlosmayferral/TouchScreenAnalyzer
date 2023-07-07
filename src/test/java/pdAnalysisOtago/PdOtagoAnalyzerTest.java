@@ -1,7 +1,5 @@
 package pdAnalysisOtago;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.File;
 
 import org.junit.jupiter.api.Assertions;
@@ -9,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dataModels.Event;
-import dataModels.Trial;
 
 class PdOtagoAnalyzerTest {
 
