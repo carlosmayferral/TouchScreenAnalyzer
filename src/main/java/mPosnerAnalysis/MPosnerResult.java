@@ -7,6 +7,7 @@ public class MPosnerResult {
 			+ "Trial_Type,"
 			+ "Cue_Side,"
 			+ "Cue_Validity,"
+			+ "Distractor,"
 			+ "Cue_Brightness,"
 			+ "Cue_Time,"
 			+ "Hold_Time,"
@@ -60,6 +61,7 @@ public class MPosnerResult {
 			+ "%s,"
 			+ "%s,"
 			+ "%s,"
+			+ "%s,"
 			+ "%f,"
 			+ "%f,"
 			+ "%f,"
@@ -83,6 +85,7 @@ public class MPosnerResult {
 	private String trialType;
 	private String cueSide;
 	private String cueValidity;
+	private String distractor;
 	private Double cueBrightness;
 	private Double cueTime;
 	private Double holdTime;
@@ -122,7 +125,15 @@ public class MPosnerResult {
 	public String getHeader() {
 		return header;
 	}
-	
+
+	public void setDistractor(String distractor) {
+		this.distractor = distractor;
+	}
+
+	public String getDistractor() {
+		return distractor;
+	}
+
 	public String toString() {
 		return String.format(resultTemplate, 
 				timestamp,
@@ -130,6 +141,7 @@ public class MPosnerResult {
 				trialType,
 				cueSide,
 				cueValidity,
+				distractor,
 				cueBrightness,
 				cueTime,
 				holdTime,
