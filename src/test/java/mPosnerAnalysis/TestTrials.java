@@ -324,185 +324,128 @@ public class TestTrials {
             "242.825,16,Variable Event,After_Reward_Timer,,35,1,Value,0,,,,,,,,\n" +
             "242.825,21,Group Change Event,Group Change,,35,1,New Group,10,,,,,,,,\n";
 
-    public static String distractedTrial4 = "264.415,16,Variable Event,ITI_Timer,,10,1,Value,1,,,,,,,,\n" +
-            "264.415,16,Variable Event,ITI_Timer,,10,1,Value,0,,,,,,,,\n" +
-            "264.415,16,Variable Event,SkipTrial_inc,,10,1,Value,0,,,,,,,,\n" +
-            "264.415,16,Variable Event,First_Analysis,,10,1,Value,1,,,,,,,,\n" +
-            "264.415,16,Variable Event,Hold_Timer,,10,1,Value,0.749,,,,,,,,\n" +
-            "264.415,16,Variable Event,Hold_Timer,,10,1,Value,0,,,,,,,,\n" +
-            "264.415,16,Variable Event,zzRT_Timer,,10,1,Value,0.56,,,,,,,,\n" +
-            "264.415,16,Variable Event,zzRT_Timer,,10,1,Value,0,,,,,,,,\n" +
-            "264.415,16,Variable Event,zzMT_Timer,,10,1,Value,0.358,,,,,,,,\n" +
-            "264.415,16,Variable Event,zzMT_Timer,,10,1,Value,0,,,,,,,,\n" +
-            "264.415,21,Group Change Event,Group Change,,10,1,New Group,27,,,,,,,,\n" +
-            "264.415,1,Condition Event,Change Hold Time,,27,0,,,,,,,,,,\n" +
-            "264.415,16,Variable Event,Hold_Time_Adjuster,,27,1,Value,0.19,,,,,,,,\n" +
-            "264.415,21,Group Change Event,Group Change,,27,1,New Group,3,,,,,,,,\n" +
-            "264.415,1,Condition Event,After 10 trials,,3,0,,,,,,,,,,\n" +
-            "264.415,16,Variable Event,_Trial_Counter,,3,1,Value,40,,,,,,,,\n" +
-            "264.415,16,Variable Event,Correct_Percent,,3,1,Value,16,,,,,,,,\n" +
-            "264.415,16,Variable Event,Correct_Percent,,3,1,Value,0.4,,,,,,,,\n" +
-            "264.415,16,Variable Event,Correct_Percent,,3,1,Value,40,,,,,,,,\n" +
-            "264.415,16,Variable Event,Accuracy_NoAE,,3,1,Value,16,,,,,,,,\n" +
-            "264.415,16,Variable Event,Accuracy_NoAE,,3,1,Value,0.552,,,,,,,,\n" +
-            "264.415,16,Variable Event,Accuracy_NoAE,,3,1,Value,55.172,,,,,,,,\n" +
-            "264.415,16,Variable Event,Validity,,3,1,Value,1,,,,,,,,\n" +
-            "264.415,19,List Change - Next Value,Validity_List,,3,2,Index,69,Value,0,,,,,,\n" +
-            "264.415,21,Group Change Event,Group Change,,3,1,New Group,17,,,,,,,,\n" +
-            "264.415,1,Condition Event,Select Invalid Trials,,17,0,,,,,,,,,,\n" +
-            "264.415,16,Variable Event,Trial_Type,,17,1,Value,4513,,,,,,,,\n" +
-            "264.415,19,List Change - Next Value,Invalid_Trials,,17,2,Index,6,Value,14531,,,,,,\n" +
-            "264.415,16,Variable Event,Distractor,,17,1,Value,0,,,,,,,,\n" +
-            "264.415,19,List Change - Next Value,Invalid_Distractor,,17,2,Index,5,Value,1,,,,,,\n" +
-            "264.415,21,Group Change Event,Group Change,,17,1,New Group,4,,,,,,,,\n" +
-            "264.415,1,Condition Event,Select Trial Type,,4,0,,,,,,,,,,\n" +
-            "264.415,32,Whisker - Display Image,mANT,Image,4,2,Position,4,CentralStimulus,0,,,,,,\n" +
-            "264.415,16,Variable Event,aTrial_Set,,4,1,Value,4513,,,,,,,,\n" +
-            "264.415,16,Variable Event,Hold_Time,,4,1,Value,0.19,,,,,,,,\n" +
-            "264.415,21,Group Change Event,Group Change,,4,1,New Group,5,,,,,,,,\n" +
-            "264.415,1,Condition Event,Trial set 4513,,5,0,,,,,,,,,,\n" +
-            "264.415,16,Variable Event,Cue,,5,1,Value,1,,,,,,,,\n" +
-            "264.415,16,Variable Event,Target_Position,,5,1,Value,1,,,,,,,,\n" +
-            "264.415,16,Variable Event,Incorrect_Position,,5,1,Value,3,,,,,,,,\n" +
-            "264.415,21,Group Change Event,Group Change,,5,1,New Group,15,,,,,,,,\n" +
-            "264.904,39,Input Transition Off Event,BIRBeam #1,,15,0,,,,,,,,,,\n" +
-            "264.913,39,Input Transition Off Event,FIRBeam #1,,15,0,,,,,,,,,,\n" +
-            "264.936,30,Touch Down Event,mANT,,15,4,Position,4,CentralStimulus,0,CoordX,60,CoordY,67,,\n" +
-            "264.936,1,Condition Event,Display Cue,,15,0,,,,,,,,,,\n" +
-            "264.936,32,Whisker - Display Image,mANT,Cue_Images,15,2,Position,4,45,0,,,,,,\n" +
-            "264.936,29,Timer Event,Hold_Timer,,15,1,Value,0,,,,,,,,\n" +
-            "264.936,21,Group Change Event,Group Change,,15,1,New Group,37,,,,,,,,\n" +
-            "264.959,38,Input Transition On Event,FIRBeam #1,,37,0,,,,,,,,,,\n" +
-            "265.066,39,Input Transition Off Event,FIRBeam #1,,37,0,,,,,,,,,,\n" +
-            "265.086,1,Condition Event,Hold_Cue,,37,0,,,,,,,,,,\n" +
-            "265.086,32,Whisker - Display Image,mANT,Background,37,2,Position,5,Image 1,0,,,,,,\n" +
-            "265.086,32,Whisker - Display Image,mANT,Image,37,2,Position,4,dim,3,,,,,,\n" +
-            "265.086,21,Group Change Event,Group Change,,37,1,New Group,16,,,,,,,,\n" +
-            "265.106,38,Input Transition On Event,FIRBeam #1,,16,0,,,,,,,,,,\n" +
-            "265.116,31,Touch Up Event,mANT,,16,4,Position,4,dim,3,CoordX,53,CoordY,68,,\n" +
-            "265.117,1,Condition Event,NotHold_CTI,,16,0,,,,,,,,,,\n" +
-            "265.117,32,Whisker - Display Image,mANT,Background,16,2,Position,4,Image 1,0,,,,,,\n" +
-            "265.117,16,Variable Event,Hold_Timer,,16,1,Value,0.181,,,,,,,,\n" +
-            "265.117,21,Group Change Event,Group Change,,16,1,New Group,38,,,,,,,,\n" +
-            "265.118,1,Condition Event,NotHold_NoPunishment,,38,0,,,,,,,,,,\n" +
-            "265.118,16,Variable Event,Hold_Timer,,38,1,Value,0.181,,,,,,,,\n" +
-            "265.118,16,Variable Event,Hold_Timer,,38,1,Value,0,,,,,,,,\n" +
-            "265.118,16,Variable Event,Hold_Failure_Counter,,38,1,Value,1,,,,,,,,\n" +
-            "265.118,16,Variable Event,Hold_Success_Counter,,38,1,Value,0,,,,,,,,\n" +
-            "265.118,29,Timer Event,ITI_Timer,,38,1,Value,0,,,,,,,,\n" +
-            "265.118,21,Group Change Event,Group Change,,38,1,New Group,31,,,,,,,,\n" +
-            "265.118,1,Condition Event,Increment_AError_No Punishment,,31,0,,,,,,,,,,\n" +
-            "265.118,16,Variable Event,zz_AnticipationError_Counter,,31,1,Value,12,,,,,,,,\n" +
-            "265.118,16,Variable Event,Change_Hold_Time,,31,1,Value,0,,,,,,,,\n" +
-            "265.118,16,Variable Event,Anticipation_Error,,31,1,Value,1,,,,,,,,\n" +
-            "265.118,21,Group Change Event,Group Change,,31,1,New Group,10,,,,,,,,\n" +
-            "265.135,38,Input Transition On Event,BIRBeam #1,,10,0,,,,,,,,,,\n" +
-            "266.118,1,Condition Event,Same trial,,10,0,,,,,,,,,,\n" +
-            "266.118,16,Variable Event,ITI_Timer,,10,1,Value,1,,,,,,,,\n" +
-            "266.118,16,Variable Event,ITI_Timer,,10,1,Value,0,,,,,,,,\n" +
-            "266.118,16,Variable Event,SkipTrial_inc,,10,1,Value,0,,,,,,,,\n" +
-            "266.118,16,Variable Event,First_Analysis,,10,1,Value,1,,,,,,,,\n" +
-            "266.118,16,Variable Event,Hold_Timer,,10,1,Value,0,,,,,,,,\n" +
-            "266.118,16,Variable Event,Hold_Timer,,10,1,Value,0,,,,,,,,\n" +
-            "266.118,16,Variable Event,zzRT_Timer,,10,1,Value,0,,,,,,,,\n" +
-            "266.118,16,Variable Event,zzRT_Timer,,10,1,Value,0,,,,,,,,\n" +
-            "266.118,16,Variable Event,zzMT_Timer,,10,1,Value,0,,,,,,,,\n" +
-            "266.118,16,Variable Event,zzMT_Timer,,10,1,Value,0,,,,,,,,\n" +
-            "266.118,16,Variable Event,_Trial_Counter,,10,1,Value,41,,,,,,,,\n" +
-            "266.118,16,Variable Event,Correct_Percent,,10,1,Value,16,,,,,,,,\n" +
-            "266.118,16,Variable Event,Correct_Percent,,10,1,Value,0.39,,,,,,,,\n" +
-            "266.118,16,Variable Event,Correct_Percent,,10,1,Value,39.024,,,,,,,,\n" +
-            "266.118,21,Group Change Event,Group Change,,10,1,New Group,27,,,,,,,,\n" +
-            "266.118,1,Condition Event,Not Change Hold Time,,27,0,,,,,,,,,,\n" +
-            "266.118,16,Variable Event,Anticipation_Error,,27,1,Value,0,,,,,,,,\n" +
-            "266.118,21,Group Change Event,Group Change,,27,1,New Group,4,,,,,,,,\n" +
-            "266.118,1,Condition Event,Select Trial Type,,4,0,,,,,,,,,,\n" +
-            "266.118,32,Whisker - Display Image,mANT,Image,4,2,Position,4,CentralStimulus,0,,,,,,\n" +
-            "266.118,16,Variable Event,aTrial_Set,,4,1,Value,4513,,,,,,,,\n" +
-            "266.118,16,Variable Event,Hold_Time,,4,1,Value,0.19,,,,,,,,\n" +
-            "266.118,21,Group Change Event,Group Change,,4,1,New Group,5,,,,,,,,\n" +
-            "266.118,1,Condition Event,Trial set 4513,,5,0,,,,,,,,,,\n" +
-            "266.118,16,Variable Event,Cue,,5,1,Value,1,,,,,,,,\n" +
-            "266.118,16,Variable Event,Target_Position,,5,1,Value,1,,,,,,,,\n" +
-            "266.118,16,Variable Event,Incorrect_Position,,5,1,Value,3,,,,,,,,\n" +
-            "266.118,21,Group Change Event,Group Change,,5,1,New Group,15,,,,,,,,\n" +
-            "266.429,30,Touch Down Event,mANT,,15,4,Position,4,CentralStimulus,0,CoordX,78,CoordY,68,,\n" +
-            "266.43,1,Condition Event,Display Cue,,15,0,,,,,,,,,,\n" +
-            "266.43,32,Whisker - Display Image,mANT,Cue_Images,15,2,Position,4,45,0,,,,,,\n" +
-            "266.43,29,Timer Event,Hold_Timer,,15,1,Value,0,,,,,,,,\n" +
-            "266.43,21,Group Change Event,Group Change,,15,1,New Group,37,,,,,,,,\n" +
-            "266.434,39,Input Transition Off Event,BIRBeam #1,,37,0,,,,,,,,,,\n" +
-            "266.58,1,Condition Event,Hold_Cue,,37,0,,,,,,,,,,\n" +
-            "266.58,32,Whisker - Display Image,mANT,Background,37,2,Position,5,Image 1,0,,,,,,\n" +
-            "266.58,32,Whisker - Display Image,mANT,Image,37,2,Position,4,dim,3,,,,,,\n" +
-            "266.58,21,Group Change Event,Group Change,,37,1,New Group,16,,,,,,,,\n" +
-            "266.619,1,Condition Event,Hold_CTI,,16,0,,,,,,,,,,\n" +
-            "266.619,32,Whisker - Display Image,mANT,Image,16,2,Position,1,Target,1,,,,,,\n" +
-            "266.619,16,Variable Event,Hold_Failure_Counter,,16,1,Value,0,,,,,,,,\n" +
-            "266.619,29,Timer Event,zzRT_Timer,,16,1,Value,0,,,,,,,,\n" +
-            "266.619,29,Timer Event,Target_Timer,,16,1,Value,0,,,,,,,,\n" +
-            "266.619,21,Group Change Event,Group Change,,16,1,New Group,7,,,,,,,,\n" +
-            "267.373,38,Input Transition On Event,BIRBeam #1,,7,0,,,,,,,,,,\n" +
-            "267.373,31,Touch Up Event,mANT,,7,4,Position,4,dim,3,CoordX,66,CoordY,94,,\n" +
-            "267.373,1,Condition Event,Leave_During Target,,7,0,,,,,,,,,,\n" +
-            "267.373,32,Whisker - Display Image,mANT,Background,7,2,Position,4,Image 1,0,,,,,,\n" +
-            "267.373,16,Variable Event,zzRT_Timer,,7,1,Value,0.754,,,,,,,,\n" +
-            "267.373,16,Variable Event,Hold_Timer,,7,1,Value,0.944,,,,,,,,\n" +
-            "267.373,29,Timer Event,zzMT_Timer,,7,1,Value,0,,,,,,,,\n" +
-            "267.373,21,Group Change Event,Group Change,,7,1,New Group,25,,,,,,,,\n" +
-            "267.619,1,Condition Event,Target off,,25,0,,,,,,,,,,\n" +
-            "267.619,16,Variable Event,Target_Timer,,25,1,Value,1,,,,,,,,\n" +
-            "267.619,16,Variable Event,Target_Timer,,25,1,Value,0,,,,,,,,\n" +
-            "267.619,32,Whisker - Display Image,mANT,Background,25,2,Position,1,Image 1,0,,,,,,\n" +
-            "267.619,32,Whisker - Display Image,mANT,Background,25,2,Position,3,Image 1,0,,,,,,\n" +
-            "267.619,61,Group Maintain Event,Group Change,,25,1,New Group,25,,,,,,,,\n" +
-            "268.311,39,Input Transition Off Event,BIRBeam #1,,25,0,,,,,,,,,,\n" +
-            "268.351,30,Touch Down Event,mANT,,25,4,Position,3,Image 1,0,CoordX,71,CoordY,165,,\n" +
-            "268.351,1,Condition Event,Incorrect_Leaving During Target,,25,0,,,,,,,,,,\n" +
-            "268.351,32,Whisker - Display Image,mANT,Background,25,2,Position,1,Image 1,0,,,,,,\n" +
-            "268.351,32,Whisker - Display Image,mANT,Background,25,2,Position,3,Image 1,0,,,,,,\n" +
-            "268.351,16,Variable Event,Timeout,,25,1,Value,1,,,,,,,,\n" +
-            "268.351,16,Variable Event,Target_Timer,,25,1,Value,0,,,,,,,,\n" +
-            "268.351,16,Variable Event,Target_Timer,,25,1,Value,0,,,,,,,,\n" +
-            "268.351,16,Variable Event,zzMT_Timer,,25,1,Value,0.978,,,,,,,,\n" +
-            "268.351,21,Group Change Event,Group Change,,25,1,New Group,32,,,,,,,,\n" +
-            "268.351,1,Condition Event,Increment_IncorrectError,,32,0,,,,,,,,,,\n" +
-            "268.351,16,Variable Event,zz_Incorrect_Counter,,32,1,Value,9,,,,,,,,\n" +
-            "268.351,16,Variable Event,aCounter_NoAE,,32,1,Value,30,,,,,,,,\n" +
-            "268.351,16,Variable Event,Change_Hold_Time,,32,1,Value,1,,,,,,,,\n" +
-            "268.351,21,Group Change Event,Group Change,,32,1,New Group,11,,,,,,,,\n" +
-            "268.351,1,Condition Event,Time Out,,11,0,,,,,,,,,,\n" +
-            "268.351,32,Whisker - Display Image,mANT,Background,11,2,Position,4,Image 1,0,,,,,,\n" +
-            "268.351,32,Whisker - Display Image,mANT,Background,11,2,Position,1,Image 1,0,,,,,,\n" +
-            "268.351,1,Condition Event,TO Houselight On,,11,0,,,,,,,,,,\n" +
-            "268.351,3,Output On Event,HouseLight #1,,11,0,,,,,,,,,,\n" +
-            "268.351,16,Variable Event,Timeout,,11,1,Value,0,,,,,,,,\n" +
-            "268.351,29,Timer Event,Time_Out_Timer,,11,1,Value,0,,,,,,,,\n" +
-            "268.351,61,Group Maintain Event,Group Change,,11,1,New Group,11,,,,,,,,\n" +
-            "268.351,1,Condition Event,TO Houselight On,,11,0,,,,,,,,,,\n" +
-            "268.351,3,Output On Event,HouseLight #1,,11,0,,,,,,,,,,\n" +
-            "268.351,21,Group Change Event,Group Change,,11,1,New Group,13,,,,,,,,\n" +
-            "268.639,31,Touch Up Event,mANT,,13,4,Position,3,Image 1,0,CoordX,71,CoordY,165,,\n" +
-            "268.668,39,Input Transition Off Event,FIRBeam #1,,13,0,,,,,,,,,,\n" +
-            "268.722,38,Input Transition On Event,FIRBeam #1,,13,0,,,,,,,,,,\n" +
-            "268.738,39,Input Transition Off Event,FIRBeam #1,,13,0,,,,,,,,,,\n" +
-            "268.829,38,Input Transition On Event,BIRBeam #1,,13,0,,,,,,,,,,\n" +
-            "268.859,39,Input Transition Off Event,BIRBeam #1,,13,0,,,,,,,,,,\n" +
-            "269.319,38,Input Transition On Event,Tray #1,,13,0,,,,,,,,,,\n" +
-            "269.351,1,Condition Event,Time Out End,,13,0,,,,,,,,,,\n" +
-            "269.351,16,Variable Event,Time_Out_Timer,,13,1,Value,1,,,,,,,,\n" +
-            "269.351,16,Variable Event,Time_Out_Timer,,13,1,Value,0,,,,,,,,\n" +
-            "269.351,29,Timer Event,ITI_Timer,,13,1,Value,0,,,,,,,,\n" +
-            "269.351,21,Group Change Event,Group Change,,13,1,New Group,14,,,,,,,,\n" +
-            "269.351,1,Condition Event,Reset Houselight off,,14,0,,,,,,,,,,\n" +
-            "269.351,4,Output Off Event,HouseLight #1,,14,0,,,,,,,,,,\n" +
-            "269.351,21,Group Change Event,Group Change,,14,1,New Group,10,,,,,,,,\n" +
-            "269.561,39,Input Transition Off Event,Tray #1,,10,0,,,,,,,,,,\n" +
-            "269.825,38,Input Transition On Event,BIRBeam #1,,10,0,,,,,,,,,,\n" +
-            "269.839,39,Input Transition Off Event,BIRBeam #1,,10,0,,,,,,,,,,\n" +
-            "270.049,38,Input Transition On Event,BIRBeam #1,,10,0,,,,,,,,,,\n" +
-            "270.054,38,Input Transition On Event,FIRBeam #1,,10,0,,,,,,,,,,\n" +
-            "270.156,39,Input Transition Off Event,BIRBeam #1,,10,0,,,,,,,,,,\n";
+    public static String distractedTrial4 = "486.433,1,Condition Event,Next trial,,10,0,,,,,,,,,,\n" +
+            "486.433,16,Variable Event,ITI_Timer,,10,1,Value,1,,,,,,,,\n" +
+            "486.433,16,Variable Event,ITI_Timer,,10,1,Value,0,,,,,,,,\n" +
+            "486.433,16,Variable Event,SkipTrial_inc,,10,1,Value,0,,,,,,,,\n" +
+            "486.433,16,Variable Event,First_Analysis,,10,1,Value,1,,,,,,,,\n" +
+            "486.433,16,Variable Event,Hold_Timer,,10,1,Value,0.958,,,,,,,,\n" +
+            "486.433,16,Variable Event,Hold_Timer,,10,1,Value,0,,,,,,,,\n" +
+            "486.433,16,Variable Event,zzRT_Timer,,10,1,Value,0.768,,,,,,,,\n" +
+            "486.433,16,Variable Event,zzRT_Timer,,10,1,Value,0,,,,,,,,\n" +
+            "486.433,16,Variable Event,zzMT_Timer,,10,1,Value,0.979,,,,,,,,\n" +
+            "486.433,16,Variable Event,zzMT_Timer,,10,1,Value,0,,,,,,,,\n" +
+            "486.433,21,Group Change Event,Group Change,,10,1,New Group,27,,,,,,,,\n" +
+            "486.433,1,Condition Event,Change Hold Time,,27,0,,,,,,,,,,\n" +
+            "486.433,16,Variable Event,Hold_Time_Adjuster,,27,1,Value,0.189,,,,,,,,\n" +
+            "486.433,21,Group Change Event,Group Change,,27,1,New Group,3,,,,,,,,\n" +
+            "486.433,1,Condition Event,After 10 trials,,3,0,,,,,,,,,,\n" +
+            "486.433,16,Variable Event,_Trial_Counter,,3,1,Value,83,,,,,,,,\n" +
+            "486.433,16,Variable Event,Correct_Percent,,3,1,Value,33,,,,,,,,\n" +
+            "486.433,16,Variable Event,Correct_Percent,,3,1,Value,0.398,,,,,,,,\n" +
+            "486.433,16,Variable Event,Correct_Percent,,3,1,Value,39.759,,,,,,,,\n" +
+            "486.433,16,Variable Event,Accuracy_NoAE,,3,1,Value,33,,,,,,,,\n" +
+            "486.433,16,Variable Event,Accuracy_NoAE,,3,1,Value,0.589,,,,,,,,\n" +
+            "486.433,16,Variable Event,Accuracy_NoAE,,3,1,Value,58.929,,,,,,,,\n" +
+            "486.433,16,Variable Event,Validity,,3,1,Value,0,,,,,,,,\n" +
+            "486.433,19,List Change - Next Value,Validity_List,,3,2,Index,96,Value,0,,,,,,\n" +
+            "486.433,21,Group Change Event,Group Change,,3,1,New Group,17,,,,,,,,\n" +
+            "486.433,1,Condition Event,Select Valid Trials,,17,0,,,,,,,,,,\n" +
+            "486.433,16,Variable Event,Trial_Type,,17,1,Value,14513,,,,,,,,\n" +
+            "486.433,19,List Change - Next Value,Valid_Trials,,17,2,Index,8,Value,14513,,,,,,\n" +
+            "486.433,16,Variable Event,Distractor,,17,1,Value,1,,,,,,,,\n" +
+            "486.433,19,List Change - Next Value,Valid_Distractor,,17,2,Index,6,Value,1,,,,,,\n" +
+            "486.433,21,Group Change Event,Group Change,,17,1,New Group,4,,,,,,,,\n" +
+            "486.433,1,Condition Event,Select Trial Type,,4,0,,,,,,,,,,\n" +
+            "486.433,32,Whisker - Display Image,mANT,Image,4,2,Position,4,CentralStimulus,0,,,,,,\n" +
+            "486.433,16,Variable Event,aTrial_Set,,4,1,Value,14513,,,,,,,,\n" +
+            "486.433,16,Variable Event,Hold_Time,,4,1,Value,0.189,,,,,,,,\n" +
+            "486.433,21,Group Change Event,Group Change,,4,1,New Group,5,,,,,,,,\n" +
+            "486.433,1,Condition Event,Trial set 14513,,5,0,,,,,,,,,,\n" +
+            "486.433,16,Variable Event,Cue,,5,1,Value,2,,,,,,,,\n" +
+            "486.433,16,Variable Event,Target_Position,,5,1,Value,1,,,,,,,,\n" +
+            "486.433,16,Variable Event,Incorrect_Position,,5,1,Value,3,,,,,,,,\n" +
+            "486.433,21,Group Change Event,Group Change,,5,1,New Group,15,,,,,,,,\n" +
+            "486.715,39,Input Transition Off Event,BIRBeam #1,,15,0,,,,,,,,,,\n" +
+            "486.866,39,Input Transition Off Event,FIRBeam #1,,15,0,,,,,,,,,,\n" +
+            "486.996,30,Touch Down Event,mANT,,15,4,Position,4,CentralStimulus,0,CoordX,41,CoordY,51,,\n" +
+            "486.997,1,Condition Event,Display Cue,,15,0,,,,,,,,,,\n" +
+            "486.997,32,Whisker - Display Image,mANT,Cue_Images,15,2,Position,4,145,1,,,,,,\n" +
+            "486.997,29,Timer Event,Hold_Timer,,15,1,Value,0,,,,,,,,\n" +
+            "486.997,21,Group Change Event,Group Change,,15,1,New Group,37,,,,,,,,\n" +
+            "487.147,1,Condition Event,Hold_Cue,,37,0,,,,,,,,,,\n" +
+            "487.147,32,Whisker - Display Image,mANT,Background,37,2,Position,5,Image 1,0,,,,,,\n" +
+            "487.147,32,Whisker - Display Image,mANT,Image,37,2,Position,4,dim,3,,,,,,\n" +
+            "487.147,21,Group Change Event,Group Change,,37,1,New Group,16,,,,,,,,\n" +
+            "487.185,1,Condition Event,Hold_CTI_Distractor,,16,0,,,,,,,,,,\n" +
+            "487.185,32,Whisker - Display Image,mANT,Image,16,2,Position,1,Target,1,,,,,,\n" +
+            "487.185,32,Whisker - Display Image,mANT,Image,16,2,Position,3,Distractor,2,,,,,,\n" +
+            "487.185,16,Variable Event,Hold_Failure_Counter,,16,1,Value,0,,,,,,,,\n" +
+            "487.185,29,Timer Event,zzRT_Timer,,16,1,Value,0,,,,,,,,\n" +
+            "487.185,29,Timer Event,Target_Timer,,16,1,Value,0,,,,,,,,\n" +
+            "487.185,21,Group Change Event,Group Change,,16,1,New Group,7,,,,,,,,\n" +
+            "487.409,38,Input Transition On Event,FIRBeam #1,,7,0,,,,,,,,,,\n" +
+            "487.438,31,Touch Up Event,mANT,,7,4,Position,3,Distractor,2,CoordX,56,CoordY,200,,\n" +
+            "487.438,1,Condition Event,Leave_During Target,,7,0,,,,,,,,,,\n" +
+            "487.438,32,Whisker - Display Image,mANT,Background,7,2,Position,4,Image 1,0,,,,,,\n" +
+            "487.438,16,Variable Event,zzRT_Timer,,7,1,Value,0.253,,,,,,,,\n" +
+            "487.438,16,Variable Event,Hold_Timer,,7,1,Value,0.441,,,,,,,,\n" +
+            "487.438,29,Timer Event,zzMT_Timer,,7,1,Value,0,,,,,,,,\n" +
+            "487.438,21,Group Change Event,Group Change,,7,1,New Group,25,,,,,,,,\n" +
+            "487.548,39,Input Transition Off Event,FIRBeam #1,,25,0,,,,,,,,,,\n" +
+            "488.185,1,Condition Event,Target off,,25,0,,,,,,,,,,\n" +
+            "488.185,16,Variable Event,Target_Timer,,25,1,Value,1,,,,,,,,\n" +
+            "488.185,16,Variable Event,Target_Timer,,25,1,Value,0,,,,,,,,\n" +
+            "488.185,32,Whisker - Display Image,mANT,Background,25,2,Position,1,Image 1,0,,,,,,\n" +
+            "488.185,32,Whisker - Display Image,mANT,Background,25,2,Position,3,Image 1,0,,,,,,\n" +
+            "488.185,61,Group Maintain Event,Group Change,,25,1,New Group,25,,,,,,,,\n" +
+            "488.8,38,Input Transition On Event,FIRBeam #1,,25,0,,,,,,,,,,\n" +
+            "488.848,39,Input Transition Off Event,FIRBeam #1,,25,0,,,,,,,,,,\n" +
+            "489.247,38,Input Transition On Event,FIRBeam #1,,25,0,,,,,,,,,,\n" +
+            "489.355,30,Touch Down Event,mANT,,25,4,Position,3,Image 1,0,CoordX,85,CoordY,165,,\n" +
+            "489.355,1,Condition Event,Incorrect_Leaving During Target,,25,0,,,,,,,,,,\n" +
+            "489.355,32,Whisker - Display Image,mANT,Background,25,2,Position,1,Image 1,0,,,,,,\n" +
+            "489.355,32,Whisker - Display Image,mANT,Background,25,2,Position,3,Image 1,0,,,,,,\n" +
+            "489.355,16,Variable Event,Timeout,,25,1,Value,1,,,,,,,,\n" +
+            "489.355,16,Variable Event,Target_Timer,,25,1,Value,0,,,,,,,,\n" +
+            "489.355,16,Variable Event,Target_Timer,,25,1,Value,0,,,,,,,,\n" +
+            "489.355,16,Variable Event,zzMT_Timer,,25,1,Value,1.917,,,,,,,,\n" +
+            "489.355,21,Group Change Event,Group Change,,25,1,New Group,32,,,,,,,,\n" +
+            "489.355,1,Condition Event,Increment_IncorrectError,,32,0,,,,,,,,,,\n" +
+            "489.355,16,Variable Event,zz_Incorrect_Counter,,32,1,Value,15,,,,,,,,\n" +
+            "489.355,16,Variable Event,aCounter_NoAE,,32,1,Value,57,,,,,,,,\n" +
+            "489.355,16,Variable Event,Change_Hold_Time,,32,1,Value,1,,,,,,,,\n" +
+            "489.355,21,Group Change Event,Group Change,,32,1,New Group,11,,,,,,,,\n" +
+            "489.355,1,Condition Event,Time Out,,11,0,,,,,,,,,,\n" +
+            "489.355,32,Whisker - Display Image,mANT,Background,11,2,Position,4,Image 1,0,,,,,,\n" +
+            "489.355,32,Whisker - Display Image,mANT,Background,11,2,Position,1,Image 1,0,,,,,,\n" +
+            "489.355,1,Condition Event,TO Houselight On,,11,0,,,,,,,,,,\n" +
+            "489.355,3,Output On Event,HouseLight #1,,11,0,,,,,,,,,,\n" +
+            "489.355,16,Variable Event,Timeout,,11,1,Value,0,,,,,,,,\n" +
+            "489.355,29,Timer Event,Time_Out_Timer,,11,1,Value,0,,,,,,,,\n" +
+            "489.355,61,Group Maintain Event,Group Change,,11,1,New Group,11,,,,,,,,\n" +
+            "489.355,1,Condition Event,TO Houselight On,,11,0,,,,,,,,,,\n" +
+            "489.355,3,Output On Event,HouseLight #1,,11,0,,,,,,,,,,\n" +
+            "489.355,21,Group Change Event,Group Change,,11,1,New Group,13,,,,,,,,\n" +
+            "489.456,39,Input Transition Off Event,FIRBeam #1,,13,0,,,,,,,,,,\n" +
+            "489.509,31,Touch Up Event,mANT,,13,4,Position,3,Image 1,0,CoordX,78,CoordY,182,,\n" +
+            "489.534,38,Input Transition On Event,FIRBeam #1,,13,0,,,,,,,,,,\n" +
+            "489.612,39,Input Transition Off Event,FIRBeam #1,,13,0,,,,,,,,,,\n" +
+            "489.616,38,Input Transition On Event,FIRBeam #1,,13,0,,,,,,,,,,\n" +
+            "489.632,39,Input Transition Off Event,FIRBeam #1,,13,0,,,,,,,,,,\n" +
+            "489.721,38,Input Transition On Event,BIRBeam #1,,13,0,,,,,,,,,,\n" +
+            "489.734,39,Input Transition Off Event,BIRBeam #1,,13,0,,,,,,,,,,\n" +
+            "490.355,1,Condition Event,Time Out End,,13,0,,,,,,,,,,\n" +
+            "490.355,16,Variable Event,Time_Out_Timer,,13,1,Value,1,,,,,,,,\n" +
+            "490.355,16,Variable Event,Time_Out_Timer,,13,1,Value,0,,,,,,,,\n" +
+            "490.355,29,Timer Event,ITI_Timer,,13,1,Value,0,,,,,,,,\n" +
+            "490.355,21,Group Change Event,Group Change,,13,1,New Group,14,,,,,,,,\n" +
+            "490.355,1,Condition Event,Reset Houselight off,,14,0,,,,,,,,,,\n" +
+            "490.355,4,Output Off Event,HouseLight #1,,14,0,,,,,,,,,,\n" +
+            "490.355,21,Group Change Event,Group Change,,14,1,New Group,10,,,,,,,,\n" +
+            "490.515,38,Input Transition On Event,Tray #1,,10,0,,,,,,,,,,\n" +
+            "491.073,39,Input Transition Off Event,Tray #1,,10,0,,,,,,,,,,\n" +
+            "491.355,1,Condition Event,Next trial,,10,0,,,,,,,,,,";
 
     public static String undistractedTrial1 = "109.091,16,Variable Event,ITI_Timer,,10,1,Value,1,,,,,,,,\n" +
             "109.091,16,Variable Event,ITI_Timer,,10,1,Value,0,,,,,,,,\n" +
