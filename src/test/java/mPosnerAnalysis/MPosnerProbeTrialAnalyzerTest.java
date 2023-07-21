@@ -3,6 +3,7 @@ package mPosnerAnalysis;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,9 @@ import org.junit.jupiter.api.Test;
 import dataModels.Event;
 import dataModels.SessionParameters;
 import dataModels.Trial;
-
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 
 class MPosnerProbeTrialAnalyzerTest {
@@ -492,8 +495,49 @@ class MPosnerProbeTrialAnalyzerTest {
 		assertEquals(4,result.getFrontBeamBreaks());
 		assertEquals(1,result.getBackBeamBreaks());
 	}
-	
-	//Didnt test touchscreen error?
+
+	@ParameterizedTest
+	@MethodSource("provideDistractedTrials")
+	void analyzer_determines_distracted_trials(Trial trial){
+		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
+		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
+		sut.setParameters(parameters);
+
+		MPosnerResult result = sut.generateResult(trial, 0, null);
+
+		assertEquals(1,result.getDistractor());
+	}
+
+	static Stream<Arguments> provideDistractedTrials(){
+		return Stream.of(
+				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.distractedTrial1))),
+				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.distractedTrial2))),
+				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.distractedTrial3))),
+				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.distractedTrial4)))
+		);
+	}
+	@ParameterizedTest
+	@MethodSource("provideDistractedTrials")
+	void analyzer_determines_undistracted_trials(Trial trial){
+		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
+		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
+		sut.setParameters(parameters);
+
+		MPosnerResult result = sut.generateResult(trial, 0, null);
+
+		assertEquals(0,result.getDistractor());
+	}
+
+	static Stream<Arguments> provideUndistractedTrials(){
+		return Stream.of(
+				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.undistractedTrial1))),
+				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.undistractedTrial2))),
+				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.undistractedTrial3))),
+				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.undistractedTrial4)))
+		);
+	}
+
+		//Didnt test touchscreen error?
 	
 	
 	
