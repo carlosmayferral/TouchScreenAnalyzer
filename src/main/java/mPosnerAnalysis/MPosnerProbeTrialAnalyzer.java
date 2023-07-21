@@ -66,6 +66,9 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 		// Set validity
 		result.setCueValidity(determineCueValidity(events, result.getCueSide()));
 
+		// Set if distracted
+		result.setDistractor(determineIfDistracted(events));
+
 		// Create posner state machine
 		MPosnerStateMachine stateMachine = new MPosnerStateMachine();
 		stateMachine.setStartingState(events[0].getGroup_Id());
@@ -136,6 +139,15 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 		result.setTouchscreenError(this.determineIfError(events));
 
 		return result;
+	}
+
+	private String determineIfDistracted(Event[] events) {
+		for (Event event : events){
+			if(event.getArgumentName(2) != null && event.getArgumentName(2).equals("Distractor")){
+				return("1");
+			}
+		}
+		return("0");
 	}
 
 	private void calculateBeamBreaks(MPosnerResult result, Event[] events) {
