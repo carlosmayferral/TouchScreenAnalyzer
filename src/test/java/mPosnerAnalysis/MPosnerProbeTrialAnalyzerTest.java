@@ -505,7 +505,7 @@ class MPosnerProbeTrialAnalyzerTest {
 
 		MPosnerResult result = sut.generateResult(trial, 0, null);
 
-		assertEquals(1,result.getDistractor());
+		assertEquals("1",result.getDistractor());
 	}
 
 	static Stream<Arguments> provideDistractedTrials(){
@@ -517,7 +517,7 @@ class MPosnerProbeTrialAnalyzerTest {
 		);
 	}
 	@ParameterizedTest
-	@MethodSource("provideDistractedTrials")
+	@MethodSource("provideUndistractedTrials")
 	void analyzer_determines_undistracted_trials(Trial trial){
 		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
 		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
@@ -525,7 +525,7 @@ class MPosnerProbeTrialAnalyzerTest {
 
 		MPosnerResult result = sut.generateResult(trial, 0, null);
 
-		assertEquals(0,result.getDistractor());
+		assertEquals("0",result.getDistractor());
 	}
 
 	static Stream<Arguments> provideUndistractedTrials(){
