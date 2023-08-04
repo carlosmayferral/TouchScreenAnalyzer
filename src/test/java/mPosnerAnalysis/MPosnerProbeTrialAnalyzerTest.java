@@ -553,7 +553,7 @@ class MPosnerProbeTrialAnalyzerTest {
 		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\AlertingTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
 	}
 	@ParameterizedTest
-	@MethodSource("provideAlertingTrials")
+	@MethodSource("provideNonAlertingTrials")
 	void analyzer_determines_nonAlertingCue_trials(Trial trial){
 		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
 		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();

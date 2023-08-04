@@ -9,6 +9,8 @@ import dataModels.SessionParameters;
 import dataModels.Trial;
 import pairwiseHabituationV2AnalysisSet.PairwiseHabiutationV2Result;
 
+import java.util.List;
+
 public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 
 	private static final Double DEFAULT_BRIGHTNESS = 100d;
@@ -25,6 +27,8 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 	private static final Object FRONT_BEAM_ITEM_NAME = "FIRBeam #1";
 
 	private static final Object BACK_BEAM_ITEM_NAME = "BIRBeam #1";
+
+	private static final List<Integer> ALERTING_TRIAL_CODES = List.of(931,913);
 
 	@Override
 	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo, MetaData metaData) {
@@ -184,6 +188,11 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 		String result = "Invalid!";
 		String targetPosition = "";
 		for (Event event : events) {
+			//if these codes appear, override normal logic
+			if (event.getItem_Name().equals("Trial_Type") && ALERTING_TRIAL_CODES.contains((int)(event.getArgumentValue(1)))){
+				return "Alerting";
+			}
+
 			// look for target position
 			if (event.getGroup_Id() == 5 && event.getItem_Name().equals("Target_Position")) {
 				if ((double) event.getArgumentValue(1) == 1d) {
