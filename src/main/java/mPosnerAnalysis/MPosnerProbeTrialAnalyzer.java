@@ -147,7 +147,7 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 
 	private String determineIfDistracted(Event[] events) {
 		for (Event event : events){
-			if(event.getArgumentName(2) != null && event.getArgumentName(2).equals("Distractor")){
+			if(event.getItem_Name().equals("Distractor") && event.getArgumentName(1).equals("Value") && (((int)event.getArgumentValue(1)) == 1)){
 				return("1");
 			}
 		}

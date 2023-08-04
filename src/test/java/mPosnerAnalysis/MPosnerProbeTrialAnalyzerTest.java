@@ -510,12 +510,7 @@ class MPosnerProbeTrialAnalyzerTest {
 	}
 
 	static Stream<Arguments> provideDistractedTrials(){
-		return Stream.of(
-				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.distractedTrial1))),
-				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.distractedTrial2))),
-				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.distractedTrial3))),
-				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.distractedTrial4)))
-		);
+		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\DistractedTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
 	}
 	@ParameterizedTest
 	@MethodSource("provideUndistractedTrials")
@@ -530,12 +525,7 @@ class MPosnerProbeTrialAnalyzerTest {
 	}
 
 	static Stream<Arguments> provideUndistractedTrials(){
-		return Stream.of(
-				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.undistractedTrial1))),
-				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.undistractedTrial2))),
-				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.undistractedTrial3))),
-				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.undistractedTrial4)))
-		);
+		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\NonDistractedTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
 	}
 
 	@ParameterizedTest
