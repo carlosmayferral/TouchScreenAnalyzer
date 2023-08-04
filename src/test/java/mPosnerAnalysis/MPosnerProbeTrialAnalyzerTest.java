@@ -14,6 +14,7 @@ import dataModels.Trial;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import testUtils.TestUtils;
 
 
 class MPosnerProbeTrialAnalyzerTest {
@@ -535,6 +536,21 @@ class MPosnerProbeTrialAnalyzerTest {
 				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.undistractedTrial3))),
 				Arguments.of(new Trial(Event.readEventsFromString(TestTrials.undistractedTrial4)))
 		);
+	}
+
+	@ParameterizedTest
+	@MethodSource("provideAlertingTrials")
+	void analyzer_determines_alertingCue_trials(Trial trial){
+		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
+		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
+		sut.setParameters(parameters);
+		MPosnerResult result = sut.generateResult(trial, 0, null);
+
+		assertEquals("Alerting",result.getCueValidity());
+	}
+
+	static Stream<Arguments> provideAlertingTrials(){
+		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\AlertingTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
 	}
 
 		//Didnt test touchscreen error?
