@@ -552,7 +552,20 @@ class MPosnerProbeTrialAnalyzerTest {
 	static Stream<Arguments> provideAlertingTrials(){
 		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\AlertingTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
 	}
+	@ParameterizedTest
+	@MethodSource("provideAlertingTrials")
+	void analyzer_determines_nonAlertingCue_trials(Trial trial){
+		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
+		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
+		sut.setParameters(parameters);
+		MPosnerResult result = sut.generateResult(trial, 0, null);
 
+		assertNotEquals("Alerting", result.getCueValidity());
+	}
+
+	static Stream<Arguments> provideNonAlertingTrials(){
+		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\Not Alerting Trials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
+	}
 		//Didnt test touchscreen error?
 	
 	
