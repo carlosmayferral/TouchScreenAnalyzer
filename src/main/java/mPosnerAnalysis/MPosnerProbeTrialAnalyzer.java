@@ -30,6 +30,8 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 
 	private static final List<Integer> ALERTING_TRIAL_CODES = List.of(931,913);
 
+	private static final List<Integer> NO_CUE_TRIAL_CODES = List.of(813,831);
+
 	@Override
 	public Result analyzeTrial(Trial trial, int counter, SessionInfo sessionInfo, MetaData metaData) {
 		MPosnerResult result = this.generateResult(trial, counter, sessionInfo);
@@ -193,6 +195,10 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 				return "Alerting";
 			}
 
+			//if no cue codes appear, override normal logic
+			if (event.getItem_Name().equals("Trial_Type") && NO_CUE_TRIAL_CODES.contains((int)(event.getArgumentValue(1)))){
+				return "No Cue";
+			}
 			// look for target position
 			if (event.getGroup_Id() == 5 && event.getItem_Name().equals("Target_Position")) {
 				if ((double) event.getArgumentValue(1) == 1d) {

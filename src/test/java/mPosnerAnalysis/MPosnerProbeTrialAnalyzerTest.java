@@ -556,7 +556,37 @@ class MPosnerProbeTrialAnalyzerTest {
 	static Stream<Arguments> provideNonAlertingTrials(){
 		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\Not Alerting Trials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
 	}
-		//Didnt test touchscreen error?
+
+	@ParameterizedTest
+	@MethodSource("provideCuedTrials")
+	void analyzer_determines_cued_trials(Trial trial){
+		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
+		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
+		sut.setParameters(parameters);
+		MPosnerResult result = sut.generateResult(trial, 0, null);
+
+		assertNotEquals("No Cue", result.getCueValidity());
+	}
+
+	static Stream<Arguments> provideCuedTrials(){
+		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\CuedTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
+	}
+
+	@ParameterizedTest
+	@MethodSource("provideNonCuedTrials")
+	void analyzer_determines_non_cued_trials(Trial trial){
+		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
+		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
+		sut.setParameters(parameters);
+		MPosnerResult result = sut.generateResult(trial, 0, null);
+
+		assertEquals("No Cue", result.getCueValidity());
+	}
+
+	static Stream<Arguments> provideNonCuedTrials(){
+		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\NonCuedTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
+	}
+	//Didnt test touchscreen error?
 	
 	
 	
