@@ -63,6 +63,7 @@ public class MPosnerResult {
 			+ "%s,"
 			+ "%s,"
 			+ "%s,"
+			+ "%s,"
 			+ "%f,"
 			+ "%f,"
 			+ "%f,"
