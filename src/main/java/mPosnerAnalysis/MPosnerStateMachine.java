@@ -107,10 +107,17 @@ public class MPosnerStateMachine {
 				throw new Exception("Invalid schedule group transition");
 			}
 			break;
-		case 39:
+		case 40:
 			throw new Exception("Invalid schedule group transition");
+			case 39:
+				if (group == 4){
+					currentState = group;
+				}
+				else{
+					throw new Exception("Invalid schedule group transition");
+				}
 		case 17:
-			if (group == 4) {
+			if (group == 4 || group == 39) {
 				currentState = group;
 			} else {
 				throw new Exception("Invalid schedule group transition");
