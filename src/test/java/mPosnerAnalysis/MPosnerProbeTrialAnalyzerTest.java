@@ -607,7 +607,56 @@ class MPosnerProbeTrialAnalyzerTest {
 		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\ValidNonAlertingTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
 	}
 
+	@ParameterizedTest
+	@MethodSource("provideValidAlertingTrials")
+	void analyzer_determines_valid_alerting_trials(Trial trial){
+		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
+		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
+		sut.setParameters(parameters);
+		MPosnerResult result = sut.generateResult(trial, 0, null);
 
+		assertEquals("Valid" , result.getCueValidity());
+		boolean isNotAlertingOrFirst10Trials = result.getAlerting().equals("Alerting") || result.getAlerting().equals("First 10 trials");
+		assertEquals(true, isNotAlertingOrFirst10Trials);
+	}
+
+	static Stream<Arguments> provideValidAlertingTrials(){
+		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\ValidAlertingTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
+	}
+
+	@ParameterizedTest
+	@MethodSource("provideInvalidAlertingTrials")
+	void analyzer_determines_invalid_alerting_trials(Trial trial){
+		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
+		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
+		sut.setParameters(parameters);
+		MPosnerResult result = sut.generateResult(trial, 0, null);
+
+		assertEquals("Invalid" , result.getCueValidity());
+		boolean isNotAlertingOrFirst10Trials = result.getAlerting().equals("Alerting") || result.getAlerting().equals("First 10 trials");
+		assertEquals(true, isNotAlertingOrFirst10Trials);
+	}
+
+	static Stream<Arguments> provideInvalidAlertingTrials(){
+		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\InvalidAlertingTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
+	}
+
+	@ParameterizedTest
+	@MethodSource("provideInvalidNonAlertingTrials")
+	void analyzer_determines_invalid_non_alerting_trials(Trial trial){
+		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
+		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
+		sut.setParameters(parameters);
+		MPosnerResult result = sut.generateResult(trial, 0, null);
+
+		assertEquals("Invalid" , result.getCueValidity());
+		boolean isNotAlertingOrFirst10Trials = result.getAlerting().equals("Non Alerting") || result.getAlerting().equals("First 10 trials");
+		assertEquals(true, isNotAlertingOrFirst10Trials);
+	}
+
+	static Stream<Arguments> provideInvalidNonAlertingTrials(){
+		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\InvalidNonAlertingTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
+	}
 	//Didnt test touchscreen error?
 	
 	
