@@ -7,6 +7,7 @@ public class MPosnerResult {
 			+ "Trial_Type,"
 			+ "Cue_Side,"
 			+ "Cue_Validity,"
+			+ "Alerting,"
 			+ "Distractor,"
 			+ "Cue_Brightness,"
 			+ "Cue_Time,"
@@ -85,6 +86,7 @@ public class MPosnerResult {
 	private String trialType;
 	private String cueSide;
 	private String cueValidity;
+	private String alerting;
 	private String distractor;
 	private Double cueBrightness;
 	private Double cueTime;
@@ -141,6 +143,7 @@ public class MPosnerResult {
 				trialType,
 				cueSide,
 				cueValidity,
+				alerting,
 				distractor,
 				cueBrightness,
 				cueTime,
@@ -211,6 +214,10 @@ public class MPosnerResult {
 	public void setCueValidity(String cueValidity) {
 		this.cueValidity = cueValidity;
 	}
+
+	public String getAlerting(){return alerting;}
+
+	public void setAlerting( String alerting) {this.alerting = alerting;};
 
 
 	public Double getCueBrightness() {
