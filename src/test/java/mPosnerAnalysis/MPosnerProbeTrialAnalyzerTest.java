@@ -586,6 +586,28 @@ class MPosnerProbeTrialAnalyzerTest {
 	static Stream<Arguments> provideNonCuedTrials(){
 		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\NonCuedTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
 	}
+
+	@ParameterizedTest
+	@MethodSource("provideValidNonAlertingTrials")
+	void analyzer_determines_valid_non_alerting_trials(Trial trial){
+		MPosnerProbeParameters parameters = (MPosnerProbeParameters) generate_parameters_exogenous();
+		MPosnerProbeTrialAnalyzer sut = new MPosnerProbeTrialAnalyzer();
+		sut.setParameters(parameters);
+		MPosnerResult result = sut.generateResult(trial, 0, null);
+
+		System.out.println("Trial with timestamp: " + result.getTimestamp());
+		System.out.println("Cue side " + result.getCueSide());
+		assertEquals("Valid" , result.getCueValidity());
+		boolean isNotAlertingOrFirst10Trials = result.getAlerting().equals("Non Alerting") || result.getAlerting().equals("First 10 trials");
+		assertEquals(true, isNotAlertingOrFirst10Trials);
+
+	}
+
+	static Stream<Arguments> provideValidNonAlertingTrials(){
+		return TestUtils.getFilesFromFolder("C:\\Projects\\TouchScreenAnalyzer\\src\\test\\resources\\ValidNonAlertingTrials").map((file)->Arguments.of(new Trial(Event.readEventsFromFile(file))));
+	}
+
+
 	//Didnt test touchscreen error?
 	
 	

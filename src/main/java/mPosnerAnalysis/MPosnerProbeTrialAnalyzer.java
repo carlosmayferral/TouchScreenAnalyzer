@@ -72,6 +72,9 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 		// Set validity
 		result.setCueValidity(determineCueValidity(events, result.getCueSide()));
 
+		// Set if alerting
+		result.setAlerting(determineAlerting(events));
+
 		// Set if distracted
 		result.setDistractor(determineIfDistracted(events));
 
@@ -92,8 +95,8 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 			} catch (Exception e) {
 				System.out.println(
 						"Invalid transition between schedule groups. Transition to group " + event.getGroup_Id()
-						+ " from group " + stateMachine.getCurrentState()+ " in trial " + sessionInfo.getFile().getName()
-						+ " at timestamp " + event.getEvent_Time());
+						+ " from group " + stateMachine.getCurrentState()+
+						 " at timestamp " + event.getEvent_Time());
 				System.out.println("Transition history for trial: " + stateMachine.getTransitionHistory());
 				e.printStackTrace();
 				System.exit(-1);
@@ -210,6 +213,26 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 					return "Valid";
 				} else if (!cueSide.equals(targetPosition)) {
 					return "Invalid";
+				}
+			}
+		}
+		return result;
+	}
+
+	private String determineAlerting(Event[] events){
+		String result = "Error";
+		for (Event event : events){
+			if(event.getEvent_Name().equals("Condition Event") && event.getItem_Name().equals("First 10 trials")){
+				result = "First 10 trials";
+			}
+			if(event.getGroup_Id() == 17 && event.getItem_Name().equals("AlertingCue")){
+				if ((double)event.getArgumentValue(1) == 1d){
+					result = "Alerting";
+				}
+				else if ((double)event.getArgumentValue(1) == 0d){
+					System.out.println("Non alerting");
+					result = "Non Alerting";
+					System.out.println(result);
 				}
 			}
 		}
