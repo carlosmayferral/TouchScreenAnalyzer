@@ -230,9 +230,7 @@ public class MPosnerProbeTrialAnalyzer implements ITrialAnalyzer {
 					result = "Alerting";
 				}
 				else if ((double)event.getArgumentValue(1) == 0d){
-					System.out.println("Non alerting");
 					result = "Non Alerting";
-					System.out.println(result);
 				}
 			}
 		}

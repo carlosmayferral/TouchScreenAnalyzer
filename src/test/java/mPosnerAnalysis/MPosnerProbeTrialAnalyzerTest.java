@@ -595,8 +595,6 @@ class MPosnerProbeTrialAnalyzerTest {
 		sut.setParameters(parameters);
 		MPosnerResult result = sut.generateResult(trial, 0, null);
 
-		System.out.println("Trial with timestamp: " + result.getTimestamp());
-		System.out.println("Cue side " + result.getCueSide());
 		assertEquals("Valid" , result.getCueValidity());
 		boolean isNotAlertingOrFirst10Trials = result.getAlerting().equals("Non Alerting") || result.getAlerting().equals("First 10 trials");
 		assertEquals(true, isNotAlertingOrFirst10Trials);
